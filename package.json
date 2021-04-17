@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
+    "heroku": "next start -p $PORT",
     "fmt": "prettier --write ."
   },
   "dependencies": {
