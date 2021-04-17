@@ -36,7 +36,7 @@ const Pools = () => {
             {state.pools.map((pool, id) => (
               <Grid>
                 <Card
-                  style={{ border: "1px dashed #333", cursor: "pointery" }}
+                  style={{ border: "1px dashed #333", cursor: "pointer" }}
                   onClick={() => {
                     router.push(`/gov/pools/${id}`);
                   }}
