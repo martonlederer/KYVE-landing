@@ -3,7 +3,7 @@ import { CssBaseline } from "@geist-ui/react";
 
 class Document extends NextDocument {
   render() {
-    const styles = CssBaseline.flush()
+    const styles = CssBaseline.flush();
 
     return (
       <Html lang="en">
