@@ -1,6 +1,6 @@
 import useContract from "../../../hooks/useContract";
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
+import {useEffect, useRef, useState} from "react";
+import {useRouter} from "next/router";
 import {
   Card,
   Dot,
@@ -11,7 +11,7 @@ import {
   Tabs,
   Text,
 } from "@geist-ui/react";
-import { DatabaseIcon, LockIcon } from "@primer/octicons-react";
+import {DatabaseIcon, LockIcon} from "@primer/octicons-react";
 import Nav from "../../../components/Governance/Nav";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
@@ -24,7 +24,7 @@ const Pool = () => {
 
   const router = useRouter();
   const [pool, setPool]: any[] = useState({});
-  const { loading, state, height } = useContract();
+  const {loading, state, height} = useContract();
 
   const poolID = parseInt(router.query.poolId as string);
 
@@ -55,19 +55,19 @@ const Pool = () => {
                   //@ts-ignore
                   lockTokensModal.current.open();
                 }}
-                style={{ cursor: "pointer" }}
+                style={{cursor: "pointer"}}
               >
-                <LockIcon />
+                <LockIcon/>
               </span>
-              <Spacer x={0.5} />
+              <Spacer x={0.5}/>
               <span
                 onClick={() => {
                   //@ts-ignore
                   fundPoolModal.current.open();
                 }}
-                style={{ cursor: "pointer" }}
+                style={{cursor: "pointer"}}
               >
-                <DatabaseIcon />
+                <DatabaseIcon/>
               </span>
             </>
           )}
@@ -77,13 +77,13 @@ const Pool = () => {
             <Text h4>{pool.name}</Text>
             <Grid.Container gap={2}>
               <Grid>
-                <DisplayCard headline="Architecture" text={pool.architecture} />
+                <DisplayCard headline="Architecture" text={pool.architecture}/>
               </Grid>
               <Grid>
-                <DisplayCard headline="Balance" text={pool.balance} />
+                <DisplayCard headline="Balance" text={pool.balance}/>
               </Grid>
               <Grid>
-                <DisplayCard headline="Uploader" text={pool.uploader} />
+                <DisplayCard headline="Uploader" text={pool.uploader}/>
               </Grid>
               <Grid>
                 <DisplayCard
@@ -97,8 +97,15 @@ const Pool = () => {
                   }
                 />
               </Grid>
+              <Grid>
+                <DisplayCard headline="$KYVE locked" text={(() => {
+                  let sum = 0;
+                  Object.values(pool.vault || {}).map((v: number) => (sum += v));
+                  return sum;
+                })()}/>
+              </Grid>
             </Grid.Container>
-            <Spacer y={2} />
+            <Spacer y={2}/>
             <Tabs initialValue="1">
               <Tabs.Item label="Validators" value="1">
                 <Table
@@ -113,8 +120,8 @@ const Pool = () => {
                     return ret;
                   })()}
                 >
-                  <Table.Column prop="address" label="Address" />
-                  <Table.Column prop="stake" label="Stake" />
+                  <Table.Column prop="address" label="Address"/>
+                  <Table.Column prop="stake" label="Stake"/>
                 </Table>
               </Tabs.Item>
               <Tabs.Item label="Vault" value="2">
@@ -130,17 +137,17 @@ const Pool = () => {
                     return ret;
                   })()}
                 >
-                  <Table.Column prop="address" label="Address" />
-                  <Table.Column prop="stake" label="Locked" />
+                  <Table.Column prop="address" label="Address"/>
+                  <Table.Column prop="stake" label="Locked"/>
                 </Table>
               </Tabs.Item>
             </Tabs>
           </>
         )}
-        <Footer height={height} />
+        <Footer height={height}/>
       </Page>
-      <FundPoolModal pool={poolID} ref={fundPoolModal} />
-      <LockTokensModal pool={poolID} ref={lockTokensModal} />
+      <FundPoolModal pool={poolID} ref={fundPoolModal}/>
+      <LockTokensModal pool={poolID} ref={lockTokensModal}/>
     </>
   );
 };
