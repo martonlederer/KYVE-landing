@@ -41,13 +41,13 @@ const CreatePoolModal = forwardRef((props, ref) => {
   const createPool = async () => {
     const input = {
       function: "createPool",
-      pool: pool,
+      name: pool,
       architecture: architecture,
       config: JSON.parse(config),
-      bundleSize: bundleSize,
-      uploader: uploader,
-      archiveRate: archiveRate,
-      validatorRate: validatorRate,
+      //bundleSize: bundleSize,
+      //uploader: uploader,
+      //archiveRate: archiveRate,
+      //validatorRate: validatorRate,
     };
     console.log(input);
     const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
@@ -86,6 +86,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
           </Select>
           <Text>Config</Text>
           <Textarea {...bindingsConfig} width={"100%"} />
+          {/*
           <Input {...bindingsBundleSize} width={"100%"}>
             Bundle size
           </Input>
@@ -98,6 +99,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
           <Input {...bindingsValidatorRate} width={"100%"}>
             Validator rate
           </Input>
+          */}
         </Modal.Content>
         <Modal.Action passive onClick={() => setVisible(false)}>
           Cancel

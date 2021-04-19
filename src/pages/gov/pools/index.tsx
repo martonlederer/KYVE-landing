@@ -2,7 +2,7 @@ import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
 import { Page, Grid, Card, Text } from "@geist-ui/react";
 import Nav from "../../../components/Governance/Nav";
-import { DatabaseIcon } from "@primer/octicons-react";
+import { PlusIcon } from "@primer/octicons-react";
 import Footer from "../../../components/Governance/Footer";
 import CreatePoolModal from "../../../components/Governance/pools/CreatePoolModal";
 import { useRef } from "react";
@@ -27,7 +27,7 @@ const Pools = () => {
               }}
               style={{ cursor: "pointer" }}
             >
-              <DatabaseIcon />
+              <PlusIcon />
             </span>
           )}
         </Nav>
