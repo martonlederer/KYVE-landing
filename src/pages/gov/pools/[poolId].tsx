@@ -11,13 +11,16 @@ import {
   Tabs,
   Text,
 } from "@geist-ui/react";
-import { DatabaseIcon } from "@primer/octicons-react";
+import { DatabaseIcon, LockIcon } from "@primer/octicons-react";
 import Nav from "../../../components/Governance/Nav";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
+import LockTokensModal from "../../../components/Governance/pools/LockTokensModal";
+import Footer from "../../../components/Governance/Footer";
 
 const Pool = () => {
   const fundPoolModal = useRef();
+  const lockTokensModal = useRef();
 
   const router = useRouter();
   const [pool, setPool]: any[] = useState({});
@@ -46,15 +49,27 @@ const Pool = () => {
       <Page>
         <Nav>
           {connected && (
-            <span
-              onClick={() => {
-                //@ts-ignore
-                fundPoolModal.current.open();
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              <DatabaseIcon />
-            </span>
+            <>
+              <span
+                onClick={() => {
+                  //@ts-ignore
+                  lockTokensModal.current.open();
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <LockIcon />
+              </span>
+              <Spacer x={0.5} />
+              <span
+                onClick={() => {
+                  //@ts-ignore
+                  fundPoolModal.current.open();
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <DatabaseIcon />
+              </span>
+            </>
           )}
         </Nav>
         {!loading && (
@@ -122,8 +137,10 @@ const Pool = () => {
             </Tabs>
           </>
         )}
+        <Footer height={height} />
       </Page>
       <FundPoolModal pool={poolID} ref={fundPoolModal} />
+      <LockTokensModal pool={poolID} ref={lockTokensModal} />
     </>
   );
 };
