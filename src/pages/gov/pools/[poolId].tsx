@@ -1,21 +1,24 @@
 import useContract from "../../../hooks/useContract";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import {
-  Page,
-  Text,
-  Table,
+  Card,
   Dot,
   Grid,
-  Card,
-  Tabs,
+  Page,
   Spacer,
+  Table,
+  Tabs,
+  Text,
 } from "@geist-ui/react";
 import { DatabaseIcon } from "@primer/octicons-react";
 import Nav from "../../../components/Governance/Nav";
 import useConnected from "../../../hooks/useConnected";
+import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
 
 const Pool = () => {
+  const fundPoolModal = useRef();
+
   const router = useRouter();
   const [pool, setPool]: any[] = useState({});
   const { loading, state, height } = useContract();
@@ -45,8 +48,8 @@ const Pool = () => {
           {connected && (
             <span
               onClick={() => {
-                // @ts-ignore
-                authNodeModal.current.open();
+                //@ts-ignore
+                fundPoolModal.current.open();
               }}
               style={{ cursor: "pointer" }}
             >
@@ -120,6 +123,7 @@ const Pool = () => {
           </>
         )}
       </Page>
+      <FundPoolModal pool={poolID} ref={fundPoolModal} />
     </>
   );
 };
