@@ -13,7 +13,7 @@ import {
   Text,
   useToasts,
 } from "@geist-ui/react";
-import { DatabaseIcon, LockIcon } from "@primer/octicons-react";
+import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react";
 import Nav from "../../../components/Governance/Nav";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
@@ -22,10 +22,13 @@ import Footer from "../../../components/Governance/Footer";
 import { interactWrite } from "smartweave";
 import { arweave } from "../../../extensions";
 import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import VotesGrid from "../../../components/Governance/pools/VotesGrid";
+import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
 
 const Pool = () => {
   const fundPoolModal = useRef();
   const lockTokensModal = useRef();
+  const updatePoolModal = useRef();
 
   const router = useRouter();
   const [pool, setPool]: any[] = useState({});
@@ -79,6 +82,16 @@ const Pool = () => {
         <Nav>
           {connected && (
             <>
+              <span
+                onClick={() => {
+                  //@ts-ignore
+                  updatePoolModal.current.open();
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <PencilIcon />
+              </span>
+              <Spacer x={0.5} />
               <span
                 onClick={() => {
                   //@ts-ignore
@@ -190,6 +203,9 @@ const Pool = () => {
                   <Table.Column prop="action" label="Action" />
                 </Table>
               </Tabs.Item>
+              <Tabs.Item label="Votes" value="3">
+                <VotesGrid votes={state.votes} poolId={poolID} />
+              </Tabs.Item>
             </Tabs>
           </>
         )}
@@ -197,6 +213,7 @@ const Pool = () => {
       </Page>
       <FundPoolModal pool={poolID} ref={fundPoolModal} />
       <LockTokensModal pool={poolID} ref={lockTokensModal} />
+      <UpdatePoolModal pool={pool} poolID={poolID} ref={updatePoolModal} />
     </>
   );
 };
