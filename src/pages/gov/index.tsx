@@ -44,6 +44,7 @@ const Gov = () => {
               </Card.Footer>
             </Card>
           </Grid>
+          {/*
           <Grid xs>
             <Card style={{ border: "1px dashed #333" }}>
               <Text h3>Votes</Text>
@@ -76,6 +77,7 @@ const Gov = () => {
               </Card.Footer>
             </Card>
           </Grid>
+                   */}
         </Grid.Container>
       )}
       <Footer height={height} />

@@ -36,6 +36,7 @@ const Pool = () => {
   const connected = useConnected();
 
   const [myAddress, setMyAddress] = useState("");
+  const [unlockLoading, setUnlockLoading] = useState(false);
 
   useEffect(() => {
     if (connected) {
@@ -168,9 +169,12 @@ const Pool = () => {
                         action:
                           myAddress === address ? (
                             <Button
+                              loading={unlockLoading}
                               size={"small"}
                               onClick={async () => {
+                                setUnlockLoading(true);
                                 await unlockTokens();
+                                setUnlockLoading(false);
                               }}
                             >
                               Unlock
