@@ -46,8 +46,8 @@ const VotesGrid = (props) => {
 
   const hasVoted = (address, vote) => {
     console.log(vote);
-    const yays = Object.keys(vote.yays);
-    const nays = Object.keys(vote.nays);
+    const yays = vote.yays;
+    const nays = vote.nays;
     if (yays.includes(address)) {
       return {
         voted: true,
@@ -66,6 +66,34 @@ const VotesGrid = (props) => {
     }
   };
 
+  const FinalizeButton = (props) => {
+    const [loading, setLoading] = useState(false);
+
+    const finalize = async (id: number) => {
+      const input = {
+        function: "finalize",
+        id,
+      };
+
+      console.log(input);
+      const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
+      console.log(state);
+      setToast({ text: `Successfully finalized vote`, type: "success" });
+    };
+
+    return (
+      <Button
+        onClick={async () => {
+          setLoading(true);
+          await finalize(props.voteID);
+          setLoading(false);
+        }}
+      >
+        Finalize
+      </Button>
+    );
+  };
+
   return (
     <>
       <Grid.Container gap={2}>
@@ -74,46 +102,55 @@ const VotesGrid = (props) => {
             return (
               <Grid>
                 <Card>
-                  <Text h4>{vote.type}</Text>
+                  <Text h4>
+                    {id}: {vote.type}
+                  </Text>
                   <Text>
                     <pre>{JSON.stringify(vote.metadata, null, 2)}</pre>
                   </Text>
-                  {height >= vote.end ? (
-                    "Finalized"
-                  ) : (
+                  {vote.status === "passed" ? "Vote passed" : undefined}
+                  {vote.status === "errored" ? "Vote errored" : undefined}
+                  {vote.status === "pending" ? (
                     <>
-                      {hasVoted(myAddress, vote).voted ? (
-                        <>
-                          <Text>
-                            Already voted with {hasVoted(myAddress, vote).cast}
-                          </Text>
-                        </>
+                      {height >= vote.end ? (
+                        <FinalizeButton voteID={id} />
                       ) : (
-                        <ButtonGroup ghost disabled={loading}>
-                          <Button
-                            loading={loading}
-                            onClick={async () => {
-                              setLoading(true);
-                              await voteOn(id, "nay");
-                              setLoading(false);
-                            }}
-                          >
-                            Nay
-                          </Button>
-                          <Button
-                            loading={loading}
-                            onClick={async () => {
-                              setLoading(true);
-                              await voteOn(id, "yay");
-                              setLoading(false);
-                            }}
-                          >
-                            Yay
-                          </Button>
-                        </ButtonGroup>
+                        <>
+                          {hasVoted(myAddress, vote).voted ? (
+                            <>
+                              <Text>
+                                Already voted with{" "}
+                                {hasVoted(myAddress, vote).cast}
+                              </Text>
+                            </>
+                          ) : (
+                            <ButtonGroup ghost disabled={loading}>
+                              <Button
+                                loading={loading}
+                                onClick={async () => {
+                                  setLoading(true);
+                                  await voteOn(id, "nay");
+                                  setLoading(false);
+                                }}
+                              >
+                                Nay
+                              </Button>
+                              <Button
+                                loading={loading}
+                                onClick={async () => {
+                                  setLoading(true);
+                                  await voteOn(id, "yay");
+                                  setLoading(false);
+                                }}
+                              >
+                                Yay
+                              </Button>
+                            </ButtonGroup>
+                          )}
+                        </>
                       )}
                     </>
-                  )}
+                  ) : undefined}
                 </Card>
               </Grid>
             );
