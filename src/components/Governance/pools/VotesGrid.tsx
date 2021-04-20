@@ -2,7 +2,7 @@ import {
   Button,
   ButtonGroup,
   Card,
-  Grid,
+  Grid, Progress,
   Text,
   useToasts,
 } from "@geist-ui/react";
@@ -108,8 +108,9 @@ const VotesGrid = (props) => {
                   <Text>
                     <pre>{JSON.stringify(vote.metadata, null, 2)}</pre>
                   </Text>
-                  {vote.status === "passed" ? "Vote passed" : undefined}
-                  {vote.status === "errored" ? "Vote errored" : undefined}
+                  <Progress value={height - vote.start} max={vote.end - vote.start}/>
+                  {vote.status === "passed" ? <Text>Vote passed</Text> : undefined}
+                  {vote.status === "errored" ? <Text>Vote errored</Text> : undefined}
                   {vote.status === "pending" ? (
                     <>
                       {height >= vote.end ? (
