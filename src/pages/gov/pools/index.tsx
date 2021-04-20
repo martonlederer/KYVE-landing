@@ -42,6 +42,7 @@ const Pools = () => {
                   }}
                 >
                   <Text h3>{pool.name}</Text>
+                  <Text h5>ID: {id}</Text>
                   <Text h5 type="secondary">
                     {pool.architecture}
                   </Text>
