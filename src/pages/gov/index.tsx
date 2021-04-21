@@ -56,6 +56,7 @@ const Gov = () => {
               </Card.Footer>
             </Card>
           </Grid>
+          */}
           <Grid xs>
             <Card
               style={{ border: "1px dashed #333", cursor: "pointer" }}
@@ -77,7 +78,6 @@ const Gov = () => {
               </Card.Footer>
             </Card>
           </Grid>
-                   */}
         </Grid.Container>
       )}
       <Footer height={height} />
