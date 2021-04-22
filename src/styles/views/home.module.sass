@@ -61,6 +61,8 @@
   border-radius: 100%
 
 .Section
+  $sideSpace: 17vw
+  $sideSpaceSmall: 10vw
   position: relative
   height: 100vh
 
@@ -68,8 +70,6 @@
     height: 45vh
 
   .SectionContent
-    $sideSpace: 17vw
-    $sideSpaceSmall: 10vw
     position: absolute
     top: 50%
     left: $sideSpace
@@ -122,3 +122,18 @@
 
       span
         color: #fff
+
+  &.PartnerSection .SectionContent
+    position: relative
+    width: auto
+    left: 0
+    margin: 0 $sideSpace
+
+    @media screen and (max-width: variables.$smaller-screen)
+      margin: 0 $sideSpaceSmall
+
+.Partners
+  display: flex
+  align-items: center
+  justify-content: space-between
+  flex-flow: row wrap
