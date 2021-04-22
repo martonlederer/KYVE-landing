@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { Row, Link, Button, Spacer } from "@geist-ui/react";
+import { Row, Link, Spacer } from "@geist-ui/react";
+import Button from "./Button";
+import styles from "../styles/components/Nav.module.sass";
 
 const Nav = ({ children }: { children?: any }) => {
   const router = useRouter();
@@ -30,11 +32,11 @@ const Nav = ({ children }: { children?: any }) => {
   }
 
   return (
-    <>
-      <Row align="middle" justify="space-between">
-        <Link href={`${base}/gov`}>
+    <div className={styles.Nav}>
+      <Link href="/">
+        <a className={styles.Title}>
           <svg
-            height="20"
+            height="45"
             viewBox="0 0 1510 350"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -44,42 +46,20 @@ const Nav = ({ children }: { children?: any }) => {
               fill="#F5F5F5"
             />
           </svg>
-        </Link>
-        <Row align="middle">
-          {children}
-          <Spacer x={1} />
-          <Button
-            type="secondary"
-            ghost
-            onClick={async () => {
-              if (!hasWallet)
-                return window.open(
-                  "https://chrome.google.com/webstore/detail/arconnect/einnioafmpimabjcddiinlhmijaionap"
-                );
-              if (connected) {
-                // @ts-ignore
-                await window.arweaveWallet.disconnect();
-                setConnected(false);
-              } else {
-                await window.arweaveWallet.connect([
-                  "ACCESS_ADDRESS",
-                  "SIGN_TRANSACTION",
-                ]);
-                setConnected(true);
-              }
-            }}
-            style={{ borderRadius: 0 }}
-          >
-            {hasWallet
-              ? connected
-                ? "Disconnect"
-                : "Connect"
-              : "Install ArConnect"}
-          </Button>
-        </Row>
-      </Row>
-      <Spacer y={1} />
-    </>
+        </a>
+      </Link>
+      <div className={styles.Menu}>
+        <span className={styles.Item}>
+          Chains
+        </span>
+        <span className={styles.Item}>
+          Governance
+        </span>
+      </div>
+      <Button buttonSize="small">
+        Connect
+      </Button>
+    </div>
   );
 };
 

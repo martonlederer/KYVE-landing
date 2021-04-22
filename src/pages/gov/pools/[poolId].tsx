@@ -14,7 +14,6 @@ import {
   useToasts,
 } from "@geist-ui/react";
 import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react";
-import Nav from "../../../components/Governance/Nav";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
 import LockTokensModal from "../../../components/Governance/pools/LockTokensModal";
@@ -79,41 +78,6 @@ const Pool = () => {
   return (
     <>
       <Page>
-        <Nav>
-          {connected && (
-            <>
-              <span
-                onClick={() => {
-                  //@ts-ignore
-                  updatePoolModal.current.open();
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <PencilIcon />
-              </span>
-              <Spacer x={0.5} />
-              <span
-                onClick={() => {
-                  //@ts-ignore
-                  lockTokensModal.current.open();
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <LockIcon />
-              </span>
-              <Spacer x={0.5} />
-              <span
-                onClick={() => {
-                  //@ts-ignore
-                  fundPoolModal.current.open();
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <DatabaseIcon />
-              </span>
-            </>
-          )}
-        </Nav>
         {!loading && (
           <>
             <Text h4>{pool.name}</Text>

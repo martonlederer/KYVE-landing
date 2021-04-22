@@ -12,7 +12,6 @@ import {
 import useConnected from "../../hooks/useConnected";
 import useContract from "../../hooks/useContract";
 import { useState, useEffect, useRef } from "react";
-import Nav from "../../components/Governance/Nav";
 import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
 import Footer from "../../components/Governance/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
@@ -68,44 +67,6 @@ const Tokens = () => {
   return (
     <>
       <Page>
-        <Nav>
-          {connected && (
-            <>
-              <span
-                onClick={async () => {
-                  setLoading(true);
-                  const id = await dispense();
-                  setToast({
-                    text: `Successfully dispensed tokens. Please wait for tx: ${id} to mine.`,
-                  });
-                  setLoading(false);
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                {loading ? (
-                  <Spinner
-                    style={{
-                      height: "1em",
-                      width: "1em",
-                    }}
-                  />
-                ) : (
-                  <PlusIcon />
-                )}
-              </span>
-              <Spacer x={1} />
-              <span
-                onClick={() => {
-                  // @ts-ignore
-                  transferTokenModal.current.open();
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <ArrowSwitchIcon />
-              </span>
-            </>
-          )}
-        </Nav>
         <Table data={data}>
           <Table.Column prop="address" label="Address" />
           <Table.Column prop="balance" label="Balance" />

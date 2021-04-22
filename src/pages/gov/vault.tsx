@@ -15,7 +15,6 @@ import {
   Row,
   Input,
 } from "@geist-ui/react";
-import Nav from "../../components/Governance/Nav";
 import Footer from "../../components/Governance/Footer";
 import { LockIcon } from "@primer/octicons-react";
 
@@ -46,16 +45,6 @@ const Vault = () => {
 
   return (
     <Page>
-      <Nav>
-        {connected && (
-          <span
-            onClick={() => modal.setVisible(true)}
-            style={{ cursor: "pointer" }}
-          >
-            <LockIcon />
-          </span>
-        )}
-      </Nav>
       {connected && !loading ? (
         <>
           {address in Object.keys(state.vault || {}) ? (

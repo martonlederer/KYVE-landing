@@ -1,4 +1,4 @@
-import "../styles.css";
+import "../styles/styles.sass";
 import { GeistProvider, CssBaseline } from "@geist-ui/react";
 
 const App = ({ Component, pageProps }) => {

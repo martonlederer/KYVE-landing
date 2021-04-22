@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import useContract from "../../hooks/useContract";
 import { Page, Grid, Card, Text, Code } from "@geist-ui/react";
-import Nav from "../../components/Governance/Nav";
 import Footer from "../../components/Governance/Footer";
 
 const Gov = () => {
@@ -10,7 +9,6 @@ const Gov = () => {
 
   return (
     <Page>
-      <Nav />
       {!loading && (
         <Grid.Container gap={1}>
           <Grid xs>

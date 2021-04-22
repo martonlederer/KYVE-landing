@@ -1,7 +1,6 @@
 import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
 import { Page, Grid, Card, Text } from "@geist-ui/react";
-import Nav from "../../../components/Governance/Nav";
 import { PlusIcon } from "@primer/octicons-react";
 import Footer from "../../../components/Governance/Footer";
 import CreatePoolModal from "../../../components/Governance/pools/CreatePoolModal";
@@ -18,19 +17,6 @@ const Pools = () => {
   return (
     <>
       <Page>
-        <Nav>
-          {connected && (
-            <span
-              onClick={() => {
-                // @ts-ignore
-                authNodeModal.current.open();
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              <PlusIcon />
-            </span>
-          )}
-        </Nav>
         {!loading && (
           <Grid.Container gap={1}>
             {state.pools.map((pool, id) => (

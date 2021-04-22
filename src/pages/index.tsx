@@ -2,6 +2,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Page, Link, Spacer, Text, Divider, Grid } from "@geist-ui/react";
 import Logo from "../components/Logo";
+import Nav from "../components/Nav"
+import styles from "../styles/views/home.module.sass";
+import { GitHub, Mail, MessageSquare, Twitter } from "react-feather"
 
 const Partners = [
   { name: "Arweave", link: "https://www.arweave.org" },
@@ -18,6 +21,27 @@ const Home = () => {
   const [logoHovered, setLogoHovered] = useState(false);
 
   return (
+    <>
+    <div className={styles.Landing}>
+      <Nav />
+      <div className={styles.LandingContent}>
+        <h1>The unified archive for blockchains.</h1>
+        <div className={styles.Socials}>
+          <a href="https://twitter.com/kyvenetwork" target="_blank" rel="noopener noreferrer">
+            <Twitter />
+          </a>
+          <a href="https://github.com/KYVENetwork" target="_blank" rel="noopener noreferrer">
+            <GitHub />
+          </a>
+          <a href="https://discord.gg/qbAeuCDa6A" target="_blank" rel="noopener noreferrer">
+            <MessageSquare />
+          </a>
+          <a href="mailto:team@kyve.network" target="_blank" rel="noopener noreferrer">
+            <Mail />
+          </a>
+        </div>
+      </div>
+    </div>
     <Page>
       <div
         style={{
@@ -41,7 +65,7 @@ const Home = () => {
           >
             <path
               d="M66 350H-9.49949e-08L74.5 -2.38419e-05H140.5L110 143.5H122L235 -2.38419e-05H312V5.99999L179 172V181L263 347V350H190L117 206.5H96L66 350ZM740.152 5.99999L595.152 227H580.152L554.152 350H488.152L514.152 227H499.152L444.152 -2.38419e-05H514.152L552.152 167H561.152L668.152 -2.38419e-05H740.152V5.99999ZM844.305 -2.38419e-05H911.305L922.805 317H931.805L1066.3 -2.38419e-05H1135.3V5.99999L984.305 350H861.305L844.305 -2.38419e-05ZM1229.46 344L1302.46 -2.38419e-05H1509.96V63H1354.96L1337.96 143H1473.46V206H1324.46L1307.46 287H1454.96V350H1229.46V344Z"
-              fill={logoHovered ? "#a76c6e" : "#F5F5F5"}
+              fill="#F5F5F5"
             />
           </svg>
         </Link>
@@ -74,6 +98,7 @@ const Home = () => {
         </Link>
       </div>
     </Page>
+    </>
   );
 };
 
