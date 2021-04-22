@@ -59,3 +59,53 @@
   width: 20vw
   height: 20vw
   border-radius: 100%
+
+.Section
+  position: relative
+  height: 100vh
+
+  .SectionContent
+    $sideSpace: 20vw
+    $sideSpaceSmall: 10vw
+    position: absolute
+    top: 50%
+    left: $sideSpace
+    width: calc(62% - #{$sideSpace})
+    transform: translateY(-50%)
+
+    @media screen and (max-width: variables.$smaller-screen)
+      left: $sideSpaceSmall
+      width: calc(62% - #{$sideSpaceSmall})
+
+    h1
+      font-size: 4.5em
+      font-weight: 800
+      line-height: 1.15em
+      color: #fff
+      margin: 0
+        bottom: .24em
+
+      @media screen and (max-width: variables.$smaller-screen)
+        font-size: 3.5em
+
+    h2
+      font-size: 1em
+      font-weight: 700
+      text-transform: uppercase
+      line-height: 1.1em
+      color: variables.$dark-text
+      margin: 0
+
+    p
+      font-size: 1.3em
+      text-align: justify
+      color: variables.$dark-text
+      font-weight: 500
+      margin: 1em 0
+
+      @media screen and (max-width: variables.$smaller-screen)
+        font-size: 1.1em
+
+      a
+        color: #fff
+        text-decoration: underline

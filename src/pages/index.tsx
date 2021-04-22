@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Page, Link, Spacer, Text, Divider, Grid } from "@geist-ui/react";
+import Button from "../components/Button"
 import Logo from "../components/Logo";
 import Nav from "../components/Nav"
 import styles from "../styles/views/home.module.sass";
-import { GitHub, Mail, MessageSquare, Twitter } from "react-feather"
+import { ArrowRight, GitHub, Mail, MessageSquare, Twitter } from "react-feather"
 
 const Partners = [
   { name: "Arweave", link: "https://www.arweave.org" },
@@ -43,6 +44,20 @@ const Home = () => {
         </div>
       </div>
       <div className={styles.Bubble} style={{ transform: "rotate(60deg)", bottom: 0, left: "-8vw" }} />
+    </div>
+    <div className={styles.Section}>
+      <div className={styles.SectionContent}>
+        <h2>What is KYVE?</h2>
+        <h1>Archiving the web on Arweave.</h1>
+        <p>
+          $KYVE is an initiative to store any data stream, with built-in validation. By leveraging the <a href="https://arweave.org" target="_blank" rel="noopener noreferrer">Arweave</a> blockchain, we can permanently and immutably store this data.
+        </p>
+        <Button>
+          What we archive
+          <ArrowRight />
+        </Button>
+      </div>
+      <div className={styles.Bubble} style={{ transform: "rotate(-70deg) translateY(-50%)", width: "60vh", height: "60vh", right: "-45vh", top: "50%" }} />
     </div>
     <Page>
       <div
