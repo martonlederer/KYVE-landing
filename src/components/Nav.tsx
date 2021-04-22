@@ -49,16 +49,10 @@ const Nav = ({ children }: { children?: any }) => {
         </a>
       </Link>
       <div className={styles.Menu}>
-        <span className={styles.Item}>
-          Chains
-        </span>
-        <span className={styles.Item}>
-          Governance
-        </span>
+        <span className={styles.Item}>Chains</span>
+        <span className={styles.Item}>Governance</span>
       </div>
-      <Button buttonSize="small">
-        Connect
-      </Button>
+      <Button buttonSize="small">Connect</Button>
     </div>
   );
 };

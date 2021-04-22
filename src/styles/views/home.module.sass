@@ -64,8 +64,11 @@
   position: relative
   height: 100vh
 
+  &.SmallSection
+    height: 45vh
+
   .SectionContent
-    $sideSpace: 20vw
+    $sideSpace: 17vw
     $sideSpaceSmall: 10vw
     position: absolute
     top: 50%
@@ -73,9 +76,16 @@
     width: calc(62% - #{$sideSpace})
     transform: translateY(-50%)
 
+    &.SectionLeft
+      left: unset
+      right: $sideSpace
+
     @media screen and (max-width: variables.$smaller-screen)
       left: $sideSpaceSmall
       width: calc(62% - #{$sideSpaceSmall})
+
+      &.SectionLeft
+        right: $sideSpaceSmall
 
     h1
       font-size: 4.5em
@@ -109,3 +119,6 @@
       a
         color: #fff
         text-decoration: underline
+
+      span
+        color: #fff
