@@ -132,6 +132,48 @@ const Home = () => {
           </p>
         </div>
       </div>
+      <div className={styles.Section}>
+        <div className={styles.SectionContent}>
+          <h2>DAO governance</h2>
+          <h1>Community organized decisions.</h1>
+          <p>
+            A designated archiver is appointed by a DAO (Decentralized Autonomous Organisation) for each pool. Nodes are incentivised by a unique staking system, which involves them locking their <span>$KYVE</span> tokens while being active in the pool.
+            <Spacer y={.3} />
+            Validators will "get together" and vote on whether the designated archiver is properly doing it's job. If the validators come to a consensus that the archiver is no longer acting honestly or reliably, a new archiver will be decided upon in the DAO. Validators can seemlessly transition into an archiver if need be.
+          </p>
+        </div>
+        <div
+          className={styles.Bubble}
+          style={{
+            width: "18vh",
+            height: "18vh",
+            right: "4vw",
+            top: "20%",
+            background: "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)"
+          }}
+        />
+        <div
+          className={styles.Bubble}
+          style={{
+            transform: "translateY(-50%)",
+            width: "22vh",
+            height: "22vh",
+            right: "18%",
+            top: "50%",
+            background: "linear-gradient(40deg, rgba(255, 255, 255, 0.4) 17.23%, rgba(255, 255, 255, 0.1) 72.16%)"
+          }}
+        />
+        <div
+          className={styles.Bubble}
+          style={{
+            width: "14.5vh",
+            height: "14.5vh",
+            right: "2vw",
+            top: "60%",
+            background: "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)"
+          }}
+        />
+      </div>
       <Page>
         <div
           style={{
