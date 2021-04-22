@@ -24,6 +24,7 @@ const Home = () => {
     <>
     <div className={styles.Landing}>
       <Nav />
+      <div className={styles.Bubble} style={{ transform: "rotate(-141deg)", top: "6em", right: "-2em", width: "16vw", height: "16vw" }} />
       <div className={styles.LandingContent}>
         <h1>The unified archive for blockchains.</h1>
         <div className={styles.Socials}>
@@ -41,6 +42,7 @@ const Home = () => {
           </a>
         </div>
       </div>
+      <div className={styles.Bubble} style={{ transform: "rotate(60deg)", bottom: 0, left: "-8vw" }} />
     </div>
     <Page>
       <div

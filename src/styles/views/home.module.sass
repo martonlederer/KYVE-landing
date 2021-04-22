@@ -1,3 +1,5 @@
+@use "../variables"
+  
 .Landing
   position: relative
   height: 100vh
@@ -19,6 +21,13 @@
       max-width: 60%
       line-height: 1.1em
 
+      @media screen and (max-width: variables.$smaller-screen)
+        font-size: 4.8em
+
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: 2.2em
+        max-width: 95vw
+
     .Socials
       display: flex
       align-items: center
@@ -28,10 +37,13 @@
       a
         text-decoration: none
         cursor: pointer
-        color: #CECECE
+        color: variables.$grey-text
         margin: 0 .75em
         font-size: 1.4em
         transition: all .23s ease-in-out
+
+        @media screen and (max-width: variables.$mobile-screen)
+          font-size: 1.1em
 
         svg
           font-size: 1em
@@ -40,3 +52,10 @@
 
         &:hover
           opacity: .8
+
+.Bubble
+  position: absolute
+  background: linear-gradient(180deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 61.98%)
+  width: 20vw
+  height: 20vw
+  border-radius: 100%
