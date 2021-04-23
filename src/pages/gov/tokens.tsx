@@ -13,9 +13,10 @@ import useConnected from "../../hooks/useConnected";
 import useContract from "../../hooks/useContract";
 import { useState, useEffect, useRef } from "react";
 import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
-import Footer from "../../components/Governance/Footer";
+import Footer from "../../components/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
 import { dispense } from "../../contract";
+import Nav from "../../components/Nav";
 
 const Tokens = () => {
   const isMobile = useMediaQuery("mobile");
@@ -66,16 +67,16 @@ const Tokens = () => {
 
   return (
     <>
+      <Nav />
       <Page>
         <Table data={data}>
           <Table.Column prop="address" label="Address" />
           <Table.Column prop="balance" label="Balance" />
           <Table.Column prop="locked" label="Locked Balance" />
         </Table>
-        <Footer name="Tokens" height={height} />
       </Page>
-
       <TransferTokenModal ref={transferTokenModal} />
+      <Footer />
     </>
   );
 };

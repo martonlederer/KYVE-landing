@@ -72,11 +72,13 @@ const Nav = () => {
       await window.arweaveWallet.disconnect();
       setConnected(false);
     } else {
-      await window.arweaveWallet.connect([
-        "ACCESS_ADDRESS",
-        "SIGN_TRANSACTION",
-      ]);
-      setConnected(true);
+      try {
+        await window.arweaveWallet.connect([
+          "ACCESS_ADDRESS",
+          "SIGN_TRANSACTION",
+        ]);
+        setConnected(true);
+      } catch {}
     }
   }
 

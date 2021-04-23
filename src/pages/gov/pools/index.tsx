@@ -2,10 +2,11 @@ import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
 import { Page, Grid, Card, Text } from "@geist-ui/react";
 import { PlusIcon } from "@primer/octicons-react";
-import Footer from "../../../components/Governance/Footer";
+import Footer from "../../../components/Footer";
 import CreatePoolModal from "../../../components/Governance/pools/CreatePoolModal";
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import Nav from "../../../components/Nav";
 
 const Pools = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const Pools = () => {
 
   return (
     <>
+      <Nav />
       <Page>
         {!loading && (
           <Grid.Container gap={1}>
@@ -43,8 +45,8 @@ const Pools = () => {
             ))}
           </Grid.Container>
         )}
-        <Footer name="Pools" height={height} />
       </Page>
+      <Footer />
 
       <CreatePoolModal ref={authNodeModal} />
     </>

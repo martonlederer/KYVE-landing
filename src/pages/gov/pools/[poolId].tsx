@@ -17,12 +17,13 @@ import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
 import LockTokensModal from "../../../components/Governance/pools/LockTokensModal";
-import Footer from "../../../components/Governance/Footer";
+import Footer from "../../../components/Footer";
 import { interactWrite } from "smartweave";
 import { arweave } from "../../../extensions";
 import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
 import VotesGrid from "../../../components/Governance/pools/VotesGrid";
 import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
+import Nav from "../../../components/Nav";
 
 const Pool = () => {
   const fundPoolModal = useRef();
@@ -77,6 +78,7 @@ const Pool = () => {
 
   return (
     <>
+      <Nav />
       <Page>
         {!loading && (
           <>
@@ -173,8 +175,8 @@ const Pool = () => {
             </Tabs>
           </>
         )}
-        <Footer height={height} />
       </Page>
+      <Footer />
       <FundPoolModal pool={poolID} ref={fundPoolModal} />
       <LockTokensModal pool={poolID} ref={lockTokensModal} />
       <UpdatePoolModal pool={pool} poolID={poolID} ref={updatePoolModal} />
