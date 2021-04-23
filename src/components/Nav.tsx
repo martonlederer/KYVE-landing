@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "@geist-ui/react";
+import { Link, Spinner } from "@geist-ui/react";
+import NextLink from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "react-feather";
 import Button from "./Button";
@@ -123,8 +124,42 @@ const Nav = () => {
               ref={popup}
               style={{ left: popupPos }}
             >
-              {(menuState === "gov" && <h1>Test</h1>) || (
-                <motion.div className={styles.Chains}>
+              {(menuState === "gov" && (
+                <div className={styles.Gov}>
+                  <div className={styles.Links}>
+                    <NextLink href="/gov/tokens">
+                      <a>
+                        Tokens
+                        <span>1390 $KYVE</span>
+                      </a>
+                    </NextLink>
+                    <NextLink href="/gov/pools">
+                      <a>
+                        Pools
+                        <span>2 Pools</span>
+                      </a>
+                    </NextLink>
+                    <NextLink href="/gov/vault">
+                      <a>
+                        Vault
+                        <span>0 $KYVE</span>
+                      </a>
+                    </NextLink>
+                  </div>
+                  <div className={styles.LatestArweaveBlock}>
+                    Block:
+                    <a
+                      href="https://viewblock.io/arweave/block/672134"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      672134
+                    </a>
+                    <Spinner />
+                  </div>
+                </div>
+              )) || (
+                <div className={styles.Chains}>
                   <div className={styles.Links}>
                     {Partners.map((partner, i) => (
                       <a
@@ -156,7 +191,7 @@ const Nav = () => {
                       />
                     )) || <KyveLogo />}
                   </motion.div>
-                </motion.div>
+                </div>
               )}
             </motion.div>
           )}

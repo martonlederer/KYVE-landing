@@ -40,9 +40,9 @@
       top: calc(100% + #{$arrowSize})
       background-color: variables.$tooltip-bg
       border-radius: 15px
-      padding: 1.7em 2em
       width: max-content
       z-index: 100
+      min-width: 220px
       transition: all .23s ease-in-out
 
       &::before
@@ -87,13 +87,20 @@
     &:hover
       opacity: .8
 
+$popupPaddingSide: 2em
+$popupPaddingTop: 1.7em
+
+.Gov, .Chains
+  .Links
+    +popupLinks
+
 .Chains
   display: flex
   align-items: stretch
+  padding: $popupPaddingTop $popupPaddingSide
 
   .Links
     margin-right: 1.85em
-    +popupLinks
 
   .CurrentLogo
     $size: 240px
@@ -107,3 +114,38 @@
       max-width: $size
       max-height: $size
       transform: translate(-50%, -50%)
+
+.Gov
+  .Links
+    padding: $popupPaddingTop $popupPaddingSide
+      bottom: $popupPaddingTop / 2
+
+    a
+      font-size: 1.35em
+      font-size: 600
+      display: block
+      line-height: 1em
+
+      span
+        display: block
+        font-size: .5em
+        font-weight: 500
+        color: variables.$grey-text
+
+  .LatestArweaveBlock
+    display: flex
+    align-items: center
+    padding: $popupPaddingTop / 2 $popupPaddingSide
+      bottom: $popupPaddingTop
+    border-top: 1px dotted variables.$dark-text
+    font-size: 1.15em
+    color: variables.$grey-text
+
+    a
+      display: flex
+      align-items: center
+      color: #fff
+      margin: 0 .3em
+
+      &:hover
+        text-decoration: underline
