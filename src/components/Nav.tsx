@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { Link, Spinner } from "@geist-ui/react";
-import NextLink from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "react-feather";
+import useContract from "../hooks/useContract";
+import NextLink from "next/link";
 import Button from "./Button";
 import styles from "../styles/components/Nav.module.sass";
 import Logo from "./Logo";
@@ -32,6 +33,8 @@ const Nav = () => {
   const popup = useRef<HTMLDivElement>(null);
   const [popupPos, setPopupPos] = useState(0);
   const [hoveredChain, setHoveredChain] = useState<string>();
+
+  const { loading, state, height } = useContract();
 
   useEffect(() => {
     const current = menuState === "gov" ? govMenu.current : chainsMenu.current;
@@ -130,19 +133,33 @@ const Nav = () => {
                     <NextLink href="/gov/tokens">
                       <a>
                         Tokens
-                        <span>1390 $KYVE</span>
+                        <span>
+                          {Object.keys(state.balances || {})
+                            .map((addr) => state.balances[addr])
+                            .reduce((a, b) => a + b, 0)}{" "}
+                          $KYVE
+                        </span>
                       </a>
                     </NextLink>
                     <NextLink href="/gov/pools">
                       <a>
                         Pools
-                        <span>2 Pools</span>
+                        <span>{state.pools.length} Pools</span>
                       </a>
                     </NextLink>
                     <NextLink href="/gov/vault">
                       <a>
                         Vault
-                        <span>0 $KYVE</span>
+                        <span>
+                          {Object.keys(state.vault || {})
+                            .map((addr) =>
+                              state.vault[addr]
+                                .map((element) => element.amount)
+                                .reduce((a, b) => a + b, 0)
+                            )
+                            .reduce((a, b) => a + b, 0)}{" "}
+                          $KYVE
+                        </span>
                       </a>
                     </NextLink>
                   </div>
@@ -153,7 +170,7 @@ const Nav = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      672134
+                      {height}
                     </a>
                     <Spinner />
                   </div>
