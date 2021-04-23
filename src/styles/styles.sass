@@ -1,3 +1,5 @@
+@use "./variables"
+  
 ::selection
   background: rgba(255, 255, 255, 0.99) !important
   color: #000 !important
@@ -7,3 +9,9 @@
 
 body
   scroll-behavior: smooth
+
+.Card
+  background-color: variables.$tooltip-bg  !important
+  border-radius: 15px  !important
+  padding: .7em 1em !important
+  border: none !important

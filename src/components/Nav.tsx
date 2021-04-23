@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
-import { Link, Spinner } from "@geist-ui/react";
+import { Spinner } from "@geist-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "react-feather";
 import useContract from "../hooks/useContract";
-import NextLink from "next/link";
+import Link from "next/link";
 import Button from "./Button";
 import styles from "../styles/components/Nav.module.sass";
 import Logo from "./Logo";
@@ -132,7 +132,7 @@ const Nav = () => {
               {(menuState === "gov" && (
                 <div className={styles.Gov}>
                   <div className={styles.Links}>
-                    <NextLink href="/gov/tokens">
+                    <Link href="/gov/tokens">
                       <a>
                         Tokens
                         <span>
@@ -142,14 +142,14 @@ const Nav = () => {
                           $KYVE
                         </span>
                       </a>
-                    </NextLink>
-                    <NextLink href="/gov/pools">
+                    </Link>
+                    <Link href="/gov/pools">
                       <a>
                         Pools
                         <span>{state.pools.length} Pools</span>
                       </a>
-                    </NextLink>
-                    <NextLink href="/gov/vault">
+                    </Link>
+                    <Link href="/gov/vault">
                       <a>
                         Vault
                         <span>
@@ -163,7 +163,7 @@ const Nav = () => {
                           $KYVE
                         </span>
                       </a>
-                    </NextLink>
+                    </Link>
                   </div>
                   <div className={styles.LatestArweaveBlock}>
                     Block:
