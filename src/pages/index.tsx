@@ -39,7 +39,7 @@ const Home = () => {
             right: "-2em",
             width: "16vw",
             height: "16vw",
-            animationDelay: ".6s"
+            animationDelay: ".6s",
           }}
         />
         <div className={styles.LandingContent}>
@@ -85,8 +85,8 @@ const Home = () => {
           <h2>What is KYVE?</h2>
           <h1>Archiving the web on Arweave.</h1>
           <p>
-            <span>$KYVE</span> is an initiative to store any data stream, with built-in
-            validation. By leveraging the{" "}
+            <span>$KYVE</span> is an initiative to store any data stream, with
+            built-in validation. By leveraging the{" "}
             <a
               href="https://arweave.org"
               target="_blank"
@@ -109,8 +109,9 @@ const Home = () => {
             height: "60vh",
             right: "-20vh",
             top: "50%",
-            background: "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
-            animationDelay: ".3s"
+            background:
+              "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+            animationDelay: ".3s",
           }}
         />
       </div>
@@ -123,15 +124,19 @@ const Home = () => {
             height: "47vh",
             left: "-12vh",
             top: "50%",
-            background: "linear-gradient(-130deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 61.98%)",
-            animationDelay: ".22s"
+            background:
+              "linear-gradient(-130deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 61.98%)",
+            animationDelay: ".22s",
           }}
         />
         <div className={styles.SectionContent + " " + styles.SectionLeft}>
           <h2>The KYVE network</h2>
           <h1>Decentralised archivers and validators.</h1>
           <p>
-            The network is powered by decentralised archivers and validators. These nodes reside in pools, each pool focusing on archiving a specific data stream. Pools are funded by <span>$KYVE</span> tokens, and anyone can fund these storage initiatives by depositing tokens.
+            The network is powered by decentralised archivers and validators.
+            These nodes reside in pools, each pool focusing on archiving a
+            specific data stream. Pools are funded by <span>$KYVE</span> tokens,
+            and anyone can fund these storage initiatives by depositing tokens.
           </p>
         </div>
       </div>
@@ -140,9 +145,16 @@ const Home = () => {
           <h2>DAO governance</h2>
           <h1>Community organized decisions.</h1>
           <p>
-            A designated archiver is appointed by a DAO (Decentralized Autonomous Organisation) for each pool. Nodes are incentivised by a unique staking system, which involves them locking their <span>$KYVE</span> tokens while being active in the pool.
-            <Spacer y={.3} />
-            Validators will "get together" and vote on whether the designated archiver is properly doing it's job. If the validators come to a consensus that the archiver is no longer acting honestly or reliably, a new archiver will be decided upon in the DAO. Validators can seemlessly transition into an archiver if need be.
+            A designated archiver is appointed by a DAO (Decentralized
+            Autonomous Organisation) for each pool. Nodes are incentivised by a
+            unique staking system, which involves them locking their{" "}
+            <span>$KYVE</span> tokens while being active in the pool.
+            <Spacer y={0.3} />
+            Validators will "get together" and vote on whether the designated
+            archiver is properly doing it's job. If the validators come to a
+            consensus that the archiver is no longer acting honestly or
+            reliably, a new archiver will be decided upon in the DAO. Validators
+            can seemlessly transition into an archiver if need be.
           </p>
         </div>
         <div
@@ -152,8 +164,9 @@ const Home = () => {
             height: "18vh",
             right: "4vw",
             top: "20%",
-            background: "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
-            animationDelay: ".87s"
+            background:
+              "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+            animationDelay: ".87s",
           }}
         />
         <div
@@ -164,7 +177,8 @@ const Home = () => {
             height: "22vh",
             right: "18%",
             top: "50%",
-            background: "linear-gradient(40deg, rgba(255, 255, 255, 0.4) 17.23%, rgba(255, 255, 255, 0.1) 72.16%)"
+            background:
+              "linear-gradient(40deg, rgba(255, 255, 255, 0.4) 17.23%, rgba(255, 255, 255, 0.1) 72.16%)",
           }}
         />
         <div
@@ -174,21 +188,40 @@ const Home = () => {
             height: "14.5vh",
             right: "2vw",
             top: "60%",
-            background: "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
-            animationDelay: ".24s"
+            background:
+              "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+            animationDelay: ".24s",
           }}
         />
       </div>
-      <div className={styles.Section + " " + styles.SmallSection + " " + styles.PartnerSection}>
+      <div
+        className={
+          styles.Section +
+          " " +
+          styles.SmallSection +
+          " " +
+          styles.PartnerSection
+        }
+      >
         <div className={styles.SectionContent + " " + styles.SectionTop}>
           <h2>Partners</h2>
-          <h1>Our users are our<br />backers.</h1>
+          <h1>
+            Our users are our
+            <br />
+            backers.
+          </h1>
           <Spacer y={2} />
           <div className={styles.Partners}>
             {Partners.map((partner) => (
-                <a className={styles.Partner} href={partner.link} key={partner.name} target="_blank" rel="noopener noreferer">
-                  <Logo name={partner.name} />
-                </a>
+              <a
+                className={styles.Partner}
+                href={partner.link}
+                key={partner.name}
+                target="_blank"
+                rel="noopener noreferer"
+              >
+                <Logo name={partner.name} />
+              </a>
             ))}
           </div>
         </div>
