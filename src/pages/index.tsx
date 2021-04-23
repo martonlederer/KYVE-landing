@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Page, Link, Spacer, Text, Divider, Grid } from "@geist-ui/react";
+import { Spacer } from "@geist-ui/react";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 import Nav from "../components/Nav";
@@ -39,6 +39,7 @@ const Home = () => {
             right: "-2em",
             width: "16vw",
             height: "16vw",
+            animationDelay: ".6s"
           }}
         />
         <div className={styles.LandingContent}>
@@ -108,7 +109,8 @@ const Home = () => {
             height: "60vh",
             right: "-20vh",
             top: "50%",
-            background: "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)"
+            background: "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+            animationDelay: ".3s"
           }}
         />
       </div>
@@ -121,7 +123,8 @@ const Home = () => {
             height: "47vh",
             left: "-12vh",
             top: "50%",
-            background: "linear-gradient(-130deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 61.98%)"
+            background: "linear-gradient(-130deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 61.98%)",
+            animationDelay: ".22s"
           }}
         />
         <div className={styles.SectionContent + " " + styles.SectionLeft}>
@@ -149,7 +152,8 @@ const Home = () => {
             height: "18vh",
             right: "4vw",
             top: "20%",
-            background: "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)"
+            background: "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+            animationDelay: ".87s"
           }}
         />
         <div
@@ -170,20 +174,21 @@ const Home = () => {
             height: "14.5vh",
             right: "2vw",
             top: "60%",
-            background: "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)"
+            background: "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+            animationDelay: ".24s"
           }}
         />
       </div>
       <div className={styles.Section + " " + styles.SmallSection + " " + styles.PartnerSection}>
-        <div className={styles.SectionContent}>
+        <div className={styles.SectionContent + " " + styles.SectionTop}>
           <h2>Partners</h2>
           <h1>Our users are our<br />backers.</h1>
           <Spacer y={2} />
           <div className={styles.Partners}>
             {Partners.map((partner) => (
-              <Link target="_blank" href={partner.link} key={partner.name}>
-                <Logo name={partner.name} />
-              </Link>
+                <a className={styles.Partner} href={partner.link} key={partner.name} target="_blank" rel="noopener noreferer">
+                  <Logo name={partner.name} />
+                </a>
             ))}
           </div>
         </div>

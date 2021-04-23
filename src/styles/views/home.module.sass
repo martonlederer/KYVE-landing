@@ -59,6 +59,7 @@
   width: 22vw
   height: 22vw
   border-radius: 100%
+  animation: wobble 7s infinite
 
 .Section
   $sideSpace: 17vw
@@ -79,6 +80,10 @@
     &.SectionLeft
       left: unset
       right: $sideSpace
+
+    &.SectionTop
+      top: 0
+      transform: none
 
     @media screen and (max-width: variables.$smaller-screen)
       left: $sideSpaceSmall
@@ -134,6 +139,47 @@
 
 .Partners
   display: flex
-  align-items: center
-  justify-content: space-between
+  align-items: stretch
+  justify-content: space-evenly
   flex-flow: row wrap
+
+  &::before, &::after
+    content: ''
+    width: 100%
+    order: 1
+
+  .Partner
+    margin: 1.3em 0
+    text-align: center
+    transition: all .23s ease-in-out
+
+    &:hover
+      transform: scale(.88)
+
+    &:nth-child(n + 5)
+      order: 1
+
+    &:nth-child(n + 8)
+      order: 2
+
+@keyframes wobble
+  0%
+    transform: translate(0%, 0%)
+
+  15%
+    transform: translate(-1%, -1%)
+
+  30%
+    transform: translate(-1.7%, -2%)
+
+  45%
+    ransform: translate(-1%, -1.2%)
+
+  60%
+    transform: translate(-.1%, -.47%)
+
+  75%
+    transform: translate(.57%, -.1%)
+
+  100%
+    transform: translate(0%, 0%)
