@@ -11,17 +11,8 @@ import {
   Twitter,
 } from "react-feather";
 import Footer from "../components/Footer";
+import Partners from "../partners";
 import styles from "../styles/views/home.module.sass";
-
-const Partners = [
-  { name: "Arweave", link: "https://www.arweave.org" },
-  { name: "Polkadot", link: "https://polkadot.network" },
-  { name: "TheGraph", link: "https://thegraph.com" },
-  { name: "Solana", link: "https://solana.com" },
-  { name: "Cosmos", link: "https://cosmos.network" },
-  { name: "Avalanche", link: "https://www.avalabs.org" },
-  { name: "Skale", link: "https://skale.network" },
-];
 
 const Home = () => {
   const partners = useRef<HTMLDivElement>(null);

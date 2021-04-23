@@ -6,18 +6,9 @@ import { ExternalLink } from "react-feather";
 import useContract from "../hooks/useContract";
 import Link from "next/link";
 import Button from "./Button";
-import styles from "../styles/components/Nav.module.sass";
 import Logo from "./Logo";
-
-const Partners = [
-  { name: "Arweave", link: "https://www.arweave.org" },
-  { name: "Polkadot", link: "https://polkadot.network" },
-  { name: "TheGraph", link: "https://thegraph.com" },
-  { name: "Solana", link: "https://solana.com" },
-  { name: "Cosmos", link: "https://cosmos.network" },
-  { name: "Avalanche", link: "https://www.avalabs.org" },
-  { name: "Skale", link: "https://skale.network" },
-];
+import Partners from "../partners";
+import styles from "../styles/components/Nav.module.sass";
 
 const Nav = () => {
   const router = useRouter();

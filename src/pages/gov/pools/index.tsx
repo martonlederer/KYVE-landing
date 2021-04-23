@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 import Nav from "../../../components/Nav";
 import { motion } from "framer-motion";
+import Logo from "../../../components/Logo";
 import styles from "../../../styles/views/pools.module.sass";
 
 const Pools = () => {
@@ -41,8 +42,10 @@ const Pools = () => {
                     className={"Card " + styles.PoolCard}
                     style={{ height: "100%", cursor: "pointer" }}
                   >
+                    <div className={styles.Logo}>
+                      <Logo name={pool.architecture} />
+                    </div>
                     <Text h3>{pool.name}</Text>
-                    <Text h5>ID: {id}</Text>
                     <Text h5 type="secondary">
                       {pool.architecture}
                     </Text>

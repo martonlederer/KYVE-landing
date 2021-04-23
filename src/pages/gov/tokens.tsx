@@ -16,7 +16,9 @@ import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
 import Footer from "../../components/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
 import { dispense } from "../../contract";
+import { motion } from "framer-motion";
 import Nav from "../../components/Nav";
+import styles from "../../styles/views/tokens.module.sass";
 
 const Tokens = () => {
   const isMobile = useMediaQuery("mobile");
@@ -46,18 +48,9 @@ const Tokens = () => {
           addr.slice(0, 5) + "..." + addr.slice(addr.length - 5, addr.length);
 
         data.push({
-          address: (
-            <Link
-              target="_blank"
-              href={`https://viewblock.io/arweave/address/${addr}`}
-            >
-              <Code style={{ color: "#a76c6e" }}>
-                {isMobile ? formatted : addr}
-              </Code>
-            </Link>
-          ),
-          balance: <Text>{balance} $KYVE</Text>,
-          locked: <Text>{locked} $KYVE</Text>,
+          address: isMobile ? formatted : addr,
+          balance,
+          locked,
           total: balance + locked,
         });
       }
@@ -69,11 +62,39 @@ const Tokens = () => {
     <>
       <Nav />
       <Page>
-        <Table data={data}>
-          <Table.Column prop="address" label="Address" />
-          <Table.Column prop="balance" label="Balance" />
-          <Table.Column prop="locked" label="Locked Balance" />
-        </Table>
+        {data.map(({ address, balance, locked }, i) => (
+          <>
+            <motion.div
+              className={"Card " + styles.Card}
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.23, ease: "easeInOut", delay: i * 0.1 }}
+              onClick={() =>
+                window.open(`https://viewblock.io/arweave/address/${address}`)
+              }
+            >
+              <p>{address}</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div className={styles.Data}>
+                  <p>Balance</p>
+                  <h1>{balance} $KYVE</h1>
+                </div>
+                <div className={styles.Data}>
+                  <p>Locked balance</p>
+                  <h1>{locked} $KYVE</h1>
+                </div>
+              </div>
+            </motion.div>
+            <Spacer y={1} />
+          </>
+        ))}
       </Page>
       <TransferTokenModal ref={transferTokenModal} />
       <Footer />
