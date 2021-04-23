@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef } from "react";
 import { Spacer } from "@geist-ui/react";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 import Nav from "../components/Nav";
-import styles from "../styles/views/home.module.sass";
 import {
   ArrowRight,
   GitHub,
@@ -12,6 +11,7 @@ import {
   MessageSquare,
   Twitter,
 } from "react-feather";
+import styles from "../styles/views/home.module.sass";
 
 const Partners = [
   { name: "Arweave", link: "https://www.arweave.org" },
@@ -25,7 +25,7 @@ const Partners = [
 
 const Home = () => {
   const router = useRouter();
-  const [logoHovered, setLogoHovered] = useState(false);
+  const partners = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -96,7 +96,12 @@ const Home = () => {
             </a>{" "}
             blockchain, we can permanently and immutably store this data.
           </p>
-          <Button>
+          <Button onClick={() => scroll({
+              top: partners.current?.offsetTop,
+              left: 0,
+              behavior: "smooth"
+            })
+          }>
             What we archive
             <ArrowRight />
           </Button>
@@ -202,6 +207,7 @@ const Home = () => {
           " " +
           styles.PartnerSection
         }
+        ref={partners}
       >
         <div className={styles.SectionContent + " " + styles.SectionTop}>
           <h2>Partners</h2>
