@@ -10,13 +10,15 @@ import {
   Spacer,
   Table,
   Text,
-  Button,
   Modal,
   Row,
   Input,
 } from "@geist-ui/react";
+import { motion } from "framer-motion";
+import Button from "../../components/Button";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
+import tokenStyles from "../../styles/views/tokens.module.sass";
 
 const client = new Arweave({
   host: "arweave.net",
@@ -50,20 +52,43 @@ const Vault = () => {
         {connected && !loading ? (
           <>
             {address in Object.keys(state.vault || {}) ? (
-              <Table
-                data={state.vault[address].map((entry) => {
-                  return {
-                    amount: <Text>{entry.amount} $KYVE</Text>,
-                    status:
-                      entry.end < height
-                        ? "Ended."
-                        : `Ends in ${entry.end - height} blocks.`,
-                  };
-                })}
-              >
-                <Table.Column prop="amount" label="Amount" />
-                <Table.Column prop="status" label="Status" />
-              </Table>
+              state.vault[address].map((entry, i) => (
+                <>
+                  <motion.div
+                    className={"Card " + tokenStyles.Card}
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.23,
+                      ease: "easeInOut",
+                      delay: i * 0.05,
+                    }}
+                  >
+                    <div
+                      className={tokenStyles.Data}
+                      style={{ margin: ".6em 0" }}
+                    >
+                      <p style={{ textAlign: "left" }}>Amount</p>
+                      <h1 style={{ textAlign: "left" }}>
+                        {entry.amount} $KYVE
+                      </h1>
+                    </div>
+                    <div
+                      className={tokenStyles.Data}
+                      style={{ margin: ".6em 0", textAlign: "left" }}
+                    >
+                      <p>Status</p>
+                      <h1>
+                        {entry.end < height
+                          ? "Ended."
+                          : `Ends in ${entry.end - height} blocks.`}
+                      </h1>
+                    </div>
+                  </motion.div>
+                  <Spacer y={1} />
+                </>
+              ))
             ) : (
               <div
                 style={{
@@ -77,7 +102,10 @@ const Vault = () => {
                   You don't have any tokens locked.
                 </Text>
                 <Spacer y={1} />
-                <Button onClick={() => modal.setVisible(true)}>
+                <Button
+                  onClick={() => modal.setVisible(true)}
+                  style={{ margin: "0 auto" }}
+                >
                   Lock Tokens
                 </Button>
               </div>

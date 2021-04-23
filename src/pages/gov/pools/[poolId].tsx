@@ -24,7 +24,7 @@ import { motion } from "framer-motion";
 import VotesGrid from "../../../components/Governance/pools/VotesGrid";
 import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
 import Nav from "../../../components/Nav";
-import Button from "../../../components/Button"
+import Button from "../../../components/Button";
 import tokenStyles from "../../../styles/views/tokens.module.sass";
 
 const Pool = () => {
@@ -53,7 +53,7 @@ const Pool = () => {
   }, [connected]);
 
   const isMobile = useMediaQuery("mobile");
-  const [poolUploader, setPoolUploader] = useState("")
+  const [poolUploader, setPoolUploader] = useState("");
 
   useEffect(() => {
     if (loading) return;
@@ -62,9 +62,13 @@ const Pool = () => {
 
   useEffect(() => {
     if (loading) return;
-    const upl = state.pools[poolID].uploader
-    setPoolUploader(isMobile ? upl.slice(0, 5) + "..." + upl.slice(upl.length - 5, upl.length) : upl)
-  }, [loading, isMobile])
+    const upl = state.pools[poolID].uploader;
+    setPoolUploader(
+      isMobile
+        ? upl.slice(0, 5) + "..." + upl.slice(upl.length - 5, upl.length)
+        : upl
+    );
+  }, [loading, isMobile]);
 
   const DisplayCard = (props) => {
     return (
@@ -94,7 +98,9 @@ const Pool = () => {
       <Page>
         {!loading && (
           <>
-            <Text h2 style={{ fontWeight: 800 }}>{pool.name}</Text>
+            <Text h2 style={{ fontWeight: 800 }}>
+              {pool.name}
+            </Text>
             <div className={"Card " + tokenStyles.Card}>
               <p>
                 <span style={{ marginRight: ".4em" }}>Architecture:</span>
@@ -108,13 +114,11 @@ const Pool = () => {
             <Spacer y={1} />
             <div className={"Card " + tokenStyles.Card}>
               <p>
-                {
-                    pool.balance > 0 ? (
-                      <Dot type="success">Active</Dot>
-                    ) : (
-                      <Dot type="error">Insufficient balance</Dot>
-                    )
-                  }
+                {pool.balance > 0 ? (
+                  <Dot type="success">Active</Dot>
+                ) : (
+                  <Dot type="error">Insufficient balance</Dot>
+                )}
               </p>
               <div
                 style={{
@@ -129,13 +133,16 @@ const Pool = () => {
                 </div>
                 <div className={tokenStyles.Data}>
                   <p>Locked balance</p>
-                  <h1>{(() => {
-                    let sum = 0;
-                    Object.values(pool.vault || {}).map(
-                      (v: number) => (sum += v)
-                    );
-                    return sum;
-                  })()} $KYVE</h1>
+                  <h1>
+                    {(() => {
+                      let sum = 0;
+                      Object.values(pool.vault || {}).map(
+                        (v: number) => (sum += v)
+                      );
+                      return sum;
+                    })()}{" "}
+                    $KYVE
+                  </h1>
                 </div>
               </div>
             </div>
@@ -145,12 +152,21 @@ const Pool = () => {
                 <Spacer y={1} />
                 {(pool.registered || []).map((address, i) => (
                   <>
-                    <motion.div className={"Card " + tokenStyles.Card} key={i}
+                    <motion.div
+                      className={"Card " + tokenStyles.Card}
+                      key={i}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.23, ease: "easeInOut", delay: i * 0.05 }}
+                      transition={{
+                        duration: 0.23,
+                        ease: "easeInOut",
+                        delay: i * 0.05,
+                      }}
                     >
-                      <div className={tokenStyles.Data} style={{ margin: ".6em 0", textAlign: "left" }}>
+                      <div
+                        className={tokenStyles.Data}
+                        style={{ margin: ".6em 0", textAlign: "left" }}
+                      >
                         <p style={{ textAlign: "left" }}>Address</p>
                         <h1 style={{ textAlign: "left" }}>{address}</h1>
                       </div>
@@ -166,48 +182,58 @@ const Pool = () => {
               <Tabs.Item label="Vault" value="2">
                 <Spacer y={1} />
                 {((Object.keys(pool.vault || {}) || []).length === 0 && (
-                  <p style={{ textAlign: "center" }}>
-                    Nothing in vault
-                  </p>
-                )) || (Object.keys(pool.vault || {}) || []).map((address, i) => (
-                  <>
-                    <motion.div className={"Card " + tokenStyles.Card} key={i}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.23, ease: "easeInOut", delay: i * 0.05 }}
-                    >
-                      <div className={tokenStyles.Data} style={{ margin: ".6em 0", textAlign: "left" }}>
-                        <p style={{ textAlign: "left" }}>Address</p>
-                        <h1 style={{ textAlign: "left" }}>{address}</h1>
-                      </div>
-                      <div style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}>
-                        <div className={tokenStyles.Data}>
-                          <p>Locked</p>
-                          <h1>{pool.vault[address] || 0} $KYVE</h1>
+                  <p style={{ textAlign: "center" }}>Nothing in vault</p>
+                )) ||
+                  (Object.keys(pool.vault || {}) || []).map((address, i) => (
+                    <>
+                      <motion.div
+                        className={"Card " + tokenStyles.Card}
+                        key={i}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                          duration: 0.23,
+                          ease: "easeInOut",
+                          delay: i * 0.05,
+                        }}
+                      >
+                        <div
+                          className={tokenStyles.Data}
+                          style={{ margin: ".6em 0", textAlign: "left" }}
+                        >
+                          <p style={{ textAlign: "left" }}>Address</p>
+                          <h1 style={{ textAlign: "left" }}>{address}</h1>
                         </div>
-                        {myAddress === address && (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
                           <div className={tokenStyles.Data}>
-                            <Button
-                              buttonSize="small"
-                              onClick={async () => {
-                                setUnlockLoading(true);
-                                await unlockTokens();
-                                setUnlockLoading(false);
-                              }}
-                            >
-                              Unlock
-                            </Button>
+                            <p>Locked</p>
+                            <h1>{pool.vault[address] || 0} $KYVE</h1>
                           </div>
-                        )}
-                      </div>
-                    </motion.div>
-                    <Spacer y={1} />
-                  </>
-                ))}
+                          {myAddress === address && (
+                            <div className={tokenStyles.Data}>
+                              <Button
+                                buttonSize="small"
+                                onClick={async () => {
+                                  setUnlockLoading(true);
+                                  await unlockTokens();
+                                  setUnlockLoading(false);
+                                }}
+                              >
+                                Unlock
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                      <Spacer y={1} />
+                    </>
+                  ))}
               </Tabs.Item>
               <Tabs.Item label="Votes" value="3">
                 <VotesGrid votes={state.votes} poolID={poolID} />

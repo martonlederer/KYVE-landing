@@ -6,12 +6,14 @@ const Button = ({
   className,
   children,
   onClick,
+  style,
 }: PropsWithChildren<ButtonProps>) => (
   <button
     className={
       styles.Button + " " + styles[`ButtonSize_${buttonSize}`] + " " + className
     }
     onClick={onClick}
+    style={style}
   >
     {children}
   </button>
