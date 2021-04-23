@@ -35,17 +35,75 @@
       margin: 0 .65em
 
     .MenuPopup
+      $arrowSize: 7px
       position: absolute
-      top: 100%
+      top: calc(100% + #{$arrowSize})
       background-color: variables.$tooltip-bg
       border-radius: 15px
-      padding: .7em 1em
+      padding: 1.7em 2em
       width: max-content
+      z-index: 100
       transition: all .23s ease-in-out
 
       &::before
-        $height: 2em
+        $height: 10px
         content: ''
-        bottom: calc(100% + #{$height})
+        position: absolute
+        top: -$height
         height: $height
-        width: 100%
+        left: 0
+        right: 0
+
+      &::after
+        content: ''
+        position: absolute
+        bottom: 100%
+        left: 50%
+        border-width: $arrowSize
+        border-style: solid
+        border-color: transparent transparent variables.$tooltip-bg transparent
+        transform: translateX(-50%)
+
+=popupLinks
+  a
+    display: flex
+    align-items: center
+    width: max-content
+    font-size: 1.1em
+    color: #fff
+    font-weight: 400
+    margin-bottom: 1em
+    transition: all .23s ease-in-out
+
+    &:last-child
+      margin-bottom: 0
+
+    svg
+      margin-left: .5em
+      font-size: 1em
+      width: 1em
+      height: 1em
+
+    &:hover
+      opacity: .8
+
+.Chains
+  display: flex
+  align-items: stretch
+
+  .Links
+    margin-right: 1.85em
+    +popupLinks
+
+  .CurrentLogo
+    $size: 240px
+    position: relative
+    width: $size
+
+    svg
+      position: absolute
+      top: 50%
+      left: 50%
+      max-width: $size
+      max-height: $size
+      transform: translate(-50%, -50%)

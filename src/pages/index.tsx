@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useRef } from "react";
 import { Spacer } from "@geist-ui/react";
 import Button from "../components/Button";
@@ -24,7 +23,6 @@ const Partners = [
 ];
 
 const Home = () => {
-  const router = useRouter();
   const partners = useRef<HTMLDivElement>(null);
 
   return (
