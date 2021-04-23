@@ -1,0 +1,55 @@
+@use "../variables"
+  
+.NotFound
+  position: relative
+  height: 100vh
+
+  .Content
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+    h1
+      color: #fff
+      font-size: 11em
+      font-weight: 800
+      text-align: center
+      line-height: 1em
+      margin: 0
+        bottom: .02em
+
+      @media screen and (max-width: variables.$smaller-screen)
+        font-size: 8em
+
+    h2
+      font-size: 1.3em
+      font-weight: 500
+      color: variables.$dark-text
+      text-align: center
+      text-transform: uppercase
+      margin: 0
+        bottom: 2em
+
+    .Btns
+      display: flex
+      align-items: center
+      justify-content: center
+
+      a
+        padding: 0 2em
+        color: #fff
+        display: flex
+        align-items: center
+        font-weight: 600
+        font-size: 1.1em
+        transition: all .23s ease-in-out
+
+        svg
+          font-size: 1em
+          width: 1em
+          height: 1em
+          margin-left: .43em
+
+        &:hover
+          opacity: .8
