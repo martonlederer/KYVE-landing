@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Twitter,
 } from "react-feather";
+import Footer from "../components/Footer";
 import styles from "../styles/views/home.module.sass";
 
 const Partners = [
@@ -58,7 +59,7 @@ const Home = () => {
               <GitHub />
             </a>
             <a
-              href="https://discord.gg/qbAeuCDa6A"
+              href="https://chat.kyve.network"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -247,7 +248,20 @@ const Home = () => {
               "linear-gradient(135deg, rgba(255, 255, 255, 0.29) 18.51%, rgba(255, 255, 255, 0.01) 60.62%)",
           }}
         />
+        <div
+          className={styles.Bubble}
+          style={{
+            width: "22vh",
+            height: "22vh",
+            left: "1vw",
+            bottom: "-6vh",
+            background:
+              "linear-gradient(220deg, rgba(255, 255, 255, 0.26) 0.63%, rgba(255, 255, 255, 0) 79.44%)",
+          }}
+        />
       </div>
+      <Spacer y={3} />
+      <Footer />
     </>
   );
 };

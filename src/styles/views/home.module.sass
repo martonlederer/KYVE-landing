@@ -62,8 +62,6 @@
   animation: wobble 7s infinite
 
 .Section
-  $sideSpace: 17vw
-  $sideSpaceSmall: 10vw
   position: relative
   height: 100vh
 
@@ -73,24 +71,24 @@
   .SectionContent
     position: absolute
     top: 50%
-    left: $sideSpace
-    width: calc(62% - #{$sideSpace})
+    left: variables.$sideSpace
+    width: calc(62% - #{variables.$sideSpace})
     transform: translateY(-50%)
 
     &.SectionLeft
       left: unset
-      right: $sideSpace
+      right: variables.$sideSpace
 
     &.SectionTop
       top: 0
       transform: none
 
     @media screen and (max-width: variables.$smaller-screen)
-      left: $sideSpaceSmall
-      width: calc(62% - #{$sideSpaceSmall})
+      left: variables.$sideSpaceSmall
+      width: calc(62% - #{variables.$sideSpaceSmall})
 
       &.SectionLeft
-        right: $sideSpaceSmall
+        right: variables.$sideSpaceSmall
 
     h1
       font-size: 4.5em
@@ -135,10 +133,10 @@
       position: relative
       width: auto
       left: 0
-      margin: 0 $sideSpace
+      margin: 0 variables.$sideSpace
 
       @media screen and (max-width: variables.$smaller-screen)
-        margin: 0 $sideSpaceSmall
+        margin: 0 variables.$sideSpaceSmall
 
 .Partners
   display: flex
