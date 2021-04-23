@@ -77,6 +77,10 @@ const Home = () => {
           className={styles.Bubble}
           style={{ transform: "rotate(60deg)", bottom: 0, left: "-8vw" }}
         />
+        <div
+          className={styles.Bubble}
+          style={{ transform: "rotate(-85deg)", width: "12vw", height: "12vw", right: "-2vw", bottom: "-8vw" }}
+        />
       </div>
       <div className={styles.Section}>
         <div className={styles.SectionContent}>

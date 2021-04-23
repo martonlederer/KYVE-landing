@@ -124,7 +124,7 @@ const Nav = () => {
               style={{ left: popupPos }}
             >
               {(menuState === "gov" && <h1>Test</h1>) || (
-                <div className={styles.Chains}>
+                <motion.div className={styles.Chains}>
                   <div className={styles.Links}>
                     {Partners.map((partner, i) => (
                       <a
@@ -156,7 +156,7 @@ const Nav = () => {
                       />
                     )) || <KyveLogo />}
                   </motion.div>
-                </div>
+                </motion.div>
               )}
             </motion.div>
           )}
