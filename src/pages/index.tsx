@@ -96,12 +96,15 @@ const Home = () => {
             </a>{" "}
             blockchain, we can permanently and immutably store this data.
           </p>
-          <Button onClick={() => scroll({
-              top: partners.current?.offsetTop,
-              left: 0,
-              behavior: "smooth"
-            })
-          }>
+          <Button
+            onClick={() =>
+              scroll({
+                top: partners.current?.offsetTop,
+                left: 0,
+                behavior: "smooth",
+              })
+            }
+          >
             What we archive
             <ArrowRight />
           </Button>
@@ -200,13 +203,7 @@ const Home = () => {
         />
       </div>
       <div
-        className={
-          styles.Section +
-          " " +
-          styles.SmallSection +
-          " " +
-          styles.PartnerSection
-        }
+        className={styles.Section + " " + styles.PartnerSection}
         ref={partners}
       >
         <div className={styles.SectionContent + " " + styles.SectionTop}>
@@ -231,6 +228,17 @@ const Home = () => {
             ))}
           </div>
         </div>
+        <div
+          className={styles.Bubble}
+          style={{
+            width: "17vh",
+            height: "17vh",
+            right: "2vw",
+            bottom: 0,
+            background:
+              "linear-gradient(135deg, rgba(255, 255, 255, 0.29) 18.51%, rgba(255, 255, 255, 0.01) 60.62%)",
+          }}
+        />
       </div>
     </>
   );

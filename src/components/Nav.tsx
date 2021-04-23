@@ -1,16 +1,15 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { Row, Link, Spacer } from "@geist-ui/react";
+import { Link } from "@geist-ui/react";
 import Button from "./Button";
 import styles from "../styles/components/Nav.module.sass";
 
-const Nav = ({ children }: { children?: any }) => {
+const Nav = () => {
   const router = useRouter();
   const [hasWallet, setHasWallet] = useState(false);
   const [connected, setConnected] = useState(false);
 
   const base = router.asPath.split(router.pathname)[0];
-  console.log(router, base);
 
   useEffect(() => {
     if (window.arweaveWallet) {
@@ -27,6 +26,21 @@ const Nav = ({ children }: { children?: any }) => {
       permissions.indexOf("ACCESS_ADDRESS") > -1 &&
       permissions.indexOf("SIGN_TRANSACTION") > -1
     ) {
+      setConnected(true);
+    }
+  }
+
+  async function login() {
+    if (!hasWallet) return window.open("https://arconnect.io");
+    if (connected) {
+      // @ts-ignore
+      await window.arweaveWallet.disconnect();
+      setConnected(false);
+    } else {
+      await window.arweaveWallet.connect([
+        "ACCESS_ADDRESS",
+        "SIGN_TRANSACTION",
+      ]);
       setConnected(true);
     }
   }
@@ -52,7 +66,13 @@ const Nav = ({ children }: { children?: any }) => {
         <span className={styles.Item}>Chains</span>
         <span className={styles.Item}>Governance</span>
       </div>
-      <Button buttonSize="small">Connect</Button>
+      <Button buttonSize="small" onClick={login}>
+        {hasWallet
+          ? connected
+            ? "Disconnect"
+            : "Connect"
+          : "Install ArConnect"}
+      </Button>
     </div>
   );
 };

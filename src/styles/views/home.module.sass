@@ -128,14 +128,17 @@
       span
         color: #fff
 
-  &.PartnerSection .SectionContent
-    position: relative
-    width: auto
-    left: 0
-    margin: 0 $sideSpace
+  &.PartnerSection 
+    height: auto
+    
+    .SectionContent
+      position: relative
+      width: auto
+      left: 0
+      margin: 0 $sideSpace
 
-    @media screen and (max-width: variables.$smaller-screen)
-      margin: 0 $sideSpaceSmall
+      @media screen and (max-width: variables.$smaller-screen)
+        margin: 0 $sideSpaceSmall
 
 .Partners
   display: flex
