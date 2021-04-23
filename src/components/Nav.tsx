@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "@geist-ui/react";
+import { motion, AnimatePresence } from "framer-motion";
 import Button from "./Button";
 import styles from "../styles/components/Nav.module.sass";
 
@@ -8,6 +9,8 @@ const Nav = () => {
   const router = useRouter();
   const [hasWallet, setHasWallet] = useState(false);
   const [connected, setConnected] = useState(false);
+  const [menuState, setMenuState] = useState<"chains" | "gov" | null>(null);
+  const [hoveredPopup, setHoveredPopup] = useState(false);
 
   const base = router.asPath.split(router.pathname)[0];
 
@@ -63,8 +66,42 @@ const Nav = () => {
         </a>
       </Link>
       <div className={styles.Menu}>
-        <span className={styles.Item}>Chains</span>
-        <span className={styles.Item}>Governance</span>
+        <span
+          className={styles.Item}
+          onMouseEnter={() => setMenuState("chains")}
+          onMouseLeave={() => {
+            if (!hoveredPopup) setMenuState(null);
+          }}
+        >
+          Chains
+        </span>
+        <span
+          className={styles.Item}
+          onMouseEnter={() => setMenuState("gov")}
+          onMouseLeave={() => {
+            if (!hoveredPopup) setMenuState(null);
+          }}
+        >
+          Governance
+        </span>
+        <AnimatePresence>
+          {menuState && (
+            <motion.div
+              className={styles.MenuPopup}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.23, ease: "easeInOut" }}
+              onMouseEnter={() => setHoveredPopup(true)}
+              onMouseLeave={() => {
+                setHoveredPopup(false);
+                setMenuState(null);
+              }}
+            >
+              <h1>hi</h1>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <Button buttonSize="small" onClick={login}>
         {hasWallet

@@ -1,3 +1,5 @@
+@use "../variables"
+  
 .Nav
   padding: 1.55em 6em
   display: flex
@@ -21,6 +23,7 @@
       opacity: .8
 
   .Menu
+    position: relative
     display: flex
     align-items: center
 
@@ -30,3 +33,19 @@
       font-weight: 500
       cursor: default
       margin: 0 .65em
+
+    .MenuPopup
+      position: absolute
+      top: 100%
+      background-color: variables.$tooltip-bg
+      border-radius: 15px
+      padding: .7em 1em
+      width: max-content
+      transition: all .23s ease-in-out
+
+      &::before
+        $height: 2em
+        content: ''
+        bottom: calc(100% + #{$height})
+        height: $height
+        width: 100%
