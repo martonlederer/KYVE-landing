@@ -14,6 +14,21 @@ const Nav = () => {
 
   const base = router.asPath.split(router.pathname)[0];
 
+  const govMenu = useRef<HTMLDivElement>(null)
+  const chainsMenu = useRef<HTMLDivElement>(null)
+  const popup = useRef<HTMLDivElement>(null)
+  const [popupPos, setPopupPos] = useState(0);
+
+  useEffect(() => {
+    const current = menuState === "gov" ? govMenu.current : chainsMenu.current;
+    if(!menuState || !current) return;
+    const popupWidth = popup.current?.clientWidth ?? 0
+    const updatePos = current.offsetLeft + current.clientWidth / 2 - popupWidth / 2
+
+    if(popupPos !== updatePos)
+      setPopupPos(updatePos);
+  }, [menuState, popup])
+
   useEffect(() => {
     if (window.arweaveWallet) {
       tryToConnect();
@@ -72,6 +87,7 @@ const Nav = () => {
           onMouseLeave={() => {
             if (!hoveredPopup) setMenuState(null);
           }}
+          ref={chainsMenu}
         >
           Chains
         </span>
@@ -81,6 +97,7 @@ const Nav = () => {
           onMouseLeave={() => {
             if (!hoveredPopup) setMenuState(null);
           }}
+          ref={govMenu}
         >
           Governance
         </span>
@@ -97,6 +114,8 @@ const Nav = () => {
                 setHoveredPopup(false);
                 setMenuState(null);
               }}
+              ref={popup}
+              style={{ left: popupPos }}
             >
               <h1>hi</h1>
             </motion.div>
