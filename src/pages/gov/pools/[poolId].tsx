@@ -22,14 +22,14 @@ import { interactWrite } from "smartweave";
 import { arweave } from "../../../extensions";
 import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
 import { AnimatePresence, motion } from "framer-motion";
+import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react";
 import VotesGrid from "../../../components/Governance/pools/VotesGrid";
 import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
 import Nav from "../../../components/Nav";
 import Button from "../../../components/Button";
-import Logo from "../../../components/Logo"
+import Logo from "../../../components/Logo";
 import tokenStyles from "../../../styles/views/tokens.module.sass";
 import styles from "../../../styles/views/pools.module.sass";
-import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react"
 
 const Pool = () => {
   const fundPoolModal = useRef();

@@ -11,6 +11,7 @@ import { interactWrite } from "smartweave";
 import { arweave } from "../../../extensions";
 import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
 import { useEffect, useState } from "react";
+import Highlight from "react-highlight";
 import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
 
@@ -107,11 +108,19 @@ const VotesGrid = (props) => {
                     {id}: {vote.type}
                   </Text>
                   <Text>
-                    <pre>{JSON.stringify(vote.metadata, null, 2)}</pre>
+                    <Highlight className="json">
+                      {JSON.stringify(vote.metadata, null, 2)}
+                    </Highlight>
                   </Text>
                   <Progress
                     value={height - vote.start}
                     max={vote.end - vote.start}
+                    colors={{
+                      100:
+                        (vote.status === "passed" && "#5fe014") ||
+                        (vote.status === "errored" && "#ff0000") ||
+                        "#F5A623",
+                    }}
                   />
                   {vote.status === "passed" ? (
                     <Text>Vote passed</Text>
