@@ -81,7 +81,7 @@ const UpdatePoolModal = forwardRef((props: any, ref) => {
         name: poolName,
         architecture: architecture,
         config: JSON.parse(config),
-        bundleSize: bundleSize,
+        bundleSize: parseInt(bundleSize),
         uploader: uploader,
         rates: {
           uploader: uploaderRate,
