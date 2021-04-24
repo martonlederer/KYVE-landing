@@ -98,7 +98,7 @@ const Vault = () => {
                   transform: "translateX(-50%) translateY(-50%)",
                 }}
               >
-                <Text h3 type="secondary">
+                <Text h3 type="secondary" style={{ textAlign: "center" }}>
                   You don't have any tokens locked.
                 </Text>
                 <Spacer y={1} />
@@ -120,7 +120,7 @@ const Vault = () => {
               transform: "translateX(-50%) translateY(-50%)",
             }}
           >
-            <Text h3 type="secondary">
+            <Text h3 type="secondary" style={{ textAlign: "center" }}>
               Please connect your wallet.
             </Text>
           </div>
