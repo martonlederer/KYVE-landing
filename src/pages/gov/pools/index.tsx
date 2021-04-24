@@ -76,38 +76,43 @@ const Pools = () => {
                 {isMobile && <Spacer y={2} />}
               </>
             ))}
-            <Grid xs={isMobile ? undefined : 8}>
-              <motion.div
-                initial={{ scale: 0.75, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{
-                  duration: 0.23,
-                  ease: "easeInOut",
-                  delay: state.pools.length * fadeInDelay,
-                }}
-                style={{ width: "100%", height: "100%" }}
-              >
-                <Card
-                  onClick={() => {
-                    // @ts-ignore
-                    authNodeModal.current.open();
-                  }}
-                  className={"Card " + styles.AddCard}
-                  style={{
-                    height: "100%",
-                    cursor: "pointer",
-                    position: "relative",
-                  }}
-                >
-                  <div className={styles.AddContent}>
-                    <span>
-                      <PlusIcon />
-                    </span>
-                    Add new
-                  </div>
-                </Card>
-              </motion.div>
-            </Grid>
+            <AnimatePresence>
+              {connected && (
+                <Grid xs={isMobile ? undefined : 8}>
+                  <motion.div
+                    initial={{ scale: 0.75, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.75, opacity: 0 }}
+                    transition={{
+                      duration: 0.23,
+                      ease: "easeInOut",
+                      delay: state.pools.length * fadeInDelay,
+                    }}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <Card
+                      onClick={() => {
+                        // @ts-ignore
+                        authNodeModal.current.open();
+                      }}
+                      className={"Card " + styles.AddCard}
+                      style={{
+                        height: "100%",
+                        cursor: "pointer",
+                        position: "relative",
+                      }}
+                    >
+                      <div className={styles.AddContent}>
+                        <span>
+                          <PlusIcon />
+                        </span>
+                        Add new
+                      </div>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              )}
+            </AnimatePresence>
             {isMobile && <Spacer y={2} />}
           </Grid.Container>
         )}
