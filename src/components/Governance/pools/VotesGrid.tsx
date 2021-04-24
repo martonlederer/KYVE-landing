@@ -2,6 +2,7 @@ import {
   Button,
   ButtonGroup,
   Card,
+  Code,
   Grid,
   Progress,
   Text,
@@ -14,6 +15,7 @@ import { useEffect, useState } from "react";
 import Highlight from "react-highlight";
 import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
+import { motion } from "framer-motion";
 
 const VotesGrid = (props) => {
   const [loading, setLoading] = useState(false);
@@ -102,74 +104,85 @@ const VotesGrid = (props) => {
         {props.votes.map((vote, id) => {
           if (vote.metadata.id === props.poolID) {
             return (
-              <Grid>
-                <Card>
-                  <Text h4>
-                    {id}: {vote.type}
-                  </Text>
-                  <Text>
-                    <Highlight className="json">
-                      {JSON.stringify(vote.metadata, null, 2)}
-                    </Highlight>
-                  </Text>
-                  <Progress
-                    value={height - vote.start}
-                    max={vote.end - vote.start}
-                    colors={{
-                      100:
-                        (vote.status === "passed" && "#5fe014") ||
-                        (vote.status === "errored" && "#ff0000") ||
-                        "#F5A623",
-                    }}
-                  />
-                  {vote.status === "passed" ? (
-                    <Text>Vote passed</Text>
-                  ) : undefined}
-                  {vote.status === "errored" ? (
-                    <Text>Vote errored</Text>
-                  ) : undefined}
-                  {vote.status === "pending" ? (
-                    <>
-                      {height >= vote.end ? (
-                        <FinalizeButton voteID={id} />
-                      ) : (
-                        <>
-                          {hasVoted(myAddress, vote).voted ? (
-                            <>
-                              <Text>
-                                Already voted with{" "}
-                                {hasVoted(myAddress, vote).cast}
-                              </Text>
-                            </>
-                          ) : (
-                            <ButtonGroup ghost disabled={loading}>
-                              <Button
-                                loading={loading}
-                                onClick={async () => {
-                                  setLoading(true);
-                                  await voteOn(id, "nay");
-                                  setLoading(false);
-                                }}
-                              >
-                                Nay
-                              </Button>
-                              <Button
-                                loading={loading}
-                                onClick={async () => {
-                                  setLoading(true);
-                                  await voteOn(id, "yay");
-                                  setLoading(false);
-                                }}
-                              >
-                                Yay
-                              </Button>
-                            </ButtonGroup>
-                          )}
-                        </>
-                      )}
-                    </>
-                  ) : undefined}
-                </Card>
+              <Grid key={id}>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.23,
+                    ease: "easeInOut",
+                    delay: id * 0.05,
+                  }}
+                >
+                  <Card className="Card">
+                    <Text h4>
+                      {id}:
+                      <Code style={{ marginLeft: ".33em" }}>{vote.type}</Code>
+                    </Text>
+                    <Text>
+                      <Highlight className="json">
+                        {JSON.stringify(vote.metadata, null, 2)}
+                      </Highlight>
+                    </Text>
+                    <Progress
+                      value={height - vote.start}
+                      max={vote.end - vote.start}
+                      colors={{
+                        100:
+                          (vote.status === "passed" && "#5fe014") ||
+                          (vote.status === "errored" && "#ff0000") ||
+                          "#F5A623",
+                      }}
+                    />
+                    {vote.status === "passed" ? (
+                      <Text>Vote passed</Text>
+                    ) : undefined}
+                    {vote.status === "errored" ? (
+                      <Text>Vote errored</Text>
+                    ) : undefined}
+                    {vote.status === "pending" ? (
+                      <>
+                        {height >= vote.end ? (
+                          <FinalizeButton voteID={id} />
+                        ) : (
+                          <>
+                            {hasVoted(myAddress, vote).voted ? (
+                              <>
+                                <Text>
+                                  Already voted with{" "}
+                                  {hasVoted(myAddress, vote).cast}
+                                </Text>
+                              </>
+                            ) : (
+                              <ButtonGroup ghost disabled={loading}>
+                                <Button
+                                  loading={loading}
+                                  onClick={async () => {
+                                    setLoading(true);
+                                    await voteOn(id, "nay");
+                                    setLoading(false);
+                                  }}
+                                >
+                                  Nay
+                                </Button>
+                                <Button
+                                  loading={loading}
+                                  onClick={async () => {
+                                    setLoading(true);
+                                    await voteOn(id, "yay");
+                                    setLoading(false);
+                                  }}
+                                >
+                                  Yay
+                                </Button>
+                              </ButtonGroup>
+                            )}
+                          </>
+                        )}
+                      </>
+                    ) : undefined}
+                  </Card>
+                </motion.div>
               </Grid>
             );
           }
