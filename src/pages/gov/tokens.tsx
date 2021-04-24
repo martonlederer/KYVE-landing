@@ -8,6 +8,7 @@ import {
   useToasts,
   Spinner,
   Spacer,
+  Tooltip,
 } from "@geist-ui/react";
 import useConnected from "../../hooks/useConnected";
 import useContract from "../../hooks/useContract";
@@ -16,7 +17,7 @@ import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
 import Footer from "../../components/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
 import { dispense } from "../../contract";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import styles from "../../styles/views/tokens.module.sass";
 
@@ -62,6 +63,53 @@ const Tokens = () => {
     <>
       <Nav />
       <Page>
+        <AnimatePresence>
+          {connected && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="ActionSheet"
+            >
+              <Tooltip text="Dispense tokens">
+                <span
+                  className="Btn"
+                  onClick={async () => {
+                    setLoading(true);
+                    const id = await dispense();
+                    setToast({
+                      text: `Successfully dispensed tokens. Please wait for tx: ${id} to mine.`,
+                    });
+                    setLoading(false);
+                  }}
+                >
+                  {loading ? (
+                    <Spinner
+                      style={{
+                        height: "1em",
+                        width: "1em",
+                      }}
+                    />
+                  ) : (
+                    <PlusIcon />
+                  )}
+                </span>
+              </Tooltip>
+              <Spacer y={1} />
+              <Tooltip text="Transfer">
+                <span
+                  className="Btn"
+                  onClick={() => {
+                    // @ts-ignore
+                    transferTokenModal.current.open();
+                  }}
+                >
+                  <ArrowSwitchIcon />
+                </span>
+              </Tooltip>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {data.map(({ address, balance, locked }, i) => (
           <>
             <motion.div
