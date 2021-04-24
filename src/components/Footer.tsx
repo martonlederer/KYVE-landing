@@ -18,7 +18,7 @@ const Footer = () => (
       />
     </svg>
     <div className={styles.Links}>
-      <div>
+      <div className={styles.Column}>
         <h2>About</h2>
         <Link href="/">Home</Link>
         <a
@@ -43,13 +43,13 @@ const Footer = () => (
           Viewblock <ExternalLink />
         </a>
       </div>
-      <div>
+      <div className={styles.Column}>
         <h2>Explore</h2>
         <Link href="/gov/tokens">Tokens</Link>
         <Link href="/gov/pools">Pools</Link>
         <Link href="/gov/vault">Vault</Link>
       </div>
-      <div>
+      <div className={styles.Column}>
         <h2>Social</h2>
         <a
           href="https://twitter.com/kyvenetwork"
@@ -80,7 +80,7 @@ const Footer = () => (
           Mail <ExternalLink />
         </a>
       </div>
-      <div>
+      <div className={styles.Column}>
         <h2>Tech</h2>
         <a href="https://arweave.org" target="_blank" rel="noopener noreferrer">
           Arweave <ExternalLink />

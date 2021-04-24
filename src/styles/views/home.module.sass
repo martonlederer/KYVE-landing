@@ -61,6 +61,10 @@
   border-radius: 100%
   animation: wobble 7s infinite
 
+  @media screen and (max-width: variables.$mobile-screen)
+    &:not(.KeepMobile)
+      display: none
+
 .Section
   position: relative
   height: 100vh
@@ -90,6 +94,11 @@
       &.SectionLeft
         right: variables.$sideSpaceSmall
 
+    @media screen and (max-width: variables.$mobile-screen)
+      left: variables.$sideSpaceSmall
+      right: variables.$sideSpaceSmall
+      width: calc(100% - #{variables.$sideSpaceSmall * 2})
+
     h1
       font-size: 4.5em
       font-weight: 800
@@ -101,6 +110,9 @@
       @media screen and (max-width: variables.$smaller-screen)
         font-size: 3.5em
 
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: 2.8em
+
     h2
       font-size: 1em
       font-weight: 700
@@ -108,6 +120,9 @@
       line-height: 1.1em
       color: variables.$dark-text
       margin: 0
+
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: .85em
 
     p
       font-size: 1.3em
@@ -162,6 +177,9 @@
 
     &:nth-child(n + 8)
       order: 2
+
+    @media screen and (max-width: variables.$mobile-screen)
+      width: 50%
 
 @keyframes wobble
   0%

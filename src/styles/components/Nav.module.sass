@@ -6,6 +6,11 @@
   justify-content: space-between
   align-items: center
 
+  @media screen and (max-width: variables.$mobile-screen)
+    padding:
+      right: 2em
+      left: 2em
+
   a
     text-decoration: none
     cursor: pointer
@@ -26,6 +31,9 @@
     position: relative
     display: flex
     align-items: center
+
+    @media screen and (max-width: variables.$mobile-screen)
+      display: none
 
     .Item
       color: #888
