@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
-import { Spinner } from "@geist-ui/react";
+import { Spinner, useMediaQuery } from "@geist-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "react-feather";
 import useContract from "../hooks/useContract";
@@ -26,6 +26,9 @@ const Nav = () => {
   const [hoveredChain, setHoveredChain] = useState<string>();
 
   const { loading, state, height } = useContract();
+
+  const isMobile = useMediaQuery("mobile");
+  const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
 
   useEffect(() => {
     const current = menuState === "gov" ? govMenu.current : chainsMenu.current;
@@ -207,13 +210,79 @@ const Nav = () => {
           )}
         </AnimatePresence>
       </div>
-      <Button buttonSize="small" onClick={login}>
-        {hasWallet
-          ? connected
-            ? "Disconnect"
-            : "Connect"
-          : "Install ArConnect"}
-      </Button>
+      {!isMobile && (
+        <Button buttonSize="small" onClick={login}>
+          {hasWallet
+            ? connected
+              ? "Disconnect"
+              : "Connect"
+            : "Install ArConnect"}
+        </Button>
+      )}
+      {isMobile && (
+        <span
+          className={
+            styles.MobileMenuButton +
+            " " +
+            (mobileMenuOpened ? styles.OpenedMenu : "")
+          }
+          onClick={() => setMobileMenuOpened((val) => !val)}
+        >
+          <span className={styles.MenuButtonLine} />
+          <span className={styles.MenuButtonLine} />
+          <AnimatePresence>
+            {state && mobileMenuOpened && (
+              <motion.div
+                className={styles.MobileMenu}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.23, ease: "easeInOut" }}
+              >
+                <Link href="/gov/tokens">
+                  <a>
+                    Tokens
+                    <span>
+                      {Object.keys(state.balances || {})
+                        .map((addr) => state.balances[addr])
+                        .reduce((a, b) => a + b, 0)}{" "}
+                      $KYVE
+                    </span>
+                  </a>
+                </Link>
+                <Link href="/gov/pools">
+                  <a>
+                    Pools
+                    <span>{state.pools.length} Pools</span>
+                  </a>
+                </Link>
+                <Link href="/gov/vault">
+                  <a>
+                    Vault
+                    <span>
+                      {Object.keys(state.vault || {})
+                        .map((addr) =>
+                          state.vault[addr]
+                            .map((element) => element.amount)
+                            .reduce((a, b) => a + b, 0)
+                        )
+                        .reduce((a, b) => a + b, 0)}{" "}
+                      $KYVE
+                    </span>
+                  </a>
+                </Link>
+                <Button buttonSize="small" onClick={login}>
+                  {hasWallet
+                    ? connected
+                      ? "Disconnect"
+                      : "Connect"
+                    : "Install ArConnect"}
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </span>
+      )}
     </div>
   );
 };

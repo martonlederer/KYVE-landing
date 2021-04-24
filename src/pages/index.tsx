@@ -90,7 +90,8 @@ const Home = () => {
               height: "28vw",
               right: "-8vw",
               top: 0,
-              background: "linear-gradient(40deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 61.98%)"
+              background:
+                "linear-gradient(40deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 61.98%)",
             }}
           />
         )}

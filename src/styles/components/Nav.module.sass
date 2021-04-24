@@ -1,5 +1,19 @@
 @use "../variables"
   
+=linkWithSubText
+  font-size: 1.35em
+  font-weight: 600
+  display: block
+  line-height: 1em
+  color: #fff
+  text-decoration: none
+
+  span
+    display: block
+    font-size: .5em
+    font-weight: 500
+    color: variables.$grey-text
+
 .Nav
   padding: 1.55em 6em
   display: flex
@@ -72,6 +86,62 @@
         border-color: transparent transparent variables.$tooltip-bg transparent
         transform: translateX(-50%)
 
+  .MobileMenuButton
+    $mobileMenuButtonWidth: 2.23em
+    $mobileMenuButtonHeight: 1.8em
+    position: relative
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    justify-content: center
+    width: $mobileMenuButtonWidth
+    height: $mobileMenuButtonHeight
+    z-index: 1000
+    -webkit-tap-highlight-color: transparent
+
+    .MenuButtonLine
+      display: block
+      height: 2px
+      width: 100%
+      background-color: #fff
+      text-align: right
+      margin-bottom: 10px
+      z-index: 10
+      transition: all .23s ease-in-out
+
+      &:nth-child(2)
+        width: 80%
+        margin-bottom: 0
+
+    &.OpenedMenu
+      .MenuButtonLine:nth-child(2)
+        display: block
+        opacity: 0
+
+    .MobileMenu
+      $mobileMenuPadding: .8em
+      $overflowSize: 15px
+      position: absolute
+      top: -$overflowSize
+      right: -$overflowSize
+      width: max-content
+      height: max-content
+      padding: $mobileMenuPadding * 2
+        right: calc(#{$mobileMenuButtonWidth + $mobileMenuPadding} + #{$overflowSize * 2})
+        top: calc(#{$mobileMenuButtonHeight} + #{$overflowSize * 2})
+      background-color: variables.$tooltip-bg
+
+      a
+        display: block
+        width: max-content
+        font-size: 1.3em
+        -webkit-tap-highlight-color: transparent
+        margin: 1em 0
+        +linkWithSubText
+
+        &:first-child
+          margin-top: 0
+
 =popupLinks
   a
     display: flex
@@ -129,16 +199,7 @@ $popupPaddingTop: 1.7em
       bottom: $popupPaddingTop / 2
 
     a
-      font-size: 1.35em
-      font-size: 600
-      display: block
-      line-height: 1em
-
-      span
-        display: block
-        font-size: .5em
-        font-weight: 500
-        color: variables.$grey-text
+      +linkWithSubText
 
   .LatestArweaveBlock
     display: flex
