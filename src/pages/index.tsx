@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Spacer } from "@geist-ui/react";
+import { Spacer, useMediaQuery } from "@geist-ui/react";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 import Nav from "../components/Nav";
@@ -16,13 +16,14 @@ import styles from "../styles/views/home.module.sass";
 
 const Home = () => {
   const partners = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("mobile");
 
   return (
     <>
       <div className={styles.Landing}>
         <Nav />
         <div
-          className={styles.Bubble}
+          className={styles.Bubble + " " + styles.KeepMobile}
           style={{
             transform: "rotate(-141deg)",
             top: "6em",
@@ -66,7 +67,7 @@ const Home = () => {
           </div>
         </div>
         <div
-          className={styles.Bubble}
+          className={styles.Bubble + " " + styles.KeepMobile}
           style={{ transform: "rotate(60deg)", bottom: 0, left: "-8vw" }}
         />
         <div
@@ -81,6 +82,18 @@ const Home = () => {
         />
       </div>
       <div className={styles.Section}>
+        {isMobile && (
+          <div
+            className={styles.Bubble + " " + styles.KeepMobile}
+            style={{
+              width: "28vw",
+              height: "28vw",
+              right: "-8vw",
+              top: 0,
+              background: "linear-gradient(40deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 61.98%)"
+            }}
+          />
+        )}
         <div className={styles.SectionContent}>
           <h2>What is KYVE?</h2>
           <h1>Archiving the web on Arweave.</h1>
@@ -122,6 +135,21 @@ const Home = () => {
             animationDelay: ".3s",
           }}
         />
+        {isMobile && (
+          <div
+            className={styles.Bubble + " " + styles.KeepMobile}
+            style={{
+              transform: "translateY(-50%)",
+              width: "24vh",
+              height: "24vh",
+              left: "-4vh",
+              bottom: 0,
+              background:
+                "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+              animationDelay: ".3s",
+            }}
+          />
+        )}
       </div>
       <div className={styles.Section + " " + styles.SmallSection}>
         <div
@@ -149,6 +177,21 @@ const Home = () => {
         </div>
       </div>
       <div className={styles.Section}>
+        {isMobile && (
+          <div
+            className={styles.Bubble + " " + styles.KeepMobile}
+            style={{
+              transform: "translateY(-50%)",
+              width: "17vh",
+              height: "17vh",
+              right: "-3vh",
+              top: 0,
+              background:
+                "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+              animationDelay: ".3s",
+            }}
+          />
+        )}
         <div className={styles.SectionContent}>
           <h2>DAO governance</h2>
           <h1>Community organized decisions.</h1>

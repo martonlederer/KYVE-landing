@@ -4,6 +4,9 @@
   position: relative
   height: 100vh
 
+  @media screen and (max-width: variables.$mobile-screen)
+    overflow: hidden
+
   .LandingContent
     position: relative
     top: 45%
@@ -68,6 +71,9 @@
 .Section
   position: relative
   height: 100vh
+
+  @media screen and (max-width: variables.$mobile-screen)
+    overflow: hidden
 
   &.SmallSection
     height: 45vh
