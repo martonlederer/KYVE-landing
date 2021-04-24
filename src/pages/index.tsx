@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Twitter,
 } from "react-feather";
+import { useRouter } from "next/router";
 import Footer from "../components/Footer";
 import Partners from "../partners";
 import styles from "../styles/views/home.module.sass";
@@ -17,6 +18,7 @@ import styles from "../styles/views/home.module.sass";
 const Home = () => {
   const partners = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("mobile");
+  const router = useRouter();
 
   return (
     <>
@@ -81,7 +83,46 @@ const Home = () => {
           }}
         />
       </div>
-      <div className={styles.Section}>
+      <div
+        className={styles.Section + " " + styles.PartnerSection}
+        ref={partners}
+      >
+        <div className={styles.SectionContent + " " + styles.SectionTop}>
+          <h2>Partners</h2>
+          <h1>
+            Our users are our
+            <br />
+            backers.
+          </h1>
+          <Spacer y={2} />
+          <div className={styles.Partners}>
+            {Partners.map((partner) => (
+              <a
+                className={styles.Partner}
+                href={partner.link}
+                key={partner.name}
+                target="_blank"
+                rel="noopener noreferer"
+              >
+                <Logo name={partner.name} />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div
+          className={styles.Bubble}
+          style={{
+            width: "22vh",
+            height: "22vh",
+            left: "1vw",
+            bottom: "-6vh",
+            background:
+              "linear-gradient(220deg, rgba(255, 255, 255, 0.26) 0.63%, rgba(255, 255, 255, 0) 79.44%)",
+          }}
+        />
+      </div>
+      {!isMobile && <Spacer y={2} />}
+      <div className={styles.Section + " " + styles.SmallSection}>
         {isMobile && (
           <div
             className={styles.Bubble + " " + styles.KeepMobile}
@@ -110,15 +151,7 @@ const Home = () => {
             </a>{" "}
             blockchain, we can permanently and immutably store this data.
           </p>
-          <Button
-            onClick={() =>
-              scroll({
-                top: partners.current?.offsetTop,
-                left: 0,
-                behavior: "smooth",
-              })
-            }
-          >
+          <Button onClick={() => router.push("/gov/pools")}>
             What we archive
             <ArrowRight />
           </Button>
@@ -130,7 +163,7 @@ const Home = () => {
             width: "60vh",
             height: "60vh",
             right: "-20vh",
-            top: "50%",
+            top: 0,
             background:
               "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
             animationDelay: ".3s",
@@ -152,15 +185,15 @@ const Home = () => {
           />
         )}
       </div>
-      <div className={styles.Section + " " + styles.SmallSection}>
+      <div className={styles.Section}>
         <div
           className={styles.Bubble}
           style={{
             transform: "translateY(-50%)",
             width: "47vh",
             height: "47vh",
-            left: "-12vh",
-            top: "50%",
+            left: "-6vh",
+            top: "47%",
             background:
               "linear-gradient(-130deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 61.98%)",
             animationDelay: ".22s",
@@ -177,7 +210,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <div className={styles.Section}>
+      <div className={styles.Section + " " + styles.SmallSection}>
         {isMobile && (
           <div
             className={styles.Bubble + " " + styles.KeepMobile}
@@ -215,7 +248,7 @@ const Home = () => {
             width: "18vh",
             height: "18vh",
             right: "4vw",
-            top: "20%",
+            top: "5%",
             background:
               "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
             animationDelay: ".87s",
@@ -228,7 +261,7 @@ const Home = () => {
             width: "22vh",
             height: "22vh",
             right: "18%",
-            top: "50%",
+            top: "30%",
             background:
               "linear-gradient(40deg, rgba(255, 255, 255, 0.4) 17.23%, rgba(255, 255, 255, 0.1) 72.16%)",
           }}
@@ -239,63 +272,14 @@ const Home = () => {
             width: "14.5vh",
             height: "14.5vh",
             right: "2vw",
-            top: "60%",
+            top: "70%",
             background:
               "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
             animationDelay: ".24s",
           }}
         />
       </div>
-      <div
-        className={styles.Section + " " + styles.PartnerSection}
-        ref={partners}
-      >
-        <div className={styles.SectionContent + " " + styles.SectionTop}>
-          <h2>Partners</h2>
-          <h1>
-            Our users are our
-            <br />
-            backers.
-          </h1>
-          <Spacer y={2} />
-          <div className={styles.Partners}>
-            {Partners.map((partner) => (
-              <a
-                className={styles.Partner}
-                href={partner.link}
-                key={partner.name}
-                target="_blank"
-                rel="noopener noreferer"
-              >
-                <Logo name={partner.name} />
-              </a>
-            ))}
-          </div>
-        </div>
-        <div
-          className={styles.Bubble}
-          style={{
-            width: "17vh",
-            height: "17vh",
-            right: "2vw",
-            bottom: 0,
-            background:
-              "linear-gradient(135deg, rgba(255, 255, 255, 0.29) 18.51%, rgba(255, 255, 255, 0.01) 60.62%)",
-          }}
-        />
-        <div
-          className={styles.Bubble}
-          style={{
-            width: "22vh",
-            height: "22vh",
-            left: "1vw",
-            bottom: "-6vh",
-            background:
-              "linear-gradient(220deg, rgba(255, 255, 255, 0.26) 0.63%, rgba(255, 255, 255, 0) 79.44%)",
-          }}
-        />
-      </div>
-      <Spacer y={3} />
+      {!isMobile && <Spacer y={4} />}
       <Footer />
     </>
   );
