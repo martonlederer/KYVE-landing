@@ -1,13 +1,22 @@
 import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
-import { Page, Grid, Card, Text, useMediaQuery, Spacer } from "@geist-ui/react";
+import {
+  Page,
+  Grid,
+  Card,
+  Text,
+  useMediaQuery,
+  Spacer,
+  Tooltip,
+} from "@geist-ui/react";
 import Footer from "../../../components/Footer";
 import CreatePoolModal from "../../../components/Governance/pools/CreatePoolModal";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import Nav from "../../../components/Nav";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../../../components/Logo";
+import { PlusIcon } from "@primer/octicons-react";
 import styles from "../../../styles/views/pools.module.sass";
 
 const Pools = () => {
@@ -17,6 +26,7 @@ const Pools = () => {
 
   const authNodeModal = useRef();
   const isMobile = useMediaQuery("mobile");
+  const fadeInDelay = 0.065;
 
   return (
     <>
@@ -36,7 +46,7 @@ const Pools = () => {
                     transition={{
                       duration: 0.23,
                       ease: "easeInOut",
-                      delay: id * 0.065,
+                      delay: id * fadeInDelay,
                     }}
                     style={{ width: "100%", height: "100%" }}
                   >
@@ -66,6 +76,39 @@ const Pools = () => {
                 {isMobile && <Spacer y={2} />}
               </>
             ))}
+            <Grid xs={isMobile ? undefined : 8}>
+              <motion.div
+                initial={{ scale: 0.75, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 0.23,
+                  ease: "easeInOut",
+                  delay: state.pools.length * fadeInDelay,
+                }}
+                style={{ width: "100%", height: "100%" }}
+              >
+                <Card
+                  onClick={() => {
+                    // @ts-ignore
+                    authNodeModal.current.open();
+                  }}
+                  className={"Card " + styles.AddCard}
+                  style={{
+                    height: "100%",
+                    cursor: "pointer",
+                    position: "relative",
+                  }}
+                >
+                  <div className={styles.AddContent}>
+                    <span>
+                      <PlusIcon />
+                    </span>
+                    Add new
+                  </div>
+                </Card>
+              </motion.div>
+            </Grid>
+            {isMobile && <Spacer y={2} />}
           </Grid.Container>
         )}
       </Page>

@@ -1,6 +1,27 @@
-.PoolCard
+.PoolCard, .AddCard
   padding: 1em .4em !important
   transition: all .23s ease-in-out
+
+  &.AddCard
+    position: relative
+
+    .AddContent
+      position: absolute
+      top: 50%
+      left: 50%
+      text-align: center
+      font-size: 1.1em
+      transform: translate(-50%, -50%)
+
+      span
+        font-size: 3em
+        margin: 0 auto
+        display: block
+
+        svg
+          font-size: 1em
+          width: 1em
+          height: 1em
 
   .Logo
     width: 160px

@@ -66,7 +66,11 @@ const CreatePoolModal = forwardRef((props, ref) => {
       <Modal {...bindings}>
         <Modal.Title>Create Pool</Modal.Title>
         <Modal.Content>
-          <Input {...bindingsPool} width={"100%"}>
+          <Input
+            {...bindingsPool}
+            width={"100%"}
+            placeholder="Enter pool name..."
+          >
             Poolname
           </Input>
           <Text>Architecture</Text>
