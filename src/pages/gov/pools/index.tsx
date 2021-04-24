@@ -1,6 +1,6 @@
 import useConnected from "../../../hooks/useConnected";
 import useContract from "../../../hooks/useContract";
-import { Page, Grid, Card, Text } from "@geist-ui/react";
+import { Page, Grid, Card, Text, useMediaQuery, Spacer } from "@geist-ui/react";
 import Footer from "../../../components/Footer";
 import CreatePoolModal from "../../../components/Governance/pools/CreatePoolModal";
 import { useRef } from "react";
@@ -16,48 +16,55 @@ const Pools = () => {
   const { loading, state, height } = useContract();
 
   const authNodeModal = useRef();
+  const isMobile = useMediaQuery("mobile");
 
   return (
     <>
       <Nav />
       <Page>
         {!loading && (
-          <Grid.Container gap={8}>
+          <Grid.Container
+            gap={isMobile ? undefined : 8}
+            style={{ display: isMobile ? "block" : undefined }}
+          >
             {state.pools.map((pool, id) => (
-              <Grid xs={8}>
-                <motion.div
-                  initial={{ scale: 0.75, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    duration: 0.23,
-                    ease: "easeInOut",
-                    delay: id * 0.065,
-                  }}
-                  style={{ width: "100%", height: "100%" }}
-                >
-                  <Card
-                    onClick={() => {
-                      router.push(`/gov/pools/${id}`);
+              <>
+                <Grid xs={isMobile ? undefined : 8}>
+                  <motion.div
+                    initial={{ scale: 0.75, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{
+                      duration: 0.23,
+                      ease: "easeInOut",
+                      delay: id * 0.065,
                     }}
-                    className={"Card " + styles.PoolCard}
-                    style={{ height: "100%", cursor: "pointer" }}
+                    style={{ width: "100%", height: "100%" }}
                   >
-                    <div className={styles.Logo}>
-                      <Logo name={pool.architecture} />
-                    </div>
-                    <Text h3>{pool.name}</Text>
-                    <Text h5 type="secondary">
-                      {pool.architecture}
-                    </Text>
-                    <Text h5 type="secondary">
-                      {pool.balance} $KYVE
-                    </Text>
-                    <Text h5 type="secondary">
-                      {pool.registered.length} Validators online
-                    </Text>
-                  </Card>
-                </motion.div>
-              </Grid>
+                    <Card
+                      onClick={() => {
+                        router.push(`/gov/pools/${id}`);
+                      }}
+                      className={"Card " + styles.PoolCard}
+                      style={{ height: "100%", cursor: "pointer" }}
+                    >
+                      <div className={styles.Logo}>
+                        <Logo name={pool.architecture} />
+                      </div>
+                      <Text h3>{pool.name}</Text>
+                      <Text h5 type="secondary">
+                        {pool.architecture}
+                      </Text>
+                      <Text h5 type="secondary">
+                        {pool.balance} $KYVE
+                      </Text>
+                      <Text h5 type="secondary">
+                        {pool.registered.length} Validators online
+                      </Text>
+                    </Card>
+                  </motion.div>
+                </Grid>
+                {isMobile && <Spacer y={2} />}
+              </>
             ))}
           </Grid.Container>
         )}

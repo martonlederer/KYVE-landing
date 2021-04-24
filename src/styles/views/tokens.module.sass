@@ -20,11 +20,17 @@
     font-weight: 600
     color: variables.$dark-text
 
+    @media screen and (max-width: variables.$mobile-screen)
+      font-size: .8em
+
     span
       color: #fff
 
   .Data
     margin-right: 3.5em
+
+    @media screen and (max-width: variables.$mobile-screen)
+      margin-right: .7em
 
     &:last-child
       margin-right: 0
@@ -36,6 +42,9 @@
         bottom: .25em
       line-height: 1em
 
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: .7em
+
     h1
       color: #fff
       font-size: 1.2em
@@ -43,3 +52,6 @@
       text-align: right
       margin: 0
       line-height: 1em
+
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: 1em

@@ -60,14 +60,15 @@ const Pool = () => {
     setPool(state.pools[poolID]);
   }, [loading]);
 
+  const formatAddress = (addr: string) =>
+    isMobile
+      ? addr.slice(0, 5) + "..." + addr.slice(addr.length - 5, addr.length)
+      : addr;
+
   useEffect(() => {
     if (loading) return;
     const upl = state.pools[poolID].uploader;
-    setPoolUploader(
-      isMobile
-        ? upl.slice(0, 5) + "..." + upl.slice(upl.length - 5, upl.length)
-        : upl
-    );
+    setPoolUploader(formatAddress(upl));
   }, [loading, isMobile]);
 
   const DisplayCard = (props) => {
@@ -168,7 +169,9 @@ const Pool = () => {
                         style={{ margin: ".6em 0", textAlign: "left" }}
                       >
                         <p style={{ textAlign: "left" }}>Address</p>
-                        <h1 style={{ textAlign: "left" }}>{address}</h1>
+                        <h1 style={{ textAlign: "left" }}>
+                          {formatAddress(address)}
+                        </h1>
                       </div>
                       <div className={tokenStyles.Data}>
                         <p>Stake</p>
@@ -202,7 +205,9 @@ const Pool = () => {
                           style={{ margin: ".6em 0", textAlign: "left" }}
                         >
                           <p style={{ textAlign: "left" }}>Address</p>
-                          <h1 style={{ textAlign: "left" }}>{address}</h1>
+                          <h1 style={{ textAlign: "left" }}>
+                            {formatAddress(address)}
+                          </h1>
                         </div>
                         <div
                           style={{
