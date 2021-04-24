@@ -10,6 +10,7 @@ import {
   Table,
   Tabs,
   Text,
+  Tooltip,
   useMediaQuery,
   useToasts,
 } from "@geist-ui/react";
@@ -20,12 +21,15 @@ import Footer from "../../../components/Footer";
 import { interactWrite } from "smartweave";
 import { arweave } from "../../../extensions";
 import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import VotesGrid from "../../../components/Governance/pools/VotesGrid";
 import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
 import Nav from "../../../components/Nav";
 import Button from "../../../components/Button";
+import Logo from "../../../components/Logo"
 import tokenStyles from "../../../styles/views/tokens.module.sass";
+import styles from "../../../styles/views/pools.module.sass";
+import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react"
 
 const Pool = () => {
   const fundPoolModal = useRef();
@@ -71,16 +75,7 @@ const Pool = () => {
     setPoolUploader(formatAddress(upl));
   }, [loading, isMobile]);
 
-  const DisplayCard = (props) => {
-    return (
-      <Card>
-        <Text h5>{props.headline}</Text>
-        <Text p>{props.text}</Text>
-      </Card>
-    );
-  };
-
-  const [toasts, setToast] = useToasts();
+  const [, setToast] = useToasts();
 
   const unlockTokens = async () => {
     const input = {
@@ -99,9 +94,63 @@ const Pool = () => {
       <Page>
         {!loading && (
           <>
-            <Text h2 style={{ fontWeight: 800 }}>
-              {pool.name}
-            </Text>
+            <div className={styles.PoolHeader}>
+              <Text h2 className={styles.PoolName}>
+                {pool.architecture && (
+                  <div className={styles.ArchitectureLogo}>
+                    <Logo name={pool.architecture.toLowerCase()} />
+                  </div>
+                )}
+                {pool.name}
+              </Text>
+              <AnimatePresence>
+                {connected && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="ActionSheet"
+                    style={{ marginBottom: 0 }}
+                  >
+                    <Tooltip text="Edit pool">
+                      <span
+                        className="Btn"
+                        onClick={() => {
+                          //@ts-ignore
+                          updatePoolModal.current.open();
+                        }}
+                      >
+                        <PencilIcon />
+                      </span>
+                    </Tooltip>
+                    <Spacer y={1} />
+                    <Tooltip text="Lock tokens">
+                      <span
+                        className="Btn"
+                        onClick={() => {
+                          //@ts-ignore
+                          lockTokensModal.current.open();
+                        }}
+                      >
+                        <LockIcon />
+                      </span>
+                    </Tooltip>
+                    <Spacer y={1} />
+                    <Tooltip text="Fund pool">
+                      <span
+                        className="Btn"
+                        onClick={() => {
+                          //@ts-ignore
+                          fundPoolModal.current.open();
+                        }}
+                      >
+                        <DatabaseIcon />
+                      </span>
+                    </Tooltip>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <div className={"Card " + tokenStyles.Card}>
               <p>
                 <span style={{ marginRight: ".4em" }}>Architecture:</span>

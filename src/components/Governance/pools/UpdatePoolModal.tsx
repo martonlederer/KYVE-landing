@@ -106,9 +106,8 @@ const UpdatePoolModal = forwardRef((props: any, ref) => {
       <Modal {...bindings}>
         <Modal.Title>Update Pool</Modal.Title>
         <Modal.Content>
-          <Input {...bindingsPool} width={"100%"}>
-            Poolname
-          </Input>
+          <Text>Poolname</Text>
+          <Input {...bindingsPool} width={"100%"} />
           <Text>Architecture</Text>
           <Select
             placeholder="Architecture"
@@ -127,18 +126,14 @@ const UpdatePoolModal = forwardRef((props: any, ref) => {
           </Select>
           <Text>Config</Text>
           <Textarea {...bindingsConfig} width={"100%"} />
-          <Input {...bindingsBundleSize} width={"100%"}>
-            Bundle size
-          </Input>
-          <Input {...bindingsUploader} width={"100%"}>
-            Uploader
-          </Input>
-          <Input {...bindingsUploaderRate} width={"100%"}>
-            Uploader rate
-          </Input>
-          <Input {...bindingsValidatorRate} width={"100%"}>
-            Validator rate
-          </Input>
+          <Text>Bundle size</Text>
+          <Input {...bindingsBundleSize} width={"100%"} />
+          <Text>Uploader</Text>
+          <Input {...bindingsUploader} width={"100%"} />
+          <Text>Uploader rate</Text>
+          <Input {...bindingsUploaderRate} width={"100%"} />
+          <Text>Validator rate</Text>
+          <Input {...bindingsValidatorRate} width={"100%"} />
         </Modal.Content>
         <Modal.Action passive onClick={() => setVisible(false)}>
           Cancel
