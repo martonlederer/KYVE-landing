@@ -162,7 +162,7 @@ const Nav = () => {
                   <div className={styles.LatestArweaveBlock}>
                     Block:
                     <a
-                      href="https://viewblock.io/arweave/block/672134"
+                      href={`https://viewblock.io/arweave/block/${height}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
