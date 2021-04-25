@@ -3,8 +3,8 @@ const Logo = (props: { name: string }) => {
     case "polkadot":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -22,8 +22,8 @@ const Logo = (props: { name: string }) => {
     case "thegraph":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +39,8 @@ const Logo = (props: { name: string }) => {
     case "cosmos":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -56,8 +56,8 @@ const Logo = (props: { name: string }) => {
     case "solana":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -114,8 +114,8 @@ const Logo = (props: { name: string }) => {
     case "skale":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -133,8 +133,8 @@ const Logo = (props: { name: string }) => {
     case "avalanche":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -152,8 +152,8 @@ const Logo = (props: { name: string }) => {
     case "arweave":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -173,8 +173,8 @@ const Logo = (props: { name: string }) => {
     case "mina":
       return (
         <svg
-          width="80"
-          height="40"
+          width="200"
+          height="200"
           viewBox="0 0 80 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

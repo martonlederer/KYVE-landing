@@ -1,0 +1,96 @@
+@use "../variables"
+
+.Footer
+  margin-top: 2em
+  padding: 2em variables.$sideSpace
+
+  @media screen and (max-width: variables.$smaller-screen)
+    padding: 2em variables.$sideSpaceSmall
+
+  .Logo
+    height: 2.7em
+    display: block
+    margin-bottom: 3em
+
+    @media screen and (max-width: variables.$smaller-screen)
+      height: 2.1em
+
+  .Links
+    display: flex
+    align-items: flex-start
+    justify-content: space-between
+
+    @media screen and (max-width: variables.$mobile-screen)
+      align-items: stretch
+      flex-flow: row wrap
+      justify-content: normal
+
+      &::before, &::after
+        content: ''
+        width: 100%
+        order: 1
+
+      .Column
+        width: 50%
+        margin-bottom: 2em
+
+        &:nth-child(n + 3)
+          order: 1
+
+        &:nth-child(n + 6)
+          order: 2
+
+        &:nth-last-child(2), &:last-child
+          margin-bottom: 0
+
+    h2
+      font-size: 1.27em
+      color: #fff
+      font-weight: 600
+      margin: 0
+        bottom: 1em
+
+      @media screen and (max-width: variables.$smaller-screen)
+        font-size: 1.15em
+
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: 1.05em
+
+    a
+      display: flex
+      width: max-content
+      align-items: center
+      color: variables.$dark-text
+      text-decoration: none
+      margin: .8em 0
+      font-size: 1.12em
+      transition: all .23s ease-in-out
+
+      @media screen and (max-width: variables.$smaller-screen)
+        font-size: 1em
+
+      @media screen and (max-width: variables.$mobile-screen)
+        font-size: .93em
+
+      svg
+        font-size: 1em
+        width: 1em
+        height: 1em
+        margin-left: .63em
+
+      &:hover
+        color: variables.$grey-text
+
+  .Copyright
+    padding-top: 2em
+    margin-top: 2em
+    border-top: 1px solid rgba(#fff, .15)
+    font-size: .85em
+    color: rgba(variables.$dark-text, .6)
+    font-weight: 400
+
+    @media screen and (max-width: variables.$smaller-screen)
+      font-size: .73em
+
+    @media screen and (max-width: variables.$mobile-screen)
+      font-size: .6em

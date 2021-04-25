@@ -1,0 +1,37 @@
+@use "./variables"
+  
+::selection
+  background: rgba(255, 255, 255, 0.99) !important
+  color: #000 !important
+
+#__next
+  overflow-x: visible
+
+body
+  scroll-behavior: smooth
+
+.Card
+  background-color: variables.$tooltip-bg  !important
+  border-radius: 15px  !important
+  padding: .7em 1em !important
+  border: none !important
+
+.ActionSheet
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  margin-bottom: 1em
+
+  .Btn
+    color: #fff
+    font-size: 1.25em
+    cursor: pointer
+    transition: all .23s ease-in-out
+
+    svg
+      font-size: 1em
+      width: 1em
+      height: 1em
+
+    &:hover
+      opacity: .68

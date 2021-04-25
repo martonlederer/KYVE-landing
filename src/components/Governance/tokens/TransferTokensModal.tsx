@@ -7,6 +7,7 @@ import {
   Text,
   Select,
   useToasts,
+  Spacer,
 } from "@geist-ui/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
@@ -50,10 +51,20 @@ const TransferTokenModal = forwardRef((props, ref) => {
       <Modal {...bindings}>
         <Modal.Title>Transfer Tokens</Modal.Title>
         <Modal.Content>
-          <Input {...bindingsTarget} width={"100%"}>
+          <Input
+            {...bindingsTarget}
+            width={"100%"}
+            placeholder="Enter target address..."
+          >
             Target
           </Input>
-          <Input {...bindingsQuantity} width={"100%"}>
+          <Spacer y={1} />
+          <Input
+            {...bindingsQuantity}
+            width={"100%"}
+            placeholder="Enter token quantity..."
+            labelRight="$KYVE"
+          >
             Quantity
           </Input>
         </Modal.Content>

@@ -1,0 +1,220 @@
+@use "../variables"
+  
+=linkWithSubText
+  font-size: 1.35em
+  font-weight: 600
+  display: block
+  line-height: 1em
+  color: #fff
+  text-decoration: none
+
+  span
+    display: block
+    font-size: .5em
+    font-weight: 500
+    color: variables.$grey-text
+
+.Nav
+  padding: 1.55em 6em
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  @media screen and (max-width: variables.$mobile-screen)
+    padding:
+      right: 2em
+      left: 2em
+
+  a
+    text-decoration: none
+    cursor: pointer
+
+  .Title
+    height: 1.6em
+    color: #fff
+    cursor: pointer
+    transition: all .23s ease-in-out
+
+    svg
+      height: 100%
+
+    &:hover
+      opacity: .8
+
+  .Menu
+    position: relative
+    display: flex
+    align-items: center
+
+    @media screen and (max-width: variables.$mobile-screen)
+      display: none
+
+    .Item
+      color: #888
+      font-size: .95em
+      font-weight: 500
+      cursor: default
+      margin: 0 .65em
+
+    .MenuPopup
+      $arrowSize: 7px
+      position: absolute
+      top: calc(100% + #{$arrowSize})
+      background-color: variables.$tooltip-bg
+      border-radius: 15px
+      width: max-content
+      z-index: 100
+      min-width: 220px
+      transition: all .23s ease-in-out
+
+      &::before
+        $height: 10px
+        content: ''
+        position: absolute
+        top: -$height
+        height: $height
+        left: 0
+        right: 0
+
+      &::after
+        content: ''
+        position: absolute
+        bottom: 100%
+        left: 50%
+        border-width: $arrowSize
+        border-style: solid
+        border-color: transparent transparent variables.$tooltip-bg transparent
+        transform: translateX(-50%)
+
+  .MobileMenuButton
+    $mobileMenuButtonWidth: 2.23em
+    $mobileMenuButtonHeight: 1.8em
+    position: relative
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    justify-content: center
+    width: $mobileMenuButtonWidth
+    height: $mobileMenuButtonHeight
+    z-index: 1000
+    -webkit-tap-highlight-color: transparent
+
+    .MenuButtonLine
+      display: block
+      height: 2px
+      width: 100%
+      background-color: #fff
+      text-align: right
+      margin-bottom: 10px
+      z-index: 10
+      transition: all .23s ease-in-out
+
+      &:nth-child(2)
+        width: 80%
+        margin-bottom: 0
+
+    &.OpenedMenu
+      .MenuButtonLine:nth-child(2)
+        display: block
+        opacity: 0
+
+    .MobileMenu
+      $mobileMenuPadding: .8em
+      $overflowSize: 15px
+      position: absolute
+      top: -$overflowSize
+      right: -$overflowSize
+      width: max-content
+      height: max-content
+      padding: $mobileMenuPadding * 2
+        right: calc(#{$mobileMenuButtonWidth + $mobileMenuPadding} + #{$overflowSize * 2})
+        top: calc(#{$mobileMenuButtonHeight} + #{$overflowSize * 2})
+      background-color: variables.$tooltip-bg
+
+      a
+        display: block
+        width: max-content
+        font-size: 1.3em
+        -webkit-tap-highlight-color: transparent
+        margin: 1em 0
+        +linkWithSubText
+
+        &:first-child
+          margin-top: 0
+
+=popupLinks
+  a
+    display: flex
+    align-items: center
+    width: max-content
+    font-size: 1.1em
+    color: #fff
+    font-weight: 400
+    margin-bottom: 1em
+    transition: all .23s ease-in-out
+
+    &:last-child
+      margin-bottom: 0
+
+    svg
+      margin-left: .5em
+      font-size: 1em
+      width: 1em
+      height: 1em
+
+    &:hover
+      opacity: .8
+
+$popupPaddingSide: 2em
+$popupPaddingTop: 1.7em
+
+.Gov, .Chains
+  .Links
+    +popupLinks
+
+.Chains
+  display: flex
+  align-items: stretch
+  padding: $popupPaddingTop $popupPaddingSide
+
+  .Links
+    margin-right: 1.85em
+
+  .CurrentLogo
+    $size: 240px
+    position: relative
+    width: $size
+
+    svg
+      position: absolute
+      top: 50%
+      left: 50%
+      max-width: $size
+      max-height: $size
+      transform: translate(-50%, -50%)
+
+.Gov
+  .Links
+    padding: $popupPaddingTop $popupPaddingSide
+      bottom: $popupPaddingTop / 2
+
+    a
+      +linkWithSubText
+
+  .LatestArweaveBlock
+    display: flex
+    align-items: center
+    padding: $popupPaddingTop / 2 $popupPaddingSide
+      bottom: $popupPaddingTop
+    border-top: 1px dotted variables.$dark-text
+    font-size: 1.15em
+    color: variables.$grey-text
+
+    a
+      display: flex
+      align-items: center
+      color: #fff
+      margin: 0 .3em
+
+      &:hover
+        text-decoration: underline
