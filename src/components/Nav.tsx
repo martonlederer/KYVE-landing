@@ -148,11 +148,7 @@ const Nav = () => {
                         Vault
                         <span>
                           {Object.keys(state.vault || {})
-                            .map((addr) =>
-                              state.vault[addr]
-                                .map((element) => element.amount)
-                                .reduce((a, b) => a + b, 0)
-                            )
+                            .map((addr) => state.vault[addr])
                             .reduce((a, b) => a + b, 0)}{" "}
                           $KYVE
                         </span>
