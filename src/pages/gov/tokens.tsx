@@ -1,22 +1,18 @@
 import {
-  useMediaQuery,
-  Link,
-  Code,
-  Text,
   Page,
-  Table,
-  useToasts,
-  Spinner,
   Spacer,
+  Spinner,
   Tooltip,
+  useMediaQuery,
+  useToasts,
 } from "@geist-ui/react";
 import useConnected from "../../hooks/useConnected";
 import useContract from "../../hooks/useContract";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
 import Footer from "../../components/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
-import { dispense } from "../../contract";
+import { contract } from "../../extensions";
 import { AnimatePresence, motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import styles from "../../styles/views/tokens.module.sass";
@@ -76,7 +72,7 @@ const Tokens = () => {
                   className="Btn"
                   onClick={async () => {
                     setLoading(true);
-                    const id = await dispense();
+                    const id = await contract.dispense();
                     setToast({
                       text: `Successfully dispensed tokens. Please wait for tx: ${id} to mine.`,
                     });

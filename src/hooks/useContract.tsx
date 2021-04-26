@@ -1,11 +1,6 @@
-import Arweave from "arweave";
-import { useState, useEffect } from "react";
+import {arweave} from "../extensions";
+import {useEffect, useState} from "react";
 
-const client = new Arweave({
-  host: "arweave.net",
-  port: 443,
-  protocol: "https",
-});
 
 const useContract = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +12,7 @@ const useContract = () => {
     const state = await res.json();
 
     setState(state);
-    setHeight((await client.network.getInfo()).height);
+    setHeight((await arweave.network.getInfo()).height);
   };
 
   useEffect(() => {
@@ -31,7 +26,7 @@ const useContract = () => {
     })();
   }, []);
 
-  return { loading, state, height };
+  return {loading, state, height};
 };
 
 export default useContract;

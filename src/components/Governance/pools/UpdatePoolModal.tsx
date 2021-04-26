@@ -1,19 +1,16 @@
 import {
   Input,
   Modal,
+  Select,
+  Text,
   Textarea,
   useInput,
   useModal,
-  Text,
-  Select,
   useToasts,
 } from "@geist-ui/react";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
-import { interactWrite } from "smartweave";
-
-import { arweave } from "../../../extensions";
-import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import { contract } from "../../../extensions";
 
 const UpdatePoolModal = forwardRef((props: any, ref) => {
   const { setVisible, bindings } = useModal();
@@ -73,25 +70,18 @@ const UpdatePoolModal = forwardRef((props: any, ref) => {
   }, [JSON.stringify(props.pool)]);
 
   const updatePool = async () => {
-    const input = {
-      function: "propose",
-      type: "updatePool",
-      id: props.poolID,
-      pool: {
-        name: poolName,
-        architecture: architecture,
-        config: JSON.parse(config),
-        bundleSize: parseInt(bundleSize),
-        uploader: uploader,
-        rates: {
-          uploader: uploaderRate,
-          validator: validatorRate,
-        },
+    const txID = await contract.updatePool(props.poolID, {
+      name: poolName,
+      architecture: architecture,
+      config: JSON.parse(config),
+      bundleSize: parseInt(bundleSize),
+      uploader: uploader,
+      rates: {
+        uploader: uploaderRate,
+        validator: validatorRate,
       },
-    };
-    console.log(input);
-    const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
-    console.log(state);
+    });
+    console.log(txID);
     setToast({ text: "Vote successfully proposed", type: "success" });
   };
 

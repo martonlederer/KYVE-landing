@@ -1,19 +1,16 @@
 import {
   Input,
   Modal,
+  Select,
+  Text,
   Textarea,
   useInput,
   useModal,
-  Text,
-  Select,
   useToasts,
 } from "@geist-ui/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
-import { interactWrite } from "smartweave";
-
-import { arweave } from "../../../extensions";
-import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import { contract } from "../../../extensions";
 
 const CreatePoolModal = forwardRef((props, ref) => {
   const { setVisible, bindings } = useModal();
@@ -24,34 +21,18 @@ const CreatePoolModal = forwardRef((props, ref) => {
 
   // declare inputs
   const { state: pool, bindings: bindingsPool } = useInput("");
-  // TODO SHOULD BE SELECT
   const { state: architecture, setState: setArchitecture } = useInput(
     "Avalanche"
   );
   const { state: config, bindings: bindingsConfig } = useInput("{}");
-  const { state: bundleSize, bindings: bindingsBundleSize } = useInput("20");
-  const { state: uploader, bindings: bindingsUploader } = useInput(
-    "3dX8Cnz3N64nKt2EKmWpKL1EbErFP3RFjxSDyQHQrkI"
-  );
-  const { state: archiveRate, bindings: bindingsArchiveRate } = useInput("1");
-  const { state: validatorRate, bindings: bindingsValidatorRate } = useInput(
-    "1"
-  );
 
   const createPool = async () => {
-    const input = {
-      function: "createPool",
-      name: pool,
-      architecture: architecture,
-      config: JSON.parse(config),
-      //bundleSize: bundleSize,
-      //uploader: uploader,
-      //archiveRate: archiveRate,
-      //validatorRate: validatorRate,
-    };
-    console.log(input);
-    const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
-    console.log(state);
+    const txID = await contract.createPool(
+      pool,
+      architecture,
+      JSON.parse(config)
+    );
+    console.log(txID);
     setToast({ text: "Pool successfully created", type: "success" });
   };
 

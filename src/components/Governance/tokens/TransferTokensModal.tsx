@@ -1,19 +1,14 @@
 import {
   Input,
   Modal,
-  Textarea,
+  Spacer,
   useInput,
   useModal,
-  Text,
-  Select,
   useToasts,
-  Spacer,
 } from "@geist-ui/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
-import { interactWrite } from "smartweave";
-
-import { arweave } from "../../../extensions";
+import { contract } from "../../../extensions";
 
 const TransferTokenModal = forwardRef((props, ref) => {
   const { setVisible, bindings } = useModal();
@@ -26,17 +21,9 @@ const TransferTokenModal = forwardRef((props, ref) => {
   const { state: target, bindings: bindingsTarget } = useInput("");
   const { state: quantity, bindings: bindingsQuantity } = useInput("");
 
-  const contractId = "v2p-0OhAxDCCMLjQ8e_6_YhT3Tfw2uUAbIQ3PXRtjr4";
-
   const transfer = async () => {
-    const input = {
-      function: "transfer",
-      target: target,
-      qty: parseInt(quantity),
-    };
-    console.log(input);
-    const state = await interactWrite(arweave, undefined, contractId, input);
-    console.log(state);
+    const txID = await contract.transfer(target, parseInt(quantity));
+    console.log(txID);
     setToast({ text: "Successfully transferred", type: "success" });
   };
 

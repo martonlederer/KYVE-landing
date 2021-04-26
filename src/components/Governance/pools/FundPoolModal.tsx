@@ -1,10 +1,7 @@
 import { Input, Modal, useInput, useModal, useToasts } from "@geist-ui/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
-import { interactWrite } from "smartweave";
-
-import { arweave } from "../../../extensions";
-import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import { contract } from "../../../extensions";
 
 const FundPoolModal = forwardRef((props: any, ref) => {
   const { setVisible, bindings } = useModal();
@@ -16,14 +13,8 @@ const FundPoolModal = forwardRef((props: any, ref) => {
   const { state: quantity, bindings: bindingsQuantity } = useInput("1");
 
   const fundPool = async () => {
-    const input = {
-      function: "fund",
-      id: props.pool,
-      qty: parseInt(quantity),
-    };
-    console.log(input);
-    const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
-    console.log(state);
+    const txID = await contract.fundPool(props.pool, parseInt(quantity));
+    console.log(txID);
     setToast({ text: "Pool successfully funded", type: "success" });
   };
 

@@ -2,12 +2,9 @@ import useContract from "../../../hooks/useContract";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import {
-  Card,
   Dot,
-  Grid,
   Page,
   Spacer,
-  Table,
   Tabs,
   Text,
   Tooltip,
@@ -18,9 +15,7 @@ import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
 import LockTokensModal from "../../../components/Governance/pools/LockTokensModal";
 import Footer from "../../../components/Footer";
-import { interactWrite } from "smartweave";
-import { arweave } from "../../../extensions";
-import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import { contract } from "../../../extensions";
 import { AnimatePresence, motion } from "framer-motion";
 import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react";
 import VotesGrid from "../../../components/Governance/pools/VotesGrid";
@@ -78,13 +73,8 @@ const Pool = () => {
   const [, setToast] = useToasts();
 
   const unlockTokens = async () => {
-    const input = {
-      function: "unlock",
-      id: poolID,
-    };
-    console.log(input);
-    const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
-    console.log(state);
+    const txID = await contract.unlock(poolID);
+    console.log(txID);
     setToast({ text: "Tokens successfully unlocked", type: "success" });
   };
 

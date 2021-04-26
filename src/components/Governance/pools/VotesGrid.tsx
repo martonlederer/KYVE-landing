@@ -8,9 +8,7 @@ import {
   Text,
   useToasts,
 } from "@geist-ui/react";
-import { interactWrite } from "smartweave";
-import { arweave } from "../../../extensions";
-import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import { contract } from "../../../extensions";
 import { useEffect, useState } from "react";
 import Highlight from "react-highlight";
 import useConnected from "../../../hooks/useConnected";
@@ -36,15 +34,8 @@ const VotesGrid = (props) => {
   }, [connected]);
 
   const voteOn = async (id: number, cast: "yay" | "nay") => {
-    const input = {
-      function: "vote",
-      id,
-      cast,
-    };
-
-    console.log(input);
-    const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
-    console.log(state);
+    const txID = await contract.vote(id, cast);
+    console.log(txID);
     setToast({ text: `Successfully voted with ${cast}`, type: "success" });
   };
 
@@ -74,14 +65,8 @@ const VotesGrid = (props) => {
     const [loading, setLoading] = useState(false);
 
     const finalize = async (id: number) => {
-      const input = {
-        function: "finalize",
-        id,
-      };
-
-      console.log(input);
-      const state = await interactWrite(arweave, undefined, CONTRACT_ID, input);
-      console.log(state);
+      const txID = await contract.finalize(id);
+      console.log(txID);
       setToast({ text: `Successfully finalized vote`, type: "success" });
     };
 
