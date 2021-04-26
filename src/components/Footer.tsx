@@ -1,6 +1,6 @@
 import { ExternalLink } from "react-feather";
 import Link from "next/link";
-import { CONTRACT as CONTRACT_ID } from "@kyve/logic";
+import {contract} from "../extensions";
 import styles from "../styles/components/Footer.module.sass";
 
 const Footer = () => (
@@ -29,14 +29,14 @@ const Footer = () => (
           Documentation <ExternalLink />
         </a>
         <a
-          href={`https://community.xyz/#${CONTRACT_ID}`}
+          href={`https://community.xyz/#${contract.ID}`}
           target="_blank"
           rel="noopener noreferrer"
         >
           Community <ExternalLink />
         </a>
         <a
-          href={`https://viewblock.io/arweave/address/${CONTRACT_ID}`}
+          href={`https://viewblock.io/arweave/address/${contract.ID}`}
           target="_blank"
           rel="noopener noreferrer"
         >
