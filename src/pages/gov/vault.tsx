@@ -1,24 +1,24 @@
 import Arweave from "arweave";
 import useConnected from "../../hooks/useConnected";
 import useContract from "../../hooks/useContract";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  useModal,
-  useInput,
-  useToasts,
-  Page,
-  Spacer,
-  Table,
-  Text,
-  Modal,
-  Row,
   Input,
+  Modal,
+  Page,
+  Row,
+  Spacer,
+  Text,
+  useInput,
+  useModal,
+  useToasts,
 } from "@geist-ui/react";
 import { motion } from "framer-motion";
 import Button from "../../components/Button";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
 import tokenStyles from "../../styles/views/tokens.module.sass";
+import { contract } from "../../extensions";
 
 const client = new Arweave({
   host: "arweave.net",
@@ -157,29 +157,8 @@ const Vault = () => {
             </Modal.Action>
             <Modal.Action
               onClick={async () => {
-                const tx = await client.createTransaction({
-                  data: Math.random().toString().slice(-4),
-                });
-
-                tx.addTag("App-Name", "SmartWeaveAction");
-                tx.addTag("App-Version", "0.3.0");
-                tx.addTag(
-                  "Contract",
-                  "z7oP5KYMnPnSqWE81hM1BvewB7bJMwiOJtAl3JIl4_w"
-                );
-                tx.addTag(
-                  "Input",
-                  JSON.stringify({
-                    function: "lock",
-                    qty: amount.state,
-                    length: length.state,
-                  })
-                );
-
-                await client.transactions.sign(tx);
-                await client.transactions.post(tx);
-
-                setToast({ text: `Locked. ${tx.id}` });
+                const txID = await contract.lockGlobal(parseInt(amount.state));
+                setToast({ text: `Locked. ${txID}` });
                 modal.setVisible(false);
 
                 amount.reset();

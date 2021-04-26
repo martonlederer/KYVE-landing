@@ -1,6 +1,5 @@
-import {arweave} from "../extensions";
-import {useEffect, useState} from "react";
-
+import { arweave } from "../extensions";
+import { useEffect, useState } from "react";
 
 const useContract = () => {
   const [loading, setLoading] = useState(true);
@@ -26,7 +25,7 @@ const useContract = () => {
     })();
   }, []);
 
-  return {loading, state, height};
+  return { loading, state, height };
 };
 
 export default useContract;
