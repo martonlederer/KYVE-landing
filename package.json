@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "start": "next start -p $PORT",
+    "start": "NODE_ENV=production node server.js",
     "heroku-postbuild": "npm run build",
     "build": "next build",
     "fmt": "prettier --write ."
