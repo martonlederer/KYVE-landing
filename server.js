@@ -11,9 +11,8 @@ app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     if (!dev && req.headers["x-forwarded-proto"] != "https") {
-      const { host } = parse(process.env.HOSTNAME || "kyve.network");
       res.writeHead(302, {
-        Location: `https://${host}${req.url}`,
+        Location: `https://kyve.network${req.url}`,
       });
       res.end();
     } else {
