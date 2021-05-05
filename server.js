@@ -5,13 +5,14 @@ const next = require("next");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     if (!dev && req.headers["x-forwarded-proto"] != "https") {
-      const { host } = parse(process.env.HOSTNAME);
+      console.log(req);
+      const { host } = parse(process.env.HOSTNAME || "kyve.network");
       res.writeHead(302, {
         Location: `https://${host}${req.url}`,
       });
