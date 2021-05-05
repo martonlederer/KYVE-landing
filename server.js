@@ -23,3 +23,5 @@ app.prepare().then(() => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
+
+// from https://rants.broonix.ca/nextjs-heroku-https
