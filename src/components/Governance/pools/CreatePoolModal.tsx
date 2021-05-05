@@ -68,6 +68,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
             <Select.Option value="Polkadot">Polkadot</Select.Option>
             <Select.Option value="Solana">Solana</Select.Option>
             <Select.Option value="SmartWeave">SmartWeave</Select.Option>
+            <Select.Option value="Zilliqa">Zilliqa</Select.Option>
           </Select>
           <Text>Config</Text>
           <Textarea {...bindingsConfig} width={"100%"} />

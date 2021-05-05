@@ -52,30 +52,30 @@ const Vault = () => {
         {connected && !loading ? (
           <>
             {address in state.vault ? (
-                <>
-                  <h3>My locked tokens</h3>
-                  <Spacer y={1} />
-                  <motion.div
-                    className={"Card " + tokenStyles.Card}
-                    key={1}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.23,
-                      ease: "easeInOut",
-                      delay: 1 * 0.05,
-                    }}
+              <>
+                <h3>My locked tokens</h3>
+                <Spacer y={1} />
+                <motion.div
+                  className={"Card " + tokenStyles.Card}
+                  key={1}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.23,
+                    ease: "easeInOut",
+                    delay: 1 * 0.05,
+                  }}
+                >
+                  <div
+                    className={tokenStyles.Data}
+                    style={{ margin: ".6em 0" }}
                   >
-                    <div
-                      className={tokenStyles.Data}
-                      style={{ margin: ".6em 0" }}
-                    >
-                      <p style={{ textAlign: "left" }}>Amount</p>
-                      <h1 style={{ textAlign: "left" }}>
-                        {state.vault[address]} $KYVE
-                      </h1>
-                    </div>
-                    {/*
+                    <p style={{ textAlign: "left" }}>Amount</p>
+                    <h1 style={{ textAlign: "left" }}>
+                      {state.vault[address]} $KYVE
+                    </h1>
+                  </div>
+                  {/*
                     <div
                       className={tokenStyles.Data}
                       style={{ margin: ".6em 0", textAlign: "left" }}
@@ -88,9 +88,9 @@ const Vault = () => {
                       </h1>
                     </div>
                     */}
-                  </motion.div>
-                  <Spacer y={1} />
-                </>
+                </motion.div>
+                <Spacer y={1} />
+              </>
             ) : (
               <div
                 style={{

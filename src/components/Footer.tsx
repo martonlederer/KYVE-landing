@@ -1,6 +1,6 @@
 import { ExternalLink } from "react-feather";
 import Link from "next/link";
-import {contract} from "../extensions";
+import { contract } from "../extensions";
 import styles from "../styles/components/Footer.module.sass";
 
 const Footer = () => (
