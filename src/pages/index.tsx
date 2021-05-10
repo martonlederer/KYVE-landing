@@ -8,6 +8,7 @@ import {
   GitHub,
   Mail,
   MessageSquare,
+  Send,
   Twitter,
 } from "react-feather";
 import { useRouter } from "next/router";
@@ -53,11 +54,18 @@ const Home = () => {
               <GitHub />
             </a>
             <a
-              href="https://chat.kyve.network"
+              href="http://chat.kyve.network"
               target="_blank"
               rel="noopener noreferrer"
             >
               <MessageSquare />
+            </a>
+            <a
+              href="https://t.me/kyvenet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Send />
             </a>
             <a
               href="mailto:team@kyve.network"
