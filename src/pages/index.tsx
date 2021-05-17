@@ -54,7 +54,7 @@ const Home = () => {
               <GitHub />
             </a>
             <a
-              href="http://chat.kyve.network"
+              href="https://discord.gg/E73KZwaa4S"
               target="_blank"
               rel="noopener noreferrer"
             >
