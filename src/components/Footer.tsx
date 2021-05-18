@@ -65,7 +65,7 @@ const Footer = () => (
         >
           Github <ExternalLink />
         </a>
-        <a href="chat.kyve.network" target="_blank" rel="noopener noreferrer">
+        <a href="https://discord.gg/E73KZwaa4S" target="_blank" rel="noopener noreferrer">
           Discord <ExternalLink />
         </a>
         <a
