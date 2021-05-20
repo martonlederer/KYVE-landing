@@ -82,11 +82,11 @@ const Footer = () => (
           Arweave <ExternalLink />
         </a>
         <a
-          href="https://github.com/KYVENetwork/node"
+          href="https://github.com/KYVENetwork/kyve"
           target="_blank"
           rel="noopener noreferrer"
         >
-          KYVE Node <ExternalLink />
+          KYVE Repo <ExternalLink />
         </a>
       </div>
     </div>
