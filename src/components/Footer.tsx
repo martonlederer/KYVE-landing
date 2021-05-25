@@ -58,13 +58,6 @@ const Footer = () => (
         >
           Twitter <ExternalLink />
         </a>
-        <a
-          href="https://github.com/KYVENetwork"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Github <ExternalLink />
-        </a>
         <a href="https://discord.gg/E73KZwaa4S" target="_blank" rel="noopener noreferrer">
           Discord <ExternalLink />
         </a>
@@ -73,7 +66,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          Mail <ExternalLink />
+          Contact <ExternalLink />
         </a>
       </div>
       <div className={styles.Column}>
@@ -86,7 +79,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          KYVE Repo <ExternalLink />
+          GitHub <ExternalLink />
         </a>
       </div>
     </div>
