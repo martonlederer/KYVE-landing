@@ -36,7 +36,7 @@ const Footer = () => (
         <Link href="/gov/vault">Vault</Link>
       </div>
       <div className={styles.Column}>
-        <h2>Social</h2>
+        <h2>Community</h2>
         <a
           href="https://twitter.com/kyvenetwork"
           target="_blank"
@@ -46,6 +46,9 @@ const Footer = () => (
         </a>
         <a href="https://discord.gg/E73KZwaa4S" target="_blank" rel="noopener noreferrer">
           Discord <ExternalLink />
+        </a>
+        <a href="https://t.me/kyvenet" target="_blank" rel="noopener noreferrer">
+          Telegram <ExternalLink />
         </a>
         <a
           href="mailto:team@kyve.network"
