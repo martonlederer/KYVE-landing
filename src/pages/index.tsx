@@ -244,14 +244,14 @@ const Home = () => {
             <span>$KYVE</span> tokens while being active in the pool.
             <Spacer y={0.3} />
             Validators will "get together" and vote on whether the designated
-            archiver is properly doing it's job. If the validators come to a
+            archiver is properly doing its job. If the validators come to a
             consensus that the archiver is no longer acting honestly or
             reliably, a new archiver will be decided upon in the DAO. Validators
             can seemlessly transition into an archiver if need be.
           </p>
         </div>
         <div
-          className={styles.Bubble}
+          className={styles.Bubbls
           style={{
             width: "18vh",
             height: "18vh",
