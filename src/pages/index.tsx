@@ -251,7 +251,7 @@ const Home = () => {
           </p>
         </div>
         <div
-          className={styles.Bubbls
+          className={styles.Bubble}
           style={{
             width: "18vh",
             height: "18vh",
