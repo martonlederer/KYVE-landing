@@ -1,5 +1,8 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
 import { CssBaseline } from "@geist-ui/react";
+import { GA_TRACKING_ID } from "../gtag";
+
+const isProduction = process.env.NODE_ENV === "production";
 
 class Document extends NextDocument {
   render() {
@@ -44,6 +47,29 @@ class Document extends NextDocument {
             property="twitter:image"
             content="https://kyve.network/og.png"
           />
+
+          {/* enable analytics script only for production */}
+          {isProduction && (
+            <>
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+              />
+              <script
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+                }}
+              />
+            </>
+          )}
 
           {styles}
         </Head>
