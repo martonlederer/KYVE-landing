@@ -150,6 +150,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "arweave":
+    case "smartweave":
       return (
         <svg
           width="200"
