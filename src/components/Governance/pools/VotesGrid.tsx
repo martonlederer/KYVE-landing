@@ -131,7 +131,7 @@ const VotesGrid = (props: { id: number; votes: any[]; height: number }) => {
                 {vote.status === "pending" ? (
                   <>
                     {props.height >= vote.end ? (
-                      <FinalizeButton voteID={id} />
+                      <FinalizeButton voteID={vote.id} />
                     ) : (
                       <>
                         {hasVoted(myAddress, vote).voted ? (
@@ -147,7 +147,7 @@ const VotesGrid = (props: { id: number; votes: any[]; height: number }) => {
                               loading={loading}
                               onClick={async () => {
                                 setLoading(true);
-                                await voteOn(id, "nay");
+                                await voteOn(vote.id, "nay");
                                 setLoading(false);
                               }}
                             >
@@ -157,7 +157,7 @@ const VotesGrid = (props: { id: number; votes: any[]; height: number }) => {
                               loading={loading}
                               onClick={async () => {
                                 setLoading(true);
-                                await voteOn(id, "yay");
+                                await voteOn(vote.id, "yay");
                                 setLoading(false);
                               }}
                             >
