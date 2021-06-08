@@ -281,7 +281,7 @@ const Pool = () => {
               </Tabs.Item>
               <Tabs.Item label="Votes" value="3">
                 <Spacer y={1} />
-                <VotesGrid votes={state.votes} poolID={poolID} />
+                <VotesGrid id={poolID} votes={state.votes} height={height} />
               </Tabs.Item>
             </Tabs>
           </>
