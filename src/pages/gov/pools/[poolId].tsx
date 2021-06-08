@@ -17,7 +17,12 @@ import LockTokensModal from "../../../components/Governance/pools/LockTokensModa
 import Footer from "../../../components/Footer";
 import { contract } from "../../../extensions";
 import { AnimatePresence, motion } from "framer-motion";
-import { DatabaseIcon, LockIcon, PencilIcon } from "@primer/octicons-react";
+import {
+  AlertIcon,
+  DatabaseIcon,
+  LockIcon,
+  PencilIcon,
+} from "@primer/octicons-react";
 import VotesGrid from "../../../components/Governance/pools/VotesGrid";
 import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
 import Nav from "../../../components/Nav";
@@ -25,6 +30,7 @@ import Button from "../../../components/Button";
 import Logo from "../../../components/Logo";
 import tokenStyles from "../../../styles/views/tokens.module.sass";
 import styles from "../../../styles/views/pools.module.sass";
+import TransactionList from "../../../components/Governance/pools/TransactionList";
 
 const Pool = () => {
   const fundPoolModal = useRef();
@@ -282,6 +288,18 @@ const Pool = () => {
               <Tabs.Item label="Votes" value="3">
                 <Spacer y={1} />
                 <VotesGrid id={poolID} votes={state.votes} height={height} />
+              </Tabs.Item>
+              <Tabs.Item
+                label={
+                  <>
+                    <AlertIcon />
+                    Explore
+                  </>
+                }
+                value="4"
+              >
+                <Spacer y={1} />
+                <TransactionList id={poolID} />
               </Tabs.Item>
             </Tabs>
           </>

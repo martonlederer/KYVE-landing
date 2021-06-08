@@ -78,6 +78,15 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
   integrity sha512-sqKVVVOe5ivCaXDWivIJYVSaEgdQK9ul7a4Kity5Iw7u9+wBAPbX1RMSnLLmp7O4Vzj0WOWwMAJsTL00xwaNug==
 
+"@kyve/contract-lib@0.1.0-alpha.7":
+  version "0.1.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.7.tgz#c0525f1b1a8ca0de34bceaa8c1d8d16ab1d44f42"
+  integrity sha512-LPgKL8J4fziqjo2vdBXqwyMaO7iZeqMKbTOoAkHsIygOtkj6rtvzZ3EkB7929LnpeOVGFmE+kQ3TTpz4zCeDkA==
+  dependencies:
+    "@kyve/contract" "0.1.0-alpha.4"
+    arweave "^1.10.13"
+    smartweave "^0.4.29"
+
 "@kyve/contract-lib@^0.1.0-alpha.4":
   version "0.1.0-alpha.4"
   resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.4.tgz#418634b4a450e0119da8cb2c7cf218ae543fa288"
@@ -87,10 +96,27 @@
     arweave "^1.10.13"
     smartweave "^0.4.29"
 
+"@kyve/contract@0.1.0-alpha.4":
+  version "0.1.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@kyve/contract/-/contract-0.1.0-alpha.4.tgz#5bfed0b16566d828d71bc967695a493027507b84"
+  integrity sha512-xJVOl29RnQyB7MJHpul1INlBdkZLrDkQzSoC+RHCaHk6fPgCuqCofh7aRfpu0jWS41eP7P/LBE4u5IcSUmDysA==
+
 "@kyve/contract@^0.1.0-alpha.1":
   version "0.1.0-alpha.1"
   resolved "https://registry.yarnpkg.com/@kyve/contract/-/contract-0.1.0-alpha.1.tgz#6d22600e41338565ad4ef0ce3b5d3300e502d6fc"
   integrity sha512-ce4GsMaZfgaAbzQpmHkbhGvJYcFGmmoa8BY4uSlTORPXd9snP2mHQwJ2Ec+FluZ1owurcHIAdi90E50MO1F/MQ==
+
+"@kyve/core@0.0.0-alpha.8":
+  version "0.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/@kyve/core/-/core-0.0.0-alpha.8.tgz#93eebd6aa05273045c8509fbd9e0571efcb9c5b7"
+  integrity sha512-OqguWjiY98eC4UDLJiqXNtTA+Mcuq7kd9vaQyGKCA8fMQ+T1jbPIxp7xIo0wLUcrF6GAaL1RVwz5Mj28TQhGHQ==
+  dependencies:
+    "@kyve/contract-lib" "0.1.0-alpha.7"
+    ardb "^1.0.8"
+    arweave "^1.10.11"
+    arweave-bundles "^1.0.3"
+    rxjs "^6.6.6"
+    smartweave "^0.4.27"
 
 "@kyve/logic@^0.0.0-alpha.15":
   version "0.0.0-alpha.15"
@@ -98,6 +124,19 @@
   integrity sha512-Ebr2o47E7sYzXp+0jf3hVICSUeOO5WXmz1dLKvKS5qpFxyrhlCtPWNi829Iub7ILVOu+O99mXQ5pS4vcKmgc5w==
   dependencies:
     ardb "^1.0.4"
+    arweave "^1.10.11"
+    arweave-bundles "^1.0.3"
+    rxjs "^6.6.6"
+    smartweave "^0.4.27"
+
+"@kyve/query@^0.0.0-alpha.11":
+  version "0.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@kyve/query/-/query-0.0.0-alpha.11.tgz#5455b71d08e562b815b839f155eb228a203356c4"
+  integrity sha512-xqCvTv4asUo+/SWqgKyHrO0DDPLGYigZtn+0GjEb1AX0vPLubtos5ayzJv7TuYX02nEadikyr1PK1vpuPKzh/g==
+  dependencies:
+    "@kyve/contract-lib" "0.1.0-alpha.7"
+    "@kyve/core" "0.0.0-alpha.8"
+    ardb "^1.0.8"
     arweave "^1.10.11"
     arweave-bundles "^1.0.3"
     rxjs "^6.6.6"
@@ -266,7 +305,7 @@ anymatch@~3.1.1:
   dependencies:
     sylvester ">= 0.0.8"
 
-ardb@^1.0.4:
+ardb@^1.0.4, ardb@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/ardb/-/ardb-1.0.8.tgz#a4dba461a913274c086c06cf55215ebb0453d09d"
   integrity sha512-/T1Yt1FJL6UgVr6becBEia163Dd2rBZSireoWZ/cvqVNnEoim9Qv94+b48kHaqytf048mloZt/2xsI8n9ixyzQ==
