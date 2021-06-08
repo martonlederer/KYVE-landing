@@ -34,12 +34,7 @@ const Tokens = () => {
       const data = [];
       for (const addr of Object.keys(state.balances)) {
         const balance = state.balances[addr];
-        const locked =
-          addr in Object.keys(state.vault || {})
-            ? state.vault[addr]
-                .map((element) => element.amount)
-                .reduce((a, b) => a + b, 0)
-            : 0;
+        const locked = addr in state.vault ? state.vault[addr] : 0;
 
         const formatted =
           addr.slice(0, 5) + "..." + addr.slice(addr.length - 5, addr.length);
