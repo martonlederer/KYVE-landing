@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Send,
   Twitter,
+  Edit3,
 } from "react-feather";
 import { useRouter } from "next/router";
 import Footer from "../components/Footer";
@@ -45,6 +46,13 @@ const Home = () => {
               rel="noopener noreferrer"
             >
               <Twitter />
+            </a>
+            <a
+              href="https://blog.kyve.network"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Edit3 />
             </a>
             <a
               href="https://github.com/KYVENetwork"
@@ -160,7 +168,7 @@ const Home = () => {
             blockchain, we can permanently and immutably store this data.
           </p>
           <Button onClick={() => router.push("/gov/pools")}>
-            What we archive
+            Get started
             <ArrowRight />
           </Button>
         </div>
@@ -209,9 +217,9 @@ const Home = () => {
         />
         <div className={styles.SectionContent + " " + styles.SectionLeft}>
           <h2>The KYVE network</h2>
-          <h1>Decentralised archivers and validators.</h1>
+          <h1>Decentralised uploaders and validators.</h1>
           <p>
-            The network is powered by decentralised archivers and validators.
+            The network is powered by decentralised uploaders and validators.
             These nodes reside in pools, each pool focusing on archiving a
             specific data stream. Pools are funded by <span>$KYVE</span> tokens,
             and anyone can fund these storage initiatives by depositing tokens.

@@ -14,13 +14,15 @@ const Nav = () => {
   const router = useRouter();
   const [hasWallet, setHasWallet] = useState(false);
   const [connected, setConnected] = useState(false);
-  const [menuState, setMenuState] = useState<"chains" | "gov" | null>(null);
+  const [menuState, setMenuState] = useState<"integrations" | "gov" | null>(
+    null
+  );
   const [hoveredPopup, setHoveredPopup] = useState(false);
 
   const base = router.asPath.split(router.pathname)[0];
 
   const govMenu = useRef<HTMLDivElement>(null);
-  const chainsMenu = useRef<HTMLDivElement>(null);
+  const integrationsMenu = useRef<HTMLDivElement>(null);
   const popup = useRef<HTMLDivElement>(null);
   const [popupPos, setPopupPos] = useState(0);
   const [hoveredChain, setHoveredChain] = useState<string>();
@@ -31,7 +33,8 @@ const Nav = () => {
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
 
   useEffect(() => {
-    const current = menuState === "gov" ? govMenu.current : chainsMenu.current;
+    const current =
+      menuState === "gov" ? govMenu.current : integrationsMenu.current;
     if (!menuState || !current) return;
     const popupWidth = popup.current?.clientWidth ?? 0;
     const updatePos =
@@ -94,13 +97,13 @@ const Nav = () => {
       >
         <span
           className={styles.Item}
-          onMouseEnter={() => setMenuState("chains")}
+          onMouseEnter={() => setMenuState("integrations")}
           onMouseLeave={() => {
             if (!hoveredPopup) setMenuState(null);
           }}
-          ref={chainsMenu}
+          ref={integrationsMenu}
         >
-          Chains
+          Integrations
         </span>
         <span
           className={styles.Item}

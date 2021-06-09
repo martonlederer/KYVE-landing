@@ -5,7 +5,7 @@ const Partners = [
   { name: "Solana", link: "https://solana.com" },
   { name: "Cosmos", link: "https://cosmos.network" },
   { name: "Avalanche", link: "https://www.avalabs.org" },
-  { name: "Skale", link: "https://skale.network" },
+  // { name: "Skale", link: "https://skale.network" },
 ];
 
 export default Partners;
