@@ -1,13 +1,10 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
-import { Spinner, useMediaQuery } from "@geist-ui/react";
+import { useMediaQuery } from "@geist-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink } from "react-feather";
 import useContract from "../hooks/useContract";
 import Link from "next/link";
 import Button from "./Button";
-import Logo from "./Logo";
-import Partners from "../partners";
 import styles from "../styles/components/Nav.module.sass";
 
 const Nav = () => {
@@ -19,7 +16,7 @@ const Nav = () => {
   );
   const [hoveredPopup, setHoveredPopup] = useState(false);
 
-  const base = router.asPath.split(router.pathname)[0];
+  const base = router.asPath.split("/")[1];
 
   const govMenu = useRef<HTMLDivElement>(null);
   const integrationsMenu = useRef<HTMLDivElement>(null);
@@ -95,127 +92,36 @@ const Nav = () => {
           setHoveredChain(undefined);
         }}
       >
-        <span
-          className={styles.Item}
-          onMouseEnter={() => setMenuState("integrations")}
-          onMouseLeave={() => {
-            if (!hoveredPopup) setMenuState(null);
-          }}
-          ref={integrationsMenu}
-        >
-          Integrations
-        </span>
-        <span
-          className={styles.Item}
-          onMouseEnter={() => setMenuState("gov")}
-          onMouseLeave={() => {
-            if (!hoveredPopup) setMenuState(null);
-          }}
-          ref={govMenu}
-        >
-          Governance
-        </span>
-        <AnimatePresence>
-          {menuState && (
-            <motion.div
-              className={styles.MenuPopup}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.23, ease: "easeInOut" }}
-              ref={popup}
-              style={{ left: popupPos }}
-            >
-              {(menuState === "gov" && (
-                <div className={styles.Gov}>
-                  <div className={styles.Links}>
-                    <Link href="/gov/tokens">
-                      <a>
-                        Tokens
-                        <span>
-                          {Object.keys(state.balances || {})
-                            .map((addr) => state.balances[addr])
-                            .reduce((a, b) => a + b, 0)}{" "}
-                          $KYVE
-                        </span>
-                      </a>
-                    </Link>
-                    <Link href="/gov/pools">
-                      <a>
-                        Pools
-                        <span>{state.pools.length} Pools</span>
-                      </a>
-                    </Link>
-                    <Link href="/gov/vault">
-                      <a>
-                        Vault
-                        <span>
-                          {Object.keys(state.vault || {})
-                            .map((addr) => state.vault[addr])
-                            .reduce((a, b) => a + b, 0)}{" "}
-                          $KYVE
-                        </span>
-                      </a>
-                    </Link>
-                  </div>
-                  <div className={styles.LatestArweaveBlock}>
-                    Block:
-                    <a
-                      href={`https://viewblock.io/arweave/block/${height}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {height}
-                    </a>
-                    <Spinner />
-                  </div>
-                </div>
-              )) || (
-                <div className={styles.Chains}>
-                  <div className={styles.Links}>
-                    {Partners.map((partner, i) => (
-                      <a
-                        href={partner.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={i}
-                        onMouseEnter={() => setHoveredChain(partner.name)}
-                      >
-                        {partner.name}
-                        <ExternalLink />
-                      </a>
-                    ))}
-                  </div>
-                  <motion.div
-                    className={styles.CurrentLogo}
-                    initial={{ opacity: 0, scale: 0.7 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.7 }}
-                    key={hoveredChain}
-                  >
-                    {(hoveredChain && (
-                      <Logo
-                        name={
-                          Partners.find(
-                            ({ name }) => name === hoveredChain
-                          )?.name?.toLowerCase() ?? ""
-                        }
-                      />
-                    )) || <KyveLogo />}
-                  </motion.div>
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Link href="/gov/tokens">
+          <a className={styles.Item}>Accounts</a>
+        </Link>
+        <Link href="/gov/pools">
+          <a className={styles.Item}>Pools</a>
+        </Link>
+        <Link href="/gov/vault">
+          <a className={styles.Item}>Vault</a>
+        </Link>
       </div>
       {!isMobile && (
-        <Button buttonSize="small" onClick={login}>
-          {hasWallet
-            ? connected
-              ? "Disconnect"
-              : "Connect"
-            : "Install ArConnect"}
+        <Button
+          buttonSize="small"
+          onClick={() => {
+            if (base === "gov") {
+              login();
+            } else router.push("/gov/pools");
+          }}
+        >
+          {base === "gov" ? (
+            <>
+              {hasWallet
+                ? connected
+                  ? "Disconnect"
+                  : "Connect"
+                : "Install ArConnect"}
+            </>
+          ) : (
+            "Get Started"
+          )}
         </Button>
       )}
       {isMobile && (
