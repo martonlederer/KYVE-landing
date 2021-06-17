@@ -145,43 +145,19 @@ const Nav = () => {
                 transition={{ duration: 0.23, ease: "easeInOut" }}
               >
                 <Link href="/gov/tokens">
-                  <a>
-                    Tokens
-                    <span>
-                      {Object.keys(state.balances || {})
-                        .map((addr) => state.balances[addr])
-                        .reduce((a, b) => a + b, 0)}{" "}
-                      $KYVE
-                    </span>
-                  </a>
+                  <a>Accounts</a>
                 </Link>
                 <Link href="/gov/pools">
-                  <a>
-                    Pools
-                    <span>{state.pools.length} Pools</span>
-                  </a>
+                  <a>Pools</a>
                 </Link>
                 <Link href="/gov/vault">
-                  <a>
-                    Vault
-                    <span>
-                      {Object.keys(state.vault || {})
-                        .map((addr) =>
-                          state.vault[addr]
-                            .map((element) => element.amount)
-                            .reduce((a, b) => a + b, 0)
-                        )
-                        .reduce((a, b) => a + b, 0)}{" "}
-                      $KYVE
-                    </span>
-                  </a>
+                  <a>Vault</a>
                 </Link>
-                <Button buttonSize="small" onClick={login}>
-                  {hasWallet
-                    ? connected
-                      ? "Disconnect"
-                      : "Connect"
-                    : "Install ArConnect"}
+                <Button
+                  buttonSize="small"
+                  onClick={() => router.push("/gov/pools")}
+                >
+                  Get Started
                 </Button>
               </motion.div>
             )}
