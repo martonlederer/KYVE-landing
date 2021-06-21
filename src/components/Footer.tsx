@@ -21,12 +21,8 @@ const Footer = () => (
       <div className={styles.Column}>
         <h2>About</h2>
         <Link href="/">Home</Link>
-        <a
-          href={`https://viewblock.io/arweave/address/${contract.ID}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ViewBlock <ExternalLink />
+        <a href={`/litepaper.pdf`} target="_blank" rel="noopener noreferrer">
+          Litepaper
         </a>
       </div>
       <div className={styles.Column}>
@@ -43,6 +39,13 @@ const Footer = () => (
           rel="noopener noreferrer"
         >
           Twitter <ExternalLink />
+        </a>
+        <a
+          href="https://blog.kyve.network"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Blog <ExternalLink />
         </a>
         <a
           href="https://discord.gg/E73KZwaa4S"

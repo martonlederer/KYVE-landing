@@ -168,7 +168,7 @@ const Home = () => {
             blockchain, we can permanently and immutably store this data.
           </p>
           <Button onClick={() => router.push("/gov/pools")}>
-            Get started
+            Start Building
             <ArrowRight />
           </Button>
         </div>
