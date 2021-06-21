@@ -108,7 +108,7 @@ const Nav = () => {
           onClick={() => {
             if (base === "gov") {
               login();
-            } else router.push("/gov/pools");
+            } else router.push("https://docs.kyve.network");
           }}
         >
           {base === "gov" ? (
@@ -155,7 +155,7 @@ const Nav = () => {
                 </Link>
                 <Button
                   buttonSize="small"
-                  onClick={() => router.push("/gov/pools")}
+                  onClick={() => router.push("https://docs.kyve.network")}
                 >
                   Get Started
                 </Button>
