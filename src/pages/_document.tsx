@@ -16,7 +16,7 @@ class Document extends NextDocument {
           <meta name="title" content="KYVE" />
           <meta
             name="description"
-            content="The unified archive for blockchains."
+            content="Enabling infinite scalability for Web3."
           />
 
           {/* Open Graph / Facebook */}
@@ -25,7 +25,7 @@ class Document extends NextDocument {
           <meta property="og:title" content="KYVE" />
           <meta
             property="og:description"
-            content="The unified archive for blockchains."
+            content="Enabling infinite scalability for Web3."
           />
 
           {/* Twitter */}
@@ -34,7 +34,7 @@ class Document extends NextDocument {
           <meta property="twitter:title" content="KYVE" />
           <meta
             property="twitter:description"
-            content="The unified archive for blockchains."
+            content="Enabling infinite scalability for Web3."
           />
 
           <link
