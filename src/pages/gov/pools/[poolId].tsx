@@ -31,172 +31,148 @@ import Logo from "../../../components/Logo";
 import tokenStyles from "../../../styles/views/tokens.module.sass";
 import styles from "../../../styles/views/pools.module.sass";
 import TransactionList from "../../../components/Governance/pools/TransactionList";
+import useSWR from "swr";
 
 const Pool = () => {
-  const fundPoolModal = useRef();
-  const lockTokensModal = useRef();
-  const updatePoolModal = useRef();
-
   const router = useRouter();
-  const [pool, setPool]: any[] = useState({});
-  const { loading, state, height } = useContract();
-
-  const poolID = parseInt(router.query.poolId as string);
-
-  const connected = useConnected();
-
-  const [myAddress, setMyAddress] = useState("");
-  const [unlockLoading, setUnlockLoading] = useState(false);
-
-  useEffect(() => {
-    if (connected) {
-      // @ts-ignore
-      window.arweaveWallet.getActiveAddress().then((address) => {
-        setMyAddress(address);
-      });
+  const { data: pool } = useSWR(
+    `/api/pool?id=${router.query.poolId}`,
+    async (url: string) => {
+      const res = await fetch(url);
+      return await res.json();
     }
-  }, [connected]);
+  );
 
-  const isMobile = useMediaQuery("mobile");
-  const [poolUploader, setPoolUploader] = useState("");
-
+  let connected = true;
+  const [balance, setBalance] = useState(0);
+  const [stake, setStake] = useState(0);
   useEffect(() => {
-    if (loading) return;
-    setPool(state.pools[poolID]);
-  }, [loading]);
+    if (pool) {
+      setBalance(
+        Object.values(pool.credit)
+          .map((credit: any) => credit.fund)
+          .reduce((a, b) => a + b, 0)
+      );
 
-  const formatAddress = (addr: string) =>
-    isMobile
-      ? addr.slice(0, 5) + "..." + addr.slice(addr.length - 5, addr.length)
-      : addr;
+      setStake(
+        Object.values(pool.credit)
+          .map((credit: any) => credit.stake)
+          .reduce((a, b) => a + b, 0)
+      );
+    }
+  }, pool);
 
-  useEffect(() => {
-    if (loading) return;
-    const upl = state.pools[poolID].uploader;
-    setPoolUploader(formatAddress(upl));
-  }, [loading, isMobile]);
-
-  const [, setToast] = useToasts();
-
-  const unlockTokens = async () => {
-    const txID = await contract.unlock(poolID);
-    console.log(txID);
-    setToast({ text: "Tokens successfully unlocked", type: "success" });
-  };
+  if (!pool) return null;
 
   return (
     <>
       <Nav />
       <Page>
-        {!loading && (
-          <>
-            <div className={styles.PoolHeader}>
-              <Text h2 className={styles.PoolName}>
-                {pool.architecture && (
-                  <div className={styles.ArchitectureLogo}>
-                    <Logo name={pool.architecture.toLowerCase()} />
-                  </div>
-                )}
-                {pool.name}
-              </Text>
-              <AnimatePresence>
-                {connected && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="ActionSheet"
-                    style={{ marginBottom: 0 }}
-                  >
-                    <Tooltip text="Edit pool">
-                      <span
-                        className="Btn"
-                        onClick={() => {
-                          //@ts-ignore
-                          updatePoolModal.current.open();
-                        }}
-                      >
-                        <PencilIcon />
-                      </span>
-                    </Tooltip>
-                    <Spacer y={1} />
-                    <Tooltip text="Lock tokens">
-                      <span
-                        className="Btn"
-                        onClick={() => {
-                          //@ts-ignore
-                          lockTokensModal.current.open();
-                        }}
-                      >
-                        <LockIcon />
-                      </span>
-                    </Tooltip>
-                    <Spacer y={1} />
-                    <Tooltip text="Fund pool">
-                      <span
-                        className="Btn"
-                        onClick={() => {
-                          //@ts-ignore
-                          fundPoolModal.current.open();
-                        }}
-                      >
-                        <DatabaseIcon />
-                      </span>
-                    </Tooltip>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+        <>
+          <div className={styles.PoolHeader}>
+            <Text h2 className={styles.PoolName}>
+              <div className={styles.ArchitectureLogo}>
+                <Logo name={pool.settings.runtime} />
+              </div>
+              {pool.settings.name}
+            </Text>
+            <AnimatePresence>
+              {connected && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="ActionSheet"
+                  style={{ marginBottom: 0 }}
+                >
+                  <Tooltip text="Edit pool">
+                    <span
+                      className="Btn"
+                      onClick={() => {
+                        //@ts-ignore
+                        updatePoolModal.current.open();
+                      }}
+                    >
+                      <PencilIcon />
+                    </span>
+                  </Tooltip>
+                  <Spacer y={1} />
+                  <Tooltip text="Lock tokens">
+                    <span
+                      className="Btn"
+                      onClick={() => {
+                        //@ts-ignore
+                        lockTokensModal.current.open();
+                      }}
+                    >
+                      <LockIcon />
+                    </span>
+                  </Tooltip>
+                  <Spacer y={1} />
+                  <Tooltip text="Fund pool">
+                    <span
+                      className="Btn"
+                      onClick={() => {
+                        //@ts-ignore
+                        fundPoolModal.current.open();
+                      }}
+                    >
+                      <DatabaseIcon />
+                    </span>
+                  </Tooltip>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          <div className={"Card " + tokenStyles.Card}>
+            <p>
+              <span style={{ marginRight: ".4em" }}>Runtime:</span>
+              {pool.settings.runtime}
+            </p>
+            <div className={tokenStyles.Data}>
+              <p>Uploader</p>
+              <h1>{pool.settings.uploader}</h1>
             </div>
-            <div className={"Card " + tokenStyles.Card}>
-              <p>
-                <span style={{ marginRight: ".4em" }}>Architecture:</span>
-                {pool.architecture}
-              </p>
+          </div>
+          <Spacer y={1} />
+          <div className={"Card " + tokenStyles.Card}>
+            <p>
+              {pool.settings.paused ? (
+                <Dot type="warning">Paused</Dot>
+              ) : (
+                <>
+                  {balance > 0 ? (
+                    <Dot type="success">Active</Dot>
+                  ) : (
+                    <Dot type="error">Insufficient balance</Dot>
+                  )}
+                </>
+              )}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <div className={tokenStyles.Data}>
-                <p>Uploader</p>
-                <h1>{poolUploader}</h1>
+                <p>Balance</p>
+                <h1>{balance} $KYVE</h1>
+              </div>
+              <div className={tokenStyles.Data}>
+                <p>Locked balance</p>
+                <h1>{stake} $KYVE</h1>
               </div>
             </div>
-            <Spacer y={1} />
-            <div className={"Card " + tokenStyles.Card}>
-              <p>
-                {pool.balance > 0 ? (
-                  <Dot type="success">Active</Dot>
-                ) : (
-                  <Dot type="error">Insufficient balance</Dot>
-                )}
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <div className={tokenStyles.Data}>
-                  <p>Balance</p>
-                  <h1>{pool.balance} $KYVE</h1>
-                </div>
-                <div className={tokenStyles.Data}>
-                  <p>Locked balance</p>
-                  <h1>
-                    {(() => {
-                      let sum = 0;
-                      Object.values(pool.vault || {}).map(
-                        (v: number) => (sum += v)
-                      );
-                      return sum;
-                    })()}{" "}
-                    $KYVE
-                  </h1>
-                </div>
-              </div>
-            </div>
-            <Spacer y={2} />
-            <Tabs initialValue="1">
-              <Tabs.Item label="Validators" value="1">
-                <Spacer y={1} />
-                {(pool.registered || []).map((address, i) => (
+          </div>
+          <Spacer y={2} />
+          <Tabs initialValue="1">
+            <Tabs.Item label="Accounts" value="1">
+              <Spacer y={1} />
+              {Object.entries(pool.credit)
+                .filter(([address, credit]) => credit.stake > 0)
+                .map(([address, credit], i) => (
                   <>
                     <motion.div
                       className={"Card " + tokenStyles.Card}
@@ -214,101 +190,29 @@ const Pool = () => {
                         style={{ margin: ".6em 0", textAlign: "left" }}
                       >
                         <p style={{ textAlign: "left" }}>Address</p>
-                        <h1 style={{ textAlign: "left" }}>
-                          {formatAddress(address)}
-                        </h1>
+                        <h1 style={{ textAlign: "left" }}>{address}</h1>
                       </div>
                       <div className={tokenStyles.Data}>
                         <p>Stake</p>
-                        <h1>{pool.vault[address] || 0} $KYVE</h1>
+                        {/* @ts-ignore */}
+                        <h1>{credit.stake} $KYVE</h1>
                       </div>
                     </motion.div>
                     <Spacer y={1} />
                   </>
                 ))}
-              </Tabs.Item>
-              <Tabs.Item label="Vault" value="2">
-                <Spacer y={1} />
-                {((Object.keys(pool.vault || {}) || []).length === 0 && (
-                  <p style={{ textAlign: "center" }}>Nothing in vault</p>
-                )) ||
-                  (Object.keys(pool.vault || {}) || []).map((address, i) => (
-                    <>
-                      <motion.div
-                        className={"Card " + tokenStyles.Card}
-                        key={i}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{
-                          duration: 0.23,
-                          ease: "easeInOut",
-                          delay: i * 0.05,
-                        }}
-                      >
-                        <div
-                          className={tokenStyles.Data}
-                          style={{ margin: ".6em 0", textAlign: "left" }}
-                        >
-                          <p style={{ textAlign: "left" }}>Address</p>
-                          <h1 style={{ textAlign: "left" }}>
-                            {formatAddress(address)}
-                          </h1>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                          }}
-                        >
-                          <div className={tokenStyles.Data}>
-                            <p>Locked</p>
-                            <h1>{pool.vault[address] || 0} $KYVE</h1>
-                          </div>
-                          {myAddress === address && (
-                            <div className={tokenStyles.Data}>
-                              <Button
-                                buttonSize="small"
-                                onClick={async () => {
-                                  setUnlockLoading(true);
-                                  await unlockTokens();
-                                  setUnlockLoading(false);
-                                }}
-                              >
-                                Unlock
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                      <Spacer y={1} />
-                    </>
-                  ))}
-              </Tabs.Item>
-              <Tabs.Item label="Votes" value="3">
-                <Spacer y={1} />
-                <VotesGrid id={poolID} votes={state.votes} height={height} />
-              </Tabs.Item>
-              <Tabs.Item
-                label={
-                  <>
-                    <AlertIcon />
-                    Explore
-                  </>
-                }
-                value="4"
-              >
-                <Spacer y={1} />
-                <TransactionList id={poolID} />
-              </Tabs.Item>
-            </Tabs>
-          </>
-        )}
+            </Tabs.Item>
+            <Tabs.Item label="Explore" value="2">
+              <Spacer y={1} />
+              <TransactionList txs={pool.txs} />
+            </Tabs.Item>
+          </Tabs>
+        </>
       </Page>
       <Footer />
-      <FundPoolModal pool={poolID} ref={fundPoolModal} />
+      {/* <FundPoolModal pool={poolID} ref={fundPoolModal} />
       <LockTokensModal pool={poolID} ref={lockTokensModal} />
-      <UpdatePoolModal pool={pool} poolID={poolID} ref={updatePoolModal} />
+      <UpdatePoolModal pool={pool} poolID={poolID} ref={updatePoolModal} /> */}
     </>
   );
 };

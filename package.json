@@ -14,15 +14,18 @@
     "@primer/octicons-react": "^12.1.0",
     "arweave": "^1.10.11",
     "framer-motion": "^4.1.8",
+    "mongodb": "^3.6.9",
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-feather": "^2.0.9",
     "react-highlight": "^0.14.0",
-    "smartweave": "^0.4.27"
+    "smartweave": "^0.4.27",
+    "swr": "^0.5.6"
   },
   "devDependencies": {
     "@types/gtag.js": "^0.0.4",
+    "@types/mongodb": "^3.6.19",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "@types/react-highlight": "^0.12.2",
