@@ -2,6 +2,7 @@ import {
   Page,
   Spacer,
   Spinner,
+  Tag,
   Tooltip,
   useMediaQuery,
   useToasts,
@@ -17,39 +18,64 @@ import Nav from "../../components/Nav";
 import styles from "../../styles/views/tokens.module.sass";
 import { interactWrite } from "smartweave";
 import { arweave } from "../../extensions";
+import useSWR from "swr";
 
 const Tokens = () => {
   const isMobile = useMediaQuery("mobile");
-
   const [toasts, setToast] = useToasts();
   const [loading, setLoading] = useState(false);
-
   const connected = useConnected();
-  const { state, height } = useContract();
-
   const transferTokenModal = useRef();
 
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    if (state) {
-      const data = [];
-      for (const addr of Object.keys(state.balances)) {
-        const balance = state.balances[addr];
-        const locked = addr in state.vault ? state.vault[addr] : 0;
-
-        const formatted =
-          addr.slice(0, 5) + "..." + addr.slice(addr.length - 5, addr.length);
-
-        data.push({
-          address: isMobile ? formatted : addr,
-          balance,
-          locked,
-          total: balance + locked,
-        });
-      }
-      setData(data.sort((a, b) => b.total - a.total));
+  const { data: state } = useSWR(
+    "/api/pool?id=C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
+    async (url: string) => {
+      const res = await fetch(url);
+      return await res.json();
     }
-  }, [state]);
+  );
+
+  const { data: pools } = useSWR("/api/pools", async (url: string) => {
+    const res = await fetch(url);
+    return await res.json();
+  });
+
+  const [accounts, setAccounts] = useState<
+    {
+      address: string;
+      balance: number;
+      stake: number;
+      total: number;
+      pool: boolean;
+    }[]
+  >([]);
+  useEffect(() => {
+    if (state && pools) {
+      for (const address of Object.keys(state.balances)) {
+        let stake = 0;
+        if (address in state.vault) {
+          stake = state.vault[address]
+            .map((entry) => entry.balance)
+            .reduce((a, b) => a + b, 0);
+        }
+
+        setAccounts((accounts) =>
+          [
+            ...accounts,
+            {
+              address,
+              balance: state.balances[address],
+              stake,
+              total: state.balances[address] + stake,
+              pool: address in pools,
+            },
+          ].sort((a, b) => b.total - a.total)
+        );
+      }
+    }
+  }, [state, pools]);
+
+  if (!state || !pools) return null;
 
   return (
     <>
@@ -110,7 +136,7 @@ const Tokens = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        {data.map(({ address, balance, locked }, i) => (
+        {accounts.map(({ address, balance, stake, pool }, i) => (
           <>
             <motion.div
               className={"Card " + styles.Card}
@@ -118,11 +144,17 @@ const Tokens = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.23, ease: "easeInOut", delay: i * 0.1 }}
-              onClick={() =>
-                window.open(`https://viewblock.io/arweave/address/${address}`)
-              }
+              onClick={() => {
+                if (pool) window.open(`/gov/pools/${address}`);
+                else
+                  window.open(
+                    `https://viewblock.io/arweave/address/${address}`
+                  );
+              }}
             >
-              <p>{address}</p>
+              <p>
+                {address} {pool && <Tag type="lite">Pool</Tag>}
+              </p>
               <div
                 style={{
                   display: "flex",
@@ -135,8 +167,8 @@ const Tokens = () => {
                   <h1>{balance} $KYVE</h1>
                 </div>
                 <div className={styles.Data}>
-                  <p>Locked balance</p>
-                  <h1>{locked} $KYVE</h1>
+                  <p>Stake</p>
+                  <h1>{stake} $KYVE</h1>
                 </div>
               </div>
             </motion.div>

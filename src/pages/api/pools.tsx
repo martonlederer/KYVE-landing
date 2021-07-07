@@ -7,6 +7,9 @@ export default async (req, res) => {
 
   let pools: { [id: string]: any } = {};
   for (const contract of contracts) {
+    if (contract._id === "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo")
+      continue;
+
     pools[contract._id] = contract.state;
   }
 

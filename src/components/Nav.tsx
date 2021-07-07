@@ -92,7 +92,7 @@ const Nav = () => {
           setHoveredChain(undefined);
         }}
       >
-        <Link href="/gov/tokens">
+        <Link href="/gov/accounts">
           <a className={styles.Item}>Accounts</a>
         </Link>
         <Link href="/gov/pools">
@@ -141,7 +141,7 @@ const Nav = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.23, ease: "easeInOut" }}
               >
-                <Link href="/gov/tokens">
+                <Link href="/gov/accounts">
                   <a>Accounts</a>
                 </Link>
                 <Link href="/gov/pools">

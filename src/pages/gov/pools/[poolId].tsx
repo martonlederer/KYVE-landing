@@ -125,6 +125,7 @@ const Pool = () => {
               )}
             </AnimatePresence>
           </div>
+          <Spacer y={0.5} />
           <div className={"Card " + tokenStyles.Card}>
             <p>
               <span style={{ marginRight: ".4em" }}>Runtime:</span>
@@ -132,7 +133,7 @@ const Pool = () => {
             </p>
             <div className={tokenStyles.Data}>
               <p>Uploader</p>
-              <h1>{pool.settings.uploader}</h1>
+              <h1>{pool.settings.uploader || "No uploader selected."}</h1>
             </div>
           </div>
           <Spacer y={1} />
