@@ -32,6 +32,16 @@ const TransactionList = (props: {
                 }}
               >
                 <div className={styles.Data}>
+                  <p>Yays</p>
+                  {/* @ts-ignore */}
+                  <h1>{tx.yays.length}</h1>
+                </div>
+                <div className={styles.Data}>
+                  <p>Nays</p>
+                  {/* @ts-ignore */}
+                  <h1>{tx.nays.length}</h1>
+                </div>
+                <div className={styles.Data}>
                   <p>Status</p>
                   <h1>{tx.status}</h1>
                 </div>

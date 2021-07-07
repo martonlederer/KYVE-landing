@@ -98,9 +98,6 @@ const Nav = () => {
         <Link href="/gov/pools">
           <a className={styles.Item}>Pools</a>
         </Link>
-        <Link href="/gov/vault">
-          <a className={styles.Item}>Vault</a>
-        </Link>
       </div>
       {!isMobile && (
         <Button
