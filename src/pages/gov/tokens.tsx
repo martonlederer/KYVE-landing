@@ -12,10 +12,11 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
 import Footer from "../../components/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
-import { contract } from "../../extensions";
 import { AnimatePresence, motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import styles from "../../styles/views/tokens.module.sass";
+import { interactWrite } from "smartweave";
+import { arweave } from "../../extensions";
 
 const Tokens = () => {
   const isMobile = useMediaQuery("mobile");
@@ -67,7 +68,15 @@ const Tokens = () => {
                   className="Btn"
                   onClick={async () => {
                     setLoading(true);
-                    const id = await contract.dispense();
+                    const id = await interactWrite(
+                      // @ts-ignore
+                      arweave,
+                      "use_wallet",
+                      "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
+                      {
+                        function: "dispense",
+                      }
+                    );
                     setToast({
                       text: `Successfully dispensed tokens. Please wait for tx: ${id} to mine.`,
                     });

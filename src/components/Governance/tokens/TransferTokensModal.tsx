@@ -7,8 +7,8 @@ import {
   useToasts,
 } from "@geist-ui/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
-
-import { contract } from "../../../extensions";
+import { interactWrite } from "smartweave";
+import { arweave } from "../../../extensions";
 
 const TransferTokenModal = forwardRef((props, ref) => {
   const { setVisible, bindings } = useModal();
@@ -22,7 +22,17 @@ const TransferTokenModal = forwardRef((props, ref) => {
   const { state: quantity, bindings: bindingsQuantity } = useInput("");
 
   const transfer = async () => {
-    const txID = await contract.transfer(target, parseInt(quantity));
+    const txID = await interactWrite(
+      // @ts-ignore
+      arweave,
+      "use_wallet",
+      "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
+      {
+        function: "transfer",
+        target,
+        qty: +quantity,
+      }
+    );
     console.log(txID);
     setToast({ text: "Successfully transferred", type: "success" });
   };

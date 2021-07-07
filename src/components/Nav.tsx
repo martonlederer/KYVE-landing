@@ -150,9 +150,6 @@ const Nav = () => {
                 <Link href="/gov/pools">
                   <a>Pools</a>
                 </Link>
-                <Link href="/gov/vault">
-                  <a>Vault</a>
-                </Link>
                 <Button
                   buttonSize="small"
                   onClick={() => router.push("https://docs.kyve.network")}
