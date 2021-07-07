@@ -142,7 +142,7 @@ const Pools = () => {
                             (address) => address !== pool.settings.uploader
                           ).length
                       }{" "}
-                      validators online
+                      validator(s) active
                     </Text>
                   </Card>
                 </motion.div>
