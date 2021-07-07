@@ -11,6 +11,7 @@ const TransactionList = (props: {
     <>
       {Object.entries(props.txs)
         .reverse()
+        .slice(100)
         .map(([id, tx], i) => (
           <>
             <motion.div
@@ -50,7 +51,7 @@ const TransactionList = (props: {
             <Spacer y={1} />
           </>
         ))}
-      {!props.txs.length && <Text>No data yet.</Text>}
+      {!Object.keys(props.txs).length && <Text>No data yet.</Text>}
     </>
   );
 };
