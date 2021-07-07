@@ -4,7 +4,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { arweave } from "../../../extensions";
 import { Pool } from "@kyve/contract-lib";
 
-const FundPoolModal = forwardRef((props: { pool: string }, ref) => {
+const WithdrawModal = forwardRef((props: { pool: string }, ref) => {
   const { setVisible, bindings } = useModal();
   const [loading, setLoading] = useState(false);
   const [toasts, setToast] = useToasts();
@@ -21,7 +21,7 @@ const FundPoolModal = forwardRef((props: { pool: string }, ref) => {
   return (
     <>
       <Modal {...bindings}>
-        <Modal.Title>Fund Pool</Modal.Title>
+        <Modal.Title>Withdraw into Pool</Modal.Title>
         <Modal.Content>
           <Input {...bindingsQuantity} width={"100%"}>
             Amount
@@ -34,17 +34,17 @@ const FundPoolModal = forwardRef((props: { pool: string }, ref) => {
           loading={loading}
           onClick={async () => {
             setLoading(true);
-            await pool.fund(+quantity);
+            await pool.withdraw(+quantity);
             setLoading(false);
             setVisible(false);
-            setToast({ text: "Pool successfully funded", type: "success" });
+            setToast({ text: "Successful withdraw", type: "success" });
           }}
         >
-          Fund
+          Withdraw
         </Modal.Action>
       </Modal>
     </>
   );
 });
 
-export default FundPoolModal;
+export default WithdrawModal;

@@ -6,7 +6,6 @@ import {
   Text,
   useMediaQuery,
   Spacer,
-  Tooltip,
   Select,
 } from "@geist-ui/react";
 import Footer from "../../../components/Footer";
@@ -106,7 +105,11 @@ const Pools = () => {
                     <div className={styles.Logo}>
                       {/* @ts-ignore */}
                       {pool.settings.logo ? (
-                        <></>
+                        <img
+                          // @ts-ignore
+                          src={`https://arweave.net/${pool.settings.logo}`}
+                          style={{ borderRadius: "50%" }}
+                        />
                       ) : (
                         // @ts-ignore
                         <Logo name={pool.settings.runtime} />
@@ -144,6 +147,7 @@ const Pools = () => {
                   transition={{
                     duration: 0.23,
                     ease: "easeInOut",
+                    // @ts-ignore
                     delay: filtered.length * fadeInDelay,
                   }}
                   style={{ width: "100%", height: "100%" }}

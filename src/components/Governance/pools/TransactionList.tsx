@@ -1,4 +1,4 @@
-import { Spacer } from "@geist-ui/react";
+import { Spacer, Text } from "@geist-ui/react";
 import { motion } from "framer-motion";
 import styles from "../../../styles/views/tokens.module.sass";
 
@@ -40,6 +40,7 @@ const TransactionList = (props: {
             <Spacer y={1} />
           </>
         ))}
+      {!props.txs.length && <Text>No data yet.</Text>}
     </>
   );
 };

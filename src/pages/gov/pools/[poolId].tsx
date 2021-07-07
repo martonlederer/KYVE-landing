@@ -1,37 +1,24 @@
-import useContract from "../../../hooks/useContract";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import {
-  Dot,
-  Page,
-  Spacer,
-  Tabs,
-  Text,
-  Tooltip,
-  useMediaQuery,
-  useToasts,
-} from "@geist-ui/react";
+import { Dot, Page, Spacer, Tabs, Text, Tooltip } from "@geist-ui/react";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
-import LockTokensModal from "../../../components/Governance/pools/LockTokensModal";
 import Footer from "../../../components/Footer";
-import { contract } from "../../../extensions";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  AlertIcon,
-  DatabaseIcon,
-  LockIcon,
-  PencilIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  PlusCircleIcon,
 } from "@primer/octicons-react";
-import VotesGrid from "../../../components/Governance/pools/VotesGrid";
-import UpdatePoolModal from "../../../components/Governance/pools/UpdatePoolModal";
 import Nav from "../../../components/Nav";
-import Button from "../../../components/Button";
 import Logo from "../../../components/Logo";
 import tokenStyles from "../../../styles/views/tokens.module.sass";
 import styles from "../../../styles/views/pools.module.sass";
 import TransactionList from "../../../components/Governance/pools/TransactionList";
 import useSWR from "swr";
+import Highlight from "react-highlight";
+import DepositModal from "../../../components/Governance/pools/DepositModal";
+import WithdrawModal from "../../../components/Governance/pools/WithdrawModal";
 
 const Pool = () => {
   const router = useRouter();
@@ -43,7 +30,11 @@ const Pool = () => {
     }
   );
 
-  let connected = true;
+  const depositModal = useRef();
+  const withdrawModal = useRef();
+  const fundPoolModal = useRef();
+
+  const connected = useConnected();
   const [balance, setBalance] = useState(0);
   const [stake, setStake] = useState(0);
   useEffect(() => {
@@ -72,7 +63,17 @@ const Pool = () => {
           <div className={styles.PoolHeader}>
             <Text h2 className={styles.PoolName}>
               <div className={styles.ArchitectureLogo}>
-                <Logo name={pool.settings.runtime} />
+                {/* @ts-ignore */}
+                {pool.settings.logo ? (
+                  // @ts-ignore
+                  <img
+                    src={`https://arweave.net/${pool.settings.logo}`}
+                    style={{ borderRadius: "50%" }}
+                  />
+                ) : (
+                  // @ts-ignore
+                  <Logo name={pool.settings.runtime} />
+                )}
               </div>
               {pool.settings.name}
             </Text>
@@ -85,31 +86,31 @@ const Pool = () => {
                   className="ActionSheet"
                   style={{ marginBottom: 0 }}
                 >
-                  <Tooltip text="Edit pool">
+                  <Tooltip text="Deposit into pool.">
                     <span
                       className="Btn"
                       onClick={() => {
                         //@ts-ignore
-                        updatePoolModal.current.open();
+                        depositModal.current.open();
                       }}
                     >
-                      <PencilIcon />
+                      <ArrowDownIcon />
                     </span>
                   </Tooltip>
                   <Spacer y={1} />
-                  <Tooltip text="Lock tokens">
+                  <Tooltip text="Withdraw from pool.">
                     <span
                       className="Btn"
                       onClick={() => {
                         //@ts-ignore
-                        lockTokensModal.current.open();
+                        withdrawModal.current.open();
                       }}
                     >
-                      <LockIcon />
+                      <ArrowUpIcon />
                     </span>
                   </Tooltip>
                   <Spacer y={1} />
-                  <Tooltip text="Fund pool">
+                  <Tooltip text="Fund pool.">
                     <span
                       className="Btn"
                       onClick={() => {
@@ -117,7 +118,7 @@ const Pool = () => {
                         fundPoolModal.current.open();
                       }}
                     >
-                      <DatabaseIcon />
+                      <PlusCircleIcon />
                     </span>
                   </Tooltip>
                 </motion.div>
@@ -170,49 +171,91 @@ const Pool = () => {
           <Tabs initialValue="1">
             <Tabs.Item label="Accounts" value="1">
               <Spacer y={1} />
-              {Object.entries(pool.credit)
-                .filter(([address, credit]) => credit.stake > 0)
-                .map(([address, credit], i) => (
-                  <>
-                    <motion.div
-                      className={"Card " + tokenStyles.Card}
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{
-                        duration: 0.23,
-                        ease: "easeInOut",
-                        delay: i * 0.05,
+              {Object.entries(pool.credit).map(([address, credit], i) => (
+                <>
+                  <motion.div
+                    className={"Card " + tokenStyles.Card}
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.23,
+                      ease: "easeInOut",
+                      delay: i * 0.05,
+                    }}
+                  >
+                    <div
+                      className={tokenStyles.Data}
+                      style={{ margin: ".6em 0", textAlign: "left" }}
+                    >
+                      <p style={{ textAlign: "left" }}>Address</p>
+                      <h1 style={{ textAlign: "left" }}>
+                        {address.slice(0, 5) +
+                          "..." +
+                          address.slice(address.length - 5, address.length)}
+                      </h1>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                       }}
                     >
-                      <div
-                        className={tokenStyles.Data}
-                        style={{ margin: ".6em 0", textAlign: "left" }}
-                      >
-                        <p style={{ textAlign: "left" }}>Address</p>
-                        <h1 style={{ textAlign: "left" }}>{address}</h1>
+                      <div className={tokenStyles.Data}>
+                        <p>Unlocked</p>
+                        {/* @ts-ignore */}
+                        <h1>{credit.amount} $KYVE</h1>
                       </div>
                       <div className={tokenStyles.Data}>
-                        <p>Stake</p>
+                        <p>Funded</p>
+                        {/* @ts-ignore */}
+                        <h1>{credit.fund} $KYVE</h1>
+                      </div>
+                      <div className={tokenStyles.Data}>
+                        <p>Staked</p>
                         {/* @ts-ignore */}
                         <h1>{credit.stake} $KYVE</h1>
                       </div>
-                    </motion.div>
-                    <Spacer y={1} />
-                  </>
-                ))}
+                      <div className={tokenStyles.Data}>
+                        <p>Points</p>
+                        {/* @ts-ignore */}
+                        <h1>{credit.points}</h1>
+                      </div>
+                    </div>
+                  </motion.div>
+                  <Spacer y={1} />
+                </>
+              ))}
             </Tabs.Item>
             <Tabs.Item label="Explore" value="2">
               <Spacer y={1} />
               <TransactionList txs={pool.txs} />
             </Tabs.Item>
+            <Tabs.Item label="Config & Settings" value="3">
+              <Spacer y={1} />
+              <Text>Config</Text>
+              <Highlight className="json">
+                {JSON.stringify(pool.config, null, 2)}
+              </Highlight>
+              <Text>Settings</Text>
+              <Highlight className="json">
+                {JSON.stringify(pool.settings, null, 2)}
+              </Highlight>
+            </Tabs.Item>
           </Tabs>
         </>
       </Page>
       <Footer />
-      {/* <FundPoolModal pool={poolID} ref={fundPoolModal} />
-      <LockTokensModal pool={poolID} ref={lockTokensModal} />
-      <UpdatePoolModal pool={pool} poolID={poolID} ref={updatePoolModal} /> */}
+      <DepositModal pool={router.query.poolId.toString()} ref={depositModal} />
+      <WithdrawModal
+        pool={router.query.poolId.toString()}
+        ref={withdrawModal}
+      />
+      <FundPoolModal
+        pool={router.query.poolId.toString()}
+        ref={fundPoolModal}
+      />
     </>
   );
 };

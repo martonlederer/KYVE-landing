@@ -1,22 +1,14 @@
 import { Input, Modal, useInput, useModal, useToasts } from "@geist-ui/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
-import { contract } from "../../../extensions";
+import { arweave } from "../../../extensions";
+import { Pool } from "@kyve/contract-lib";
 
-const LockTokensModal = forwardRef((props: any, ref) => {
+const DepositModal = forwardRef((props: { pool: string }, ref) => {
   const { setVisible, bindings } = useModal();
-
   const [loading, setLoading] = useState(false);
-
   const [toasts, setToast] = useToasts();
-
   const { state: quantity, bindings: bindingsQuantity } = useInput("1");
-
-  const lockTokens = async () => {
-    const txID = await contract.lock(props.pool, parseInt(quantity));
-    console.log(txID);
-    setToast({ text: "Tokens successfully locked", type: "success" });
-  };
 
   useImperativeHandle(ref, () => ({
     open() {
@@ -24,10 +16,12 @@ const LockTokensModal = forwardRef((props: any, ref) => {
     },
   }));
 
+  const pool = new Pool(arweave, "use_wallet", props.pool);
+
   return (
     <>
       <Modal {...bindings}>
-        <Modal.Title>Lock Tokens</Modal.Title>
+        <Modal.Title>Deposit into Pool</Modal.Title>
         <Modal.Content>
           <Input {...bindingsQuantity} width={"100%"}>
             Amount
@@ -40,16 +34,17 @@ const LockTokensModal = forwardRef((props: any, ref) => {
           loading={loading}
           onClick={async () => {
             setLoading(true);
-            await lockTokens();
+            await pool.deposit(+quantity);
             setLoading(false);
             setVisible(false);
+            setToast({ text: "Successful deposit", type: "success" });
           }}
         >
-          Lock Tokens
+          Deposit
         </Modal.Action>
       </Modal>
     </>
   );
 });
 
-export default LockTokensModal;
+export default DepositModal;

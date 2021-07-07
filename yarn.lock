@@ -87,24 +87,27 @@
     arweave "^1.10.13"
     smartweave "^0.4.29"
 
-"@kyve/contract-lib@^0.1.0-alpha.4":
-  version "0.1.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.4.tgz#418634b4a450e0119da8cb2c7cf218ae543fa288"
-  integrity sha512-kpgF029KyEVIPCwlOdHfReTrEEskFNsrv0cVRkKepMUomnHFpVrdZS0RJi027ZXUyBaRK/FLlN7ptptWqLAXMg==
+"@kyve/contract-lib@^0.1.0-alpha.10":
+  version "0.1.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.10.tgz#c6ddc52f3beaf5e3bed87aa87cb651f594f1f193"
+  integrity sha512-DgNrhCUX6HgRUlcL9ZyWRDmUU9pWp4baAGl9oBpN7HhX+rNBdDS1HiJg0+5ITvXS0XFmUsqvuPP55jTpc3PJfw==
   dependencies:
-    "@kyve/contract" "^0.1.0-alpha.1"
-    arweave "^1.10.13"
-    smartweave "^0.4.29"
+    "@kyve/contract-pool" "^1.0.0-alpha.1"
+    arweave "^1.10.15"
+    smartweave johnletey/SmartWeave#release
+
+"@kyve/contract-pool@^1.0.0-alpha.1":
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-pool/-/contract-pool-1.0.0-alpha.1.tgz#420e33d0eca15acacc78cd1fd3dc511a62f53cb7"
+  integrity sha512-dfpO39QG6kWAuwaQHJc4LvjiMpclFlT8PUzOnMIsQA5rsSEE/d04CzOUmZf+mm+eI1hhb0TLw7t2kARR8AmYyg==
+  dependencies:
+    arweave-bundles "^1.0.3"
+    prando "^6.0.1"
 
 "@kyve/contract@0.1.0-alpha.4":
   version "0.1.0-alpha.4"
   resolved "https://registry.yarnpkg.com/@kyve/contract/-/contract-0.1.0-alpha.4.tgz#5bfed0b16566d828d71bc967695a493027507b84"
   integrity sha512-xJVOl29RnQyB7MJHpul1INlBdkZLrDkQzSoC+RHCaHk6fPgCuqCofh7aRfpu0jWS41eP7P/LBE4u5IcSUmDysA==
-
-"@kyve/contract@^0.1.0-alpha.1":
-  version "0.1.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@kyve/contract/-/contract-0.1.0-alpha.1.tgz#6d22600e41338565ad4ef0ce3b5d3300e502d6fc"
-  integrity sha512-ce4GsMaZfgaAbzQpmHkbhGvJYcFGmmoa8BY4uSlTORPXd9snP2mHQwJ2Ec+FluZ1owurcHIAdi90E50MO1F/MQ==
 
 "@kyve/core@0.0.0-alpha.8":
   version "0.0.0-alpha.8"
@@ -320,6 +323,13 @@ anymatch@~3.1.1:
   dependencies:
     sylvester ">= 0.0.8"
 
+arconnect@^0.2.8:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/arconnect/-/arconnect-0.2.9.tgz#be07d2281f20d864a91cdcb44e3eed7fccb97f12"
+  integrity sha512-Us49eN/+8l6BrkAPdXnJVPwWlxxUPR7QaBjA0j3OBAcioIFRpwTdoPN9FxtwDGN91lgM6ebOudTXJToRiNizoA==
+  dependencies:
+    arweave "^1.10.13"
+
 ardb@^1.0.4, ardb@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/ardb/-/ardb-1.0.8.tgz#a4dba461a913274c086c06cf55215ebb0453d09d"
@@ -349,6 +359,17 @@ arweave@^1.10.11, arweave@^1.10.13, arweave@^1.10.5:
   resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.13.tgz#88205154524b30a22b18f011f7241b2ddc22413c"
   integrity sha512-FfM9CAF5msAk/12d87KDKu+00/ZriEf/S3ei2FTPMKCOdOb++SwLx7F3kAKO74obAgIGzL8X4Y0D/aV8oNNJDA==
   dependencies:
+    asn1.js "^5.4.1"
+    axios "^0.21.1"
+    base64-js "^1.3.1"
+    bignumber.js "^9.0.1"
+
+arweave@^1.10.15:
+  version "1.10.15"
+  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.15.tgz#c55d0c6f4eef60a4b89056976af411dcdffa83c8"
+  integrity sha512-dzct71xkkuGIqb3Cp0HI6X9V+5AvhpCLO70MGawPZ5sZ7n1QUrTKeGuOfWOGGMZx4r4vXRxQg33PUiJScDmNhA==
+  dependencies:
+    arconnect "^0.2.8"
     asn1.js "^5.4.1"
     axios "^0.21.1"
     base64-js "^1.3.1"
@@ -1924,6 +1945,11 @@ postcss@^7.0.32:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+prando@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/prando/-/prando-6.0.1.tgz#ffa8de84c2adc4975dd9df37ae4ada0458face53"
+  integrity sha512-ghUWxQ1T9IJmPu6eshc3VU0OwveUtXQ33ZLXYUcz1Oc5ppKLDXKp0TBDj6b0epwhEctzcQSNGR2iHyvQSn4W5A==
+
 prettier@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
@@ -2224,6 +2250,24 @@ smartweave@^0.4.27, smartweave@^0.4.29:
     "@types/inquirer" "^7.3.1"
     "@weavery/clarity" "^0.1.5"
     arweave "^1.10.11"
+    bignumber.js "^9.0.1"
+    chalk "^4.1.0"
+    clui "^0.3.6"
+    figlet "^1.5.0"
+    inquirer "^7.3.3"
+    json-beautify "^1.1.1"
+    loglevel "^1.7.0"
+    sentencer "^0.2.1"
+    yargs "^16.2.0"
+
+smartweave@johnletey/SmartWeave#release:
+  version "0.4.38"
+  resolved "https://codeload.github.com/johnletey/SmartWeave/tar.gz/adbfc2a8da22b3fcd71907a591c9faaf814e03be"
+  dependencies:
+    "@types/clui" "^0.3.0"
+    "@types/inquirer" "^7.3.1"
+    "@weavery/clarity" "^0.1.5"
+    arweave "^1.10.15"
     bignumber.js "^9.0.1"
     chalk "^4.1.0"
     clui "^0.3.6"
