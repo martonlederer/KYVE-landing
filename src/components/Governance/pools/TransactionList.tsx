@@ -11,7 +11,7 @@ const TransactionList = (props: {
     <>
       {Object.entries(props.txs)
         .reverse()
-        .slice(100)
+        .slice(0, 100)
         .map(([id, tx], i) => (
           <>
             <motion.div
