@@ -69,19 +69,17 @@ const Pools = () => {
     <>
       <Nav />
       <Page>
+        <Select value={runtime} onChange={(val) => setRuntime(val.toString())}>
+          <Select.Option value="all">All Runtimes</Select.Option>
+          {runtimes.map((runtime) => (
+            <Select.Option value={runtime}>{runtime}</Select.Option>
+          ))}
+        </Select>
+        <Spacer y={1} />
         <Grid.Container
           gap={isMobile ? undefined : 8}
           style={{ display: isMobile ? "block" : undefined }}
         >
-          <Select
-            value={runtime}
-            onChange={(val) => setRuntime(val.toString())}
-          >
-            <Select.Option value="all">All Runtimes</Select.Option>
-            {runtimes.map((runtime) => (
-              <Select.Option value={runtime}>{runtime}</Select.Option>
-            ))}
-          </Select>
           {Object.entries(filtered).map(([id, pool], index) => (
             <>
               <Grid xs={isMobile ? undefined : 8}>
@@ -122,14 +120,29 @@ const Pools = () => {
                       {pool.settings.runtime}
                     </Text>
                     <Text h5 type="secondary">
-                      {/* @ts-ignore */}
-                      {Object.values(pool.credit)
-                        .map((entry: any) => entry.fund)
-                        .reduce((a, b) => a + b, 0)}{" "}
+                      {parseFloat(
+                        parseFloat(
+                          // @ts-ignore
+                          Object.values(pool.credit)
+                            .map((entry: any) => entry.fund)
+                            .reduce((a, b) => a + b, 0)
+                        ).toFixed(2)
+                      )}{" "}
                       $KYVE
                     </Text>
                     <Text h5 type="secondary">
-                      {/* {pool.registered.length} Validators online */}
+                      {
+                        // @ts-ignore
+                        Object.entries(pool.credit)
+                          // @ts-ignore
+                          .filter(([address, credit]) => credit.stake > 0)
+                          .map(([address, credit]) => address)
+                          .filter(
+                            // @ts-ignore
+                            (address) => address !== pool.settings.uploader
+                          ).length
+                      }{" "}
+                      validators online
                     </Text>
                   </Card>
                 </motion.div>

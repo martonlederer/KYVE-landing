@@ -160,11 +160,13 @@ const Pool = () => {
             >
               <div className={tokenStyles.Data}>
                 <p>Balance</p>
-                <h1>{balance} $KYVE</h1>
+                {/* @ts-ignore */}
+                <h1>{parseFloat(parseFloat(balance).toFixed(2))} $KYVE</h1>
               </div>
               <div className={tokenStyles.Data}>
                 <p>Locked balance</p>
-                <h1>{stake} $KYVE</h1>
+                {/* @ts-ignore */}
+                <h1>{parseFloat(parseFloat(stake).toFixed(2))} $KYVE</h1>
               </div>
             </div>
           </div>
@@ -205,18 +207,28 @@ const Pool = () => {
                     >
                       <div className={tokenStyles.Data}>
                         <p>Unlocked</p>
-                        {/* @ts-ignore */}
-                        <h1>{credit.amount} $KYVE</h1>
+                        <h1>
+                          {parseFloat(
+                            // @ts-ignore
+                            parseFloat(credit.amount).toFixed(2)
+                          )}{" "}
+                          $KYVE
+                        </h1>
                       </div>
                       <div className={tokenStyles.Data}>
                         <p>Funded</p>
-                        {/* @ts-ignore */}
-                        <h1>{credit.fund} $KYVE</h1>
+                        <h1>
+                          {/* @ts-ignore */}
+                          {parseFloat(parseFloat(credit.fund).toFixed(2))} $KYVE
+                        </h1>
                       </div>
                       <div className={tokenStyles.Data}>
                         <p>Staked</p>
-                        {/* @ts-ignore */}
-                        <h1>{credit.stake} $KYVE</h1>
+                        <h1>
+                          {/* @ts-ignore */}
+                          {parseFloat(parseFloat(credit.stake).toFixed(2))}{" "}
+                          $KYVE
+                        </h1>
                       </div>
                       <div className={tokenStyles.Data}>
                         <p>Points</p>

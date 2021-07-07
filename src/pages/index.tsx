@@ -3,19 +3,19 @@ import { Spacer, useMediaQuery } from "@geist-ui/react";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 import Nav from "../components/Nav";
-import {
-  ArrowRight,
-  GitHub,
-  Mail,
-  MessageSquare,
-  Send,
-  Twitter,
-  Edit3,
-} from "react-feather";
+import { ArrowRight } from "react-feather";
 import { useRouter } from "next/router";
 import Footer from "../components/Footer";
 import Partners from "../partners";
 import styles from "../styles/views/home.module.sass";
+import {
+  Discord,
+  Github,
+  Gmail,
+  Medium,
+  Telegram,
+  Twitter,
+} from "@icons-pack/react-simple-icons";
 
 const Home = () => {
   const partners = useRef<HTMLDivElement>(null);
@@ -52,35 +52,35 @@ const Home = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Edit3 />
+              <Medium />
             </a>
             <a
               href="https://github.com/KYVENetwork"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <GitHub />
+              <Github />
             </a>
             <a
               href="https://discord.gg/E73KZwaa4S"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageSquare />
+              <Discord />
             </a>
             <a
               href="https://t.me/kyvenet"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Send />
+              <Telegram />
             </a>
             <a
               href="mailto:team@kyve.network"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Mail />
+              <Gmail />
             </a>
           </div>
         </div>

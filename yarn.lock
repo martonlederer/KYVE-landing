@@ -78,6 +78,13 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
   integrity sha512-sqKVVVOe5ivCaXDWivIJYVSaEgdQK9ul7a4Kity5Iw7u9+wBAPbX1RMSnLLmp7O4Vzj0WOWwMAJsTL00xwaNug==
 
+"@icons-pack/react-simple-icons@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@icons-pack/react-simple-icons/-/react-simple-icons-4.4.0.tgz#2bef639b843f981a467fa06e1bff2e811f33d102"
+  integrity sha512-LzGL9aeO/KgDkkvgt96fdel1z2KrUW0gC7F9frl9Pd9ocwi42d14nIWlN9buEAZHQplDmfyMBpixcje7xhs8bA==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@kyve/contract-lib@0.1.0-alpha.7":
   version "0.1.0-alpha.7"
   resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.7.tgz#c0525f1b1a8ca0de34bceaa8c1d8d16ab1d44f42"
