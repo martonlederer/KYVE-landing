@@ -51,6 +51,8 @@ const Tokens = () => {
   >([]);
   useEffect(() => {
     if (state && pools) {
+      const accounts = [];
+
       for (const address of Object.keys(state.balances)) {
         let stake = 0;
         if (address in state.vault) {
@@ -59,19 +61,16 @@ const Tokens = () => {
             .reduce((a, b) => a + b, 0);
         }
 
-        setAccounts((accounts) =>
-          [
-            ...accounts,
-            {
-              address,
-              balance: state.balances[address],
-              stake,
-              total: state.balances[address] + stake,
-              pool: address in pools,
-            },
-          ].sort((a, b) => b.total - a.total)
-        );
+        accounts.push({
+          address,
+          balance: state.balances[address],
+          stake,
+          total: state.balances[address] + stake,
+          pool: address in pools,
+        });
       }
+
+      setAccounts(accounts.sort((a, b) => b.total - a.total));
     }
   }, [state, pools]);
 
