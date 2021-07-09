@@ -23,7 +23,7 @@ const Pools = () => {
   const router = useRouter();
   const connected = useConnected();
 
-  const authNodeModal = useRef();
+  const createPoolModal = useRef();
   const isMobile = useMediaQuery("mobile");
   const fadeInDelay = 0.065;
 
@@ -57,7 +57,6 @@ const Pools = () => {
           }
         }
 
-        console.log(filtered);
         setFiltered(filtered);
       }
     }
@@ -93,58 +92,64 @@ const Pools = () => {
                   }}
                   style={{ width: "100%", height: "100%" }}
                 >
-                  <Card
-                    onClick={() => {
-                      router.push(`/gov/pools/${id}`);
-                    }}
-                    className={"Card " + styles.PoolCard}
-                    style={{ height: "100%", cursor: "pointer" }}
-                  >
-                    <div className={styles.Logo}>
-                      {/* @ts-ignore */}
-                      {pool.settings.logo ? (
-                        <img
-                          // @ts-ignore
-                          src={`https://arweave.net/${pool.settings.logo}`}
-                          style={{ borderRadius: "50%" }}
-                        />
-                      ) : (
-                        // @ts-ignore
-                        <Logo name={pool.settings.runtime} />
-                      )}
-                    </div>
-                    {/* @ts-ignore */}
-                    <Text h3>{pool.settings.name}</Text>
-                    <Text h5 type="secondary">
-                      {/* @ts-ignore */}
-                      {pool.settings.runtime}
-                    </Text>
-                    <Text h5 type="secondary">
-                      {parseFloat(
-                        parseFloat(
-                          // @ts-ignore
-                          Object.values(pool.credit)
-                            .map((entry: any) => entry.fund)
-                            .reduce((a, b) => a + b, 0)
-                        ).toFixed(2)
-                      )}{" "}
-                      $KYVE
-                    </Text>
-                    <Text h5 type="secondary">
-                      {
-                        // @ts-ignore
-                        Object.entries(pool.credit)
-                          // @ts-ignore
-                          .filter(([address, credit]) => credit.stake > 0)
-                          .map(([address, credit]) => address)
-                          .filter(
+                  {
+                    // @ts-ignore
+                    pool.settings.name && (
+                      <Card
+                        onClick={() => {
+                          router.push(`/gov/pools/${id}`);
+                        }}
+                        className={"Card " + styles.PoolCard}
+                        style={{ height: "100%", cursor: "pointer" }}
+                      >
+                        <div className={styles.Logo}>
+                          {/* @ts-ignore */}
+                          {pool.settings.logo ? (
+                            <img
+                              // @ts-ignore
+                              src={`https://arweave.net/${pool.settings.logo}`}
+                              style={{ borderRadius: "50%" }}
+                            />
+                          ) : (
                             // @ts-ignore
-                            (address) => address !== pool.settings.uploader
-                          ).length
-                      }{" "}
-                      validator(s) active
-                    </Text>
-                  </Card>
+                            <Logo name={pool.settings.runtime} />
+                          )}
+                        </div>
+                        {/* @ts-ignore */}
+                        <Text h3>{pool.settings.name}</Text>
+                        <Text h5 type="secondary">
+                          {/* @ts-ignore */}
+                          {pool.settings.runtime}
+                        </Text>
+                        <Text h5 type="secondary">
+                          {parseFloat(
+                            parseFloat(
+                              // @ts-ignore
+                              Object.values(pool.credit)
+                                .map((entry: any) => entry.fund)
+                                .reduce((a, b) => a + b, 0)
+                            ).toFixed(2)
+                          )}{" "}
+                          $KYVE
+                        </Text>
+                        <Text h5 type="secondary">
+                          {
+                            // @ts-ignore
+                            Object.entries(pool.credit)
+                              // @ts-ignore
+                              .filter(([address, credit]) => credit.stake > 0)
+                              .map(([address, credit]) => address)
+                              .filter(
+                                // @ts-ignore
+                                (address) => address !== pool.settings.uploader
+                              ).length
+                          }{" "}
+                          validator(s) active
+                        </Text>
+                      </Card>
+                    )
+                  }
+
                 </motion.div>
               </Grid>
               {isMobile && <Spacer y={2} />}
@@ -168,7 +173,7 @@ const Pools = () => {
                   <Card
                     onClick={() => {
                       // @ts-ignore
-                      authNodeModal.current.open();
+                      createPoolModal.current.open();
                     }}
                     className={"Card " + styles.AddCard}
                     style={{
@@ -193,7 +198,7 @@ const Pools = () => {
       </Page>
       <Footer />
 
-      <CreatePoolModal ref={authNodeModal} />
+      <CreatePoolModal ref={createPoolModal} />
     </>
   );
 };
