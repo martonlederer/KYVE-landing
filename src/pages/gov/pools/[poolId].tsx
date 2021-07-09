@@ -98,12 +98,12 @@ const Pool = () => {
                     </span>
                   </Tooltip>
                   <Spacer y={1} />
-                  <Tooltip text="Withdraw from pool.">
+                  <Tooltip text="Withdrawals currently disabled">
                     <span
                       className="Btn"
                       onClick={() => {
                         //@ts-ignore
-                        withdrawModal.current.open();
+                        //withdrawModal.current.open();
                       }}
                     >
                       <ArrowUpIcon />
