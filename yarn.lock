@@ -94,13 +94,14 @@
     arweave "^1.10.13"
     smartweave "^0.4.29"
 
-"@kyve/contract-lib@^0.1.0-alpha.10":
-  version "0.1.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.10.tgz#c6ddc52f3beaf5e3bed87aa87cb651f594f1f193"
-  integrity sha512-DgNrhCUX6HgRUlcL9ZyWRDmUU9pWp4baAGl9oBpN7HhX+rNBdDS1HiJg0+5ITvXS0XFmUsqvuPP55jTpc3PJfw==
+"@kyve/contract-lib@^0.1.0-alpha.12":
+  version "0.1.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.12.tgz#6b84bc040fdf36a8bb35e2b22cba6acdc49d6512"
+  integrity sha512-7yqs1FqdXuAsucbYeODiHuDGjj+qkyYOWJw4ggzrlJ2QUcVP2lOAuYqU+AcaMXLYxaGBvhx9jjQ/6hVuV247Dw==
   dependencies:
     "@kyve/contract-pool" "^1.0.0-alpha.1"
     arweave "^1.10.15"
+    cross-fetch "^3.1.4"
     smartweave johnletey/SmartWeave#release
 
 "@kyve/contract-pool@^1.0.0-alpha.1":
@@ -788,6 +789,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+cross-fetch@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
+  integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
+  dependencies:
+    node-fetch "2.6.1"
 
 crypto-browserify@3.12.0, crypto-browserify@^3.11.0:
   version "3.12.0"
@@ -2267,7 +2275,7 @@ smartweave@^0.4.27, smartweave@^0.4.29:
     sentencer "^0.2.1"
     yargs "^16.2.0"
 
-smartweave@johnletey/SmartWeave#release:
+"smartweave@github:johnletey/SmartWeave#release", smartweave@johnletey/SmartWeave#release:
   version "0.4.38"
   resolved "https://codeload.github.com/johnletey/SmartWeave/tar.gz/adbfc2a8da22b3fcd71907a591c9faaf814e03be"
   dependencies:
