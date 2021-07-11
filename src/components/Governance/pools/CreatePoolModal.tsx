@@ -19,18 +19,22 @@ const CreatePoolModal = forwardRef((props, ref) => {
   const { state: config, bindings: bindingsConfig } = useInput("{}");
 
   const { state: name, bindings: bindingsName } = useInput("");
-  const { state: uploader, bindings: bindingsUploader } = useInput("3dX8Cnz3N64nKt2EKmWpKL1EbErFP3RFjxSDyQHQrkI");
+  const { state: uploader, bindings: bindingsUploader } = useInput(
+    "3dX8Cnz3N64nKt2EKmWpKL1EbErFP3RFjxSDyQHQrkI"
+  );
   const { state: bundleSize, bindings: bindingsBundleSize } = useInput("50");
   const { state: gracePeriod, bindings: bindingsGracePeriod } = useInput("20");
-  const { state: slashThreshold, bindings: bindingsSlashThreshold } = useInput("20");
+  const { state: slashThreshold, bindings: bindingsSlashThreshold } = useInput(
+    "20"
+  );
   const { state: admins, bindings: bindingsAdmins } = useInput("[]");
   const { state: logo, bindings: bindingsLogo } = useInput("");
   const { state: runtime, bindings: bindingsRuntime } = useInput("");
   //const { state: payout, bindings: bindingsPayout } = useInput("{payout: {kyvePerByte: 0.0002 idleCost: 0}");
   const payout = {
-    "kyvePerByte": 0.0002,
-    "idleCost": 0
-  }
+    kyvePerByte: 0.0002,
+    idleCost: 0,
+  };
 
   useImperativeHandle(ref, () => ({
     open() {
@@ -86,7 +90,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
                 logo,
                 foriegnContracts: {
                   governance: "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
-                  treasury: "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA"
+                  treasury: "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA",
                 },
                 paused: false,
                 admins: JSON.parse(admins),
@@ -94,7 +98,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
                 bundleSize: parseInt(bundleSize),
                 gracePeriod: parseInt(gracePeriod),
                 slashThreshold: parseInt(slashThreshold),
-                payout
+                payout,
               },
               config: JSON.parse(config),
               credit: {},

@@ -149,7 +149,6 @@ const Pools = () => {
                       </Card>
                     )
                   }
-
                 </motion.div>
               </Grid>
               {isMobile && <Spacer y={2} />}
