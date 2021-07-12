@@ -36,9 +36,9 @@ const Pools = () => {
   const [runtimes, setRuntimes] = useState([]);
   useEffect(() => {
     if (pools) {
-      const list = Object.values(pools).map(
-        (pool: any) => pool.settings.runtime
-      );
+      const list = Object.values(pools)
+        .map((pool: any) => pool.settings.runtime)
+        .filter((runtime) => runtime);
 
       setRuntimes([...new Set(list)]);
     }
@@ -81,20 +81,20 @@ const Pools = () => {
         >
           {Object.entries(filtered).map(([id, pool], index) => (
             <>
-              <Grid xs={isMobile ? undefined : 8}>
-                <motion.div
-                  initial={{ scale: 0.75, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    duration: 0.23,
-                    ease: "easeInOut",
-                    delay: index * fadeInDelay,
-                  }}
-                  style={{ width: "100%", height: "100%" }}
-                >
-                  {
-                    // @ts-ignore
-                    pool.settings.name && (
+              {
+                // @ts-ignore
+                pool.settings.name && (
+                  <Grid xs={isMobile ? undefined : 8}>
+                    <motion.div
+                      initial={{ scale: 0.75, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{
+                        duration: 0.23,
+                        ease: "easeInOut",
+                        delay: index * fadeInDelay,
+                      }}
+                      style={{ width: "100%", height: "100%" }}
+                    >
                       <Card
                         onClick={() => {
                           router.push(`/gov/pools/${id}`);
@@ -147,10 +147,10 @@ const Pools = () => {
                           validator(s) active
                         </Text>
                       </Card>
-                    )
-                  }
-                </motion.div>
-              </Grid>
+                    </motion.div>
+                  </Grid>
+                )
+              }
               {isMobile && <Spacer y={2} />}
             </>
           ))}

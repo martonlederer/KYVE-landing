@@ -1,6 +1,7 @@
 const Logo = (props: { name: string }) => {
   switch (props.name.toLowerCase()) {
     case "polkadot":
+    case "@kyve/polkadot":
       return (
         <svg
           width="200"
@@ -37,6 +38,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "cosmos":
+    case "@kyve/cosmos":
       return (
         <svg
           width="200"
@@ -54,6 +56,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "solana":
+    case "@kyve/solana":
       return (
         <svg
           width="200"
@@ -112,6 +115,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "skale":
+    case "@kyve/skale":
       return (
         <svg
           width="200"
@@ -131,6 +135,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "avalanche":
+    case "@kyve/avalanche":
       return (
         <svg
           width="200"
@@ -173,6 +178,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "mina":
+    case "@kyve/mina":
       return (
         <svg
           width="200"
@@ -188,6 +194,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "zilliqa":
+    case "@kyve/zilliqa":
       return (
         <svg
           width="80"
@@ -215,6 +222,7 @@ const Logo = (props: { name: string }) => {
         </svg>
       );
     case "near":
+    case "@kyve/near":
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
