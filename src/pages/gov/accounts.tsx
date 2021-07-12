@@ -47,6 +47,7 @@ const Tokens = () => {
       stake: number;
       total: number;
       pool: boolean;
+      treasury: boolean;
     }[]
   >([]);
   useEffect(() => {
@@ -67,6 +68,7 @@ const Tokens = () => {
           stake,
           total: state.balances[address] + stake,
           pool: address in pools,
+          treasury: address === "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA",
         });
       }
 
@@ -135,7 +137,7 @@ const Tokens = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        {accounts.map(({ address, balance, stake, pool }, i) => (
+        {accounts.map(({ address, balance, stake, pool, treasury }, i) => (
           <>
             <motion.div
               className={"Card " + styles.Card}
@@ -152,7 +154,8 @@ const Tokens = () => {
               }}
             >
               <p>
-                {address} {pool && <Tag type="lite">Pool</Tag>}
+                {address} {pool && <Tag type="lite">Pool</Tag>}{" "}
+                {treasury && <Tag type="lite">Treasury</Tag>}
               </p>
               <div
                 style={{
