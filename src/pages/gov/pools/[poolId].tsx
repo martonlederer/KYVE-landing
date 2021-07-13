@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Dot, Page, Spacer, Tabs, Text, Tooltip } from "@geist-ui/react";
+import {
+  Dot,
+  Page,
+  Spacer,
+  Spinner,
+  Tabs,
+  Text,
+  Tooltip,
+  useToasts,
+} from "@geist-ui/react";
 import useConnected from "../../../hooks/useConnected";
 import FundPoolModal from "../../../components/Governance/pools/FundPoolModal";
 import Footer from "../../../components/Footer";
@@ -9,6 +18,7 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
   PlusCircleIcon,
+  SyncIcon,
 } from "@primer/octicons-react";
 import Nav from "../../../components/Nav";
 import Logo from "../../../components/Logo";
@@ -19,6 +29,8 @@ import useSWR from "swr";
 import Highlight from "react-highlight";
 import DepositModal from "../../../components/Governance/pools/DepositModal";
 import WithdrawModal from "../../../components/Governance/pools/WithdrawModal";
+import { arweave } from "../../../extensions";
+import { Pool as KYVEPool } from "@kyve/contract-lib";
 
 const Pool = () => {
   const router = useRouter();
@@ -33,6 +45,8 @@ const Pool = () => {
   const depositModal = useRef();
   const withdrawModal = useRef();
   const fundPoolModal = useRef();
+  const [loading, setLoading] = useState(false);
+  const [toasts, setToast] = useToasts();
 
   const connected = useConnected();
   const [balance, setBalance] = useState(0);
@@ -86,7 +100,7 @@ const Pool = () => {
                   className="ActionSheet"
                   style={{ marginBottom: 0 }}
                 >
-                  <Tooltip text="Deposit into pool.">
+                  <Tooltip text="Deposit into pool." placement="left">
                     <span
                       className="Btn"
                       onClick={() => {
@@ -98,19 +112,19 @@ const Pool = () => {
                     </span>
                   </Tooltip>
                   <Spacer y={1} />
-                  <Tooltip text="Withdrawals currently disabled">
+                  <Tooltip text="Withdraw from pool." placement="left">
                     <span
                       className="Btn"
                       onClick={() => {
                         //@ts-ignore
-                        //withdrawModal.current.open();
+                        withdrawModal.current.open();
                       }}
                     >
                       <ArrowUpIcon />
                     </span>
                   </Tooltip>
                   <Spacer y={1} />
-                  <Tooltip text="Fund pool.">
+                  <Tooltip text="Fund pool." placement="left">
                     <span
                       className="Btn"
                       onClick={() => {
@@ -119,6 +133,37 @@ const Pool = () => {
                       }}
                     >
                       <PlusCircleIcon />
+                    </span>
+                  </Tooltip>
+                  <Spacer y={1} />
+                  <Tooltip text="Process outbox." placement="left">
+                    <span
+                      className="Btn"
+                      onClick={async () => {
+                        setLoading(true);
+                        const pool = new KYVEPool(
+                          arweave,
+                          "use_wallet",
+                          router.query.poolId.toString()
+                        );
+                        await pool.processOutbox();
+                        setLoading(false);
+                        setToast({
+                          text: "Successfully processed outbox.",
+                          type: "success",
+                        });
+                      }}
+                    >
+                      {loading ? (
+                        <Spinner
+                          style={{
+                            height: "1em",
+                            width: "1em",
+                          }}
+                        />
+                      ) : (
+                        <SyncIcon />
+                      )}
                     </span>
                   </Tooltip>
                 </motion.div>
