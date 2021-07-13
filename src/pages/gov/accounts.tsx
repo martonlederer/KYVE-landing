@@ -27,56 +27,12 @@ const Tokens = () => {
   const connected = useConnected();
   const transferTokenModal = useRef();
 
-  const { data: state } = useSWR(
-    "/api/pool?id=C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
-    async (url: string) => {
-      const res = await fetch(url);
-      return await res.json();
-    }
-  );
-
-  const { data: pools } = useSWR("/api/pools", async (url: string) => {
+  const { data: accounts } = useSWR("/api/accounts", async (url: string) => {
     const res = await fetch(url);
     return await res.json();
   });
 
-  const [accounts, setAccounts] = useState<
-    {
-      address: string;
-      balance: number;
-      stake: number;
-      total: number;
-      pool: boolean;
-      treasury: boolean;
-    }[]
-  >([]);
-  useEffect(() => {
-    if (state && pools) {
-      const accounts = [];
-
-      for (const address of Object.keys(state.balances)) {
-        let stake = 0;
-        if (address in state.vault) {
-          stake = state.vault[address]
-            .map((entry) => entry.balance)
-            .reduce((a, b) => a + b, 0);
-        }
-
-        accounts.push({
-          address,
-          balance: state.balances[address],
-          stake,
-          total: state.balances[address] + stake,
-          pool: address in pools,
-          treasury: address === "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA",
-        });
-      }
-
-      setAccounts(accounts.sort((a, b) => b.total - a.total));
-    }
-  }, [state, pools]);
-
-  if (!state || !pools) return null;
+  if (!accounts) return null;
 
   return (
     <>
@@ -137,7 +93,7 @@ const Tokens = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        {accounts.map(({ address, balance, stake, pool, treasury }, i) => (
+        {accounts.map(({ address, type, balance, credit, stake }, i) => (
           <>
             <motion.div
               className={"Card " + styles.Card}
@@ -146,7 +102,7 @@ const Tokens = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.23, ease: "easeInOut", delay: i * 0.1 }}
               onClick={() => {
-                if (pool) window.open(`/gov/pools/${address}`);
+                if (type === "pool") window.open(`/gov/pools/${address}`);
                 else
                   window.open(
                     `https://viewblock.io/arweave/address/${address}`
@@ -154,8 +110,8 @@ const Tokens = () => {
               }}
             >
               <p>
-                {address} {pool && <Tag type="lite">Pool</Tag>}{" "}
-                {treasury && <Tag type="lite">Treasury</Tag>}
+                {address} {type === "pool" && <Tag type="lite">Pool</Tag>}{" "}
+                {type === "treasury" && <Tag type="lite">Treasury</Tag>}
               </p>
               <div
                 style={{
@@ -167,6 +123,10 @@ const Tokens = () => {
                 <div className={styles.Data}>
                   <p>Balance</p>
                   <h1>{balance} $KYVE</h1>
+                </div>
+                <div className={styles.Data}>
+                  <p>Credit</p>
+                  <h1>{credit} $KYVE</h1>
                 </div>
                 <div className={styles.Data}>
                   <p>Stake</p>
