@@ -16,6 +16,7 @@ export default async (req, res) => {
 
   const accounts: {
     address: string;
+    formatted: string;
     type?: "pool" | "treasury";
     balance: number;
     credit: number;
@@ -50,6 +51,10 @@ export default async (req, res) => {
     const total = format(balance) + format(credit) + format(stake);
     accounts.push({
       address,
+      formatted:
+        address.slice(0, 10) +
+        "..." +
+        address.slice(address.length - 10, address.length),
       // @ts-ignore
       type,
       balance: format(balance),

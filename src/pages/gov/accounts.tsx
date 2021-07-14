@@ -93,50 +93,68 @@ const Tokens = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        {accounts.map(({ address, type, balance, credit, stake }, i) => (
-          <>
-            <motion.div
-              className={"Card " + styles.Card}
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.23, ease: "easeInOut", delay: i * 0.1 }}
-              onClick={() => {
-                if (type === "pool") window.open(`/gov/pools/${address}`);
-                else
-                  window.open(
-                    `https://viewblock.io/arweave/address/${address}`
-                  );
-              }}
-            >
-              <p>
-                {address} {type === "pool" && <Tag type="lite">Pool</Tag>}{" "}
-                {type === "treasury" && <Tag type="lite">Treasury</Tag>}
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+        {accounts.map(
+          ({ address, formatted, type, balance, credit, stake }, i) => (
+            <>
+              <motion.div
+                className={"Card " + styles.Card}
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.23,
+                  ease: "easeInOut",
+                  delay: i * 0.1,
+                }}
+                onClick={() => {
+                  if (type === "pool") window.open(`/gov/pools/${address}`);
+                  else
+                    window.open(
+                      `https://viewblock.io/arweave/address/${address}`
+                    );
                 }}
               >
-                <div className={styles.Data}>
-                  <p>Balance</p>
-                  <h1>{balance} $KYVE</h1>
-                </div>
-                <div className={styles.Data}>
-                  <p>Credit</p>
-                  <h1>{credit} $KYVE</h1>
-                </div>
-                <div className={styles.Data}>
-                  <p>Stake</p>
-                  <h1>{stake} $KYVE</h1>
-                </div>
-              </div>
-            </motion.div>
-            <Spacer y={1} />
-          </>
-        ))}
+                {isMobile ? (
+                  <>
+                    <p>{formatted}</p>
+                    <>
+                      {type === "pool" && <Tag type="lite">Pool</Tag>}{" "}
+                      {type === "treasury" && <Tag type="lite">Treasury</Tag>}
+                    </>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      {address} {type === "pool" && <Tag type="lite">Pool</Tag>}{" "}
+                      {type === "treasury" && <Tag type="lite">Treasury</Tag>}
+                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div className={styles.Data}>
+                        <p>Balance</p>
+                        <h1>{balance} $KYVE</h1>
+                      </div>
+                      <div className={styles.Data}>
+                        <p>Credit</p>
+                        <h1>{credit} $KYVE</h1>
+                      </div>
+                      <div className={styles.Data}>
+                        <p>Stake</p>
+                        <h1>{stake} $KYVE</h1>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+              <Spacer y={1} />
+            </>
+          )
+        )}
       </Page>
       <TransferTokenModal ref={transferTokenModal} />
       <Footer />
