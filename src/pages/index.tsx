@@ -38,7 +38,7 @@ const Home = () => {
           }}
         />
         <div className={styles.LandingContent}>
-          <h1>Enabling infinite scalability for Web3.</h1>
+          <h1>Enabling limitless scalability for Web3.</h1>
           <div className={styles.Socials}>
             <a
               href="https://twitter.com/kyvenetwork"

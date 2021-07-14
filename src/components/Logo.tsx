@@ -57,6 +57,7 @@ const Logo = (props: { name: string }) => {
       );
     case "solana":
     case "@kyve/solana":
+    case "@kyve/solana-snapshots":
       return (
         <svg
           width="200"
