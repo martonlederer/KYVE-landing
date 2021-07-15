@@ -10,7 +10,18 @@ const format = (input: number) => {
 export default async (req, res) => {
   const { db } = await connectToDatabase();
 
-  const contracts = await db.collection("contracts").find().toArray();
+  const contracts = await db
+    .collection("contracts")
+    .aggregate([
+      {
+        $project: {
+          "state.balances": 1,
+          "state.credit": 1,
+          "state.vault": 1,
+        },
+      },
+    ])
+    .toArray();
   const governance = contracts.find((contract) => contract._id === GOVERNANCE)
     .state;
 
