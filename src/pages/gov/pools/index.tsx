@@ -44,16 +44,15 @@ const Pools = () => {
     }
   }, pools);
 
-  const [filtered, setFiltered] = useState({});
+  const [filtered, setFiltered] = useState([]);
   useEffect(() => {
     if (pools) {
       if (runtime === "all") setFiltered(pools);
       else {
-        const filtered = {};
-        for (const [id, pool] of Object.entries(pools)) {
-          // @ts-ignore
+        const filtered = [];
+        for (const pool of pools) {
           if (pool.settings.runtime === runtime) {
-            filtered[id] = pool;
+            filtered.push(pool);
           }
         }
 
@@ -79,78 +78,52 @@ const Pools = () => {
           gap={isMobile ? undefined : 8}
           style={{ display: isMobile ? "block" : undefined }}
         >
-          {Object.entries(filtered).map(([id, pool], index) => (
+          {filtered.map(({ id, settings, balance, validators }, index) => (
             <>
-              {
-                // @ts-ignore
-                pool.settings.name && (
-                  <Grid xs={isMobile ? undefined : 8}>
-                    <motion.div
-                      initial={{ scale: 0.75, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{
-                        duration: 0.23,
-                        ease: "easeInOut",
-                        delay: index * fadeInDelay,
+              {settings.name && (
+                <Grid xs={isMobile ? undefined : 8}>
+                  <motion.div
+                    initial={{ scale: 0.75, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{
+                      duration: 0.23,
+                      ease: "easeInOut",
+                      delay: index * fadeInDelay,
+                    }}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <Card
+                      onClick={() => {
+                        router.push(`/gov/pools/${id}`);
                       }}
-                      style={{ width: "100%", height: "100%" }}
+                      className={"Card " + styles.PoolCard}
+                      style={{ height: "100%", cursor: "pointer" }}
                     >
-                      <Card
-                        onClick={() => {
-                          router.push(`/gov/pools/${id}`);
-                        }}
-                        className={"Card " + styles.PoolCard}
-                        style={{ height: "100%", cursor: "pointer" }}
-                      >
-                        <div className={styles.Logo}>
-                          {/* @ts-ignore */}
-                          {pool.settings.logo ? (
-                            <img
-                              // @ts-ignore
-                              src={`https://arweave.net/${pool.settings.logo}`}
-                              style={{ borderRadius: "50%" }}
-                            />
-                          ) : (
-                            // @ts-ignore
-                            <Logo name={pool.settings.runtime} />
-                          )}
-                        </div>
-                        {/* @ts-ignore */}
-                        <Text h3>{pool.settings.name}</Text>
-                        <Text h5 type="secondary">
-                          {/* @ts-ignore */}
-                          {pool.settings.runtime}
-                        </Text>
-                        <Text h5 type="secondary">
-                          {parseFloat(
-                            parseFloat(
-                              // @ts-ignore
-                              Object.values(pool.credit)
-                                .map((entry: any) => entry.fund)
-                                .reduce((a, b) => a + b, 0)
-                            ).toFixed(2)
-                          )}{" "}
-                          $KYVE
-                        </Text>
-                        <Text h5 type="secondary">
-                          {
-                            // @ts-ignore
-                            Object.entries(pool.credit)
-                              // @ts-ignore
-                              .filter(([address, credit]) => credit.stake > 0)
-                              .map(([address, credit]) => address)
-                              .filter(
-                                // @ts-ignore
-                                (address) => address !== pool.settings.uploader
-                              ).length
-                          }{" "}
-                          validator(s) active
-                        </Text>
-                      </Card>
-                    </motion.div>
-                  </Grid>
-                )
-              }
+                      <div className={styles.Logo}>
+                        {settings.logo ? (
+                          <img
+                            src={`https://arweave.net/${settings.logo}`}
+                            style={{ borderRadius: "50%" }}
+                          />
+                        ) : (
+                          <Logo name={settings.runtime} />
+                        )}
+                      </div>
+                      <Text h3>{settings.name}</Text>
+                      <Text h5 type="secondary">
+                        {settings.runtime}
+                      </Text>
+                      <Text h5 type="secondary">
+                        {balance} $KYVE
+                      </Text>
+                      <Text h5 type="secondary">
+                        {validators} validator{validators === 1 ? "" : "s"}{" "}
+                        active
+                      </Text>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              )}
               {isMobile && <Spacer y={2} />}
             </>
           ))}
