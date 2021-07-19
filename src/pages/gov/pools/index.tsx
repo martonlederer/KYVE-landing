@@ -100,13 +100,21 @@ const Pools = () => {
                       style={{ height: "100%", cursor: "pointer" }}
                     >
                       <div className={styles.Logo}>
-                        {settings.logo ? (
-                          <img
-                            src={`https://arweave.net/${settings.logo}`}
-                            style={{ borderRadius: "50%" }}
-                          />
+                        {settings.logo.startsWith("https://") ? (
+                          // Logo is a URL.
+                          <img src={settings.logo} />
                         ) : (
-                          <Logo name={settings.runtime} />
+                          <>
+                            {/[a-z0-9_-]{43}/i.test(settings.logo) ? (
+                              // Logo is an Arweave transaction.
+                              <img
+                                src={`https://arweave.net/${settings.logo}`}
+                              />
+                            ) : (
+                              // Fallback.
+                              <Logo name={settings.logo || settings.runtime} />
+                            )}
+                          </>
                         )}
                       </div>
                       <Text h3>{settings.name}</Text>

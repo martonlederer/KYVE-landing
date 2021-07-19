@@ -77,16 +77,21 @@ const Pool = () => {
           <div className={styles.PoolHeader}>
             <Text h2 className={styles.PoolName}>
               <div className={styles.ArchitectureLogo}>
-                {/* @ts-ignore */}
-                {pool.settings.logo ? (
-                  // @ts-ignore
-                  <img
-                    src={`https://arweave.net/${pool.settings.logo}`}
-                    style={{ borderRadius: "50%" }}
-                  />
+                {pool.settings.logo.startsWith("https://") ? (
+                  // Logo is a URL.
+                  <img src={pool.settings.logo} />
                 ) : (
-                  // @ts-ignore
-                  <Logo name={pool.settings.runtime} />
+                  <>
+                    {/[a-z0-9_-]{43}/i.test(pool.settings.logo) ? (
+                      // Logo is an Arweave transaction.
+                      <img src={`https://arweave.net/${pool.settings.logo}`} />
+                    ) : (
+                      // Fallback.
+                      <Logo
+                        name={pool.settings.logo || pool.settings.runtime}
+                      />
+                    )}
+                  </>
                 )}
               </div>
               {pool.settings.name}
