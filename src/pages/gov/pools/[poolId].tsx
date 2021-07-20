@@ -6,6 +6,7 @@ import {
   Spacer,
   Spinner,
   Tabs,
+  Tag,
   Text,
   Tooltip,
   useToasts,
@@ -245,7 +246,17 @@ const Pool = () => {
                       <h1 style={{ textAlign: "left" }}>
                         {address.slice(0, 5) +
                           "..." +
-                          address.slice(address.length - 5, address.length)}
+                          address.slice(
+                            address.length - 5,
+                            address.length
+                          )}{" "}
+                        {address === pool.settings.uploader && (
+                          <Tag type="lite">Uploader</Tag>
+                        )}
+                        {address !== pool.settings.uploader &&
+                          // @ts-ignore
+                          parseFloat(parseFloat(credit.stake).toFixed(2)) >
+                            0 && <Tag type="lite">Validator</Tag>}
                       </h1>
                     </div>
                     <div
