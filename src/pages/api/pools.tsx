@@ -47,5 +47,5 @@ export default async (req, res) => {
     });
   }
 
-  res.json(pools);
+  res.json(pools.sort((a, b) => b.balance - a.balance));
 };
