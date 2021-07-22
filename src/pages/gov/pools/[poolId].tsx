@@ -36,7 +36,7 @@ import { Pool as KYVEPool } from "@kyve/contract-lib";
 const Pool = () => {
   const router = useRouter();
   const { data: pool } = useSWR(
-    `/api/pool?id=${router.query.poolId}`,
+    `/api/pool?id=${router.query.poolId}&type=meta`,
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();
@@ -304,7 +304,7 @@ const Pool = () => {
             </Tabs.Item>
             <Tabs.Item label="Explore" value="2">
               <Spacer y={1} />
-              <TransactionList txs={pool.txs} />
+              <TransactionList id={router.query.poolId.toString()} />
             </Tabs.Item>
             <Tabs.Item label="Config & Settings" value="3">
               <Spacer y={1} />

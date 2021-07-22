@@ -1,15 +1,22 @@
 import { Spacer, Text } from "@geist-ui/react";
 import { motion } from "framer-motion";
+import useSWR from "swr";
 import styles from "../../../styles/views/tokens.module.sass";
 
-const TransactionList = (props: {
-  txs: {
-    [id: string]: { status: "pending" | "dropped" | "valid" | "invalid" };
-  };
-}) => {
+const TransactionList = (props: { id: string }) => {
+  const { data: pool } = useSWR(
+    `/api/pool?id=${props.id}&type=txs`,
+    async (url: string) => {
+      const res = await fetch(url);
+      return await res.json();
+    }
+  );
+
+  if (!pool) return null;
+
   return (
     <>
-      {Object.entries(props.txs)
+      {Object.entries(pool.txs)
         .reverse()
         .slice(0, 100)
         .map(([id, tx], i) => (
@@ -44,6 +51,7 @@ const TransactionList = (props: {
                 </div>
                 <div className={styles.Data}>
                   <p>Status</p>
+                  {/* @ts-ignore */}
                   <h1>{tx.status}</h1>
                 </div>
               </div>
@@ -51,7 +59,7 @@ const TransactionList = (props: {
             <Spacer y={1} />
           </>
         ))}
-      {!Object.keys(props.txs).length && <Text>No data yet.</Text>}
+      {!Object.keys(pool.txs).length && <Text>No data yet.</Text>}
     </>
   );
 };
