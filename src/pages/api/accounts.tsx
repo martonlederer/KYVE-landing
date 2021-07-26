@@ -2,6 +2,7 @@ import { connectToDatabase } from "../../utils/mongodb";
 
 const GOVERNANCE = "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo";
 const TREASURY = "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA";
+const FAUCET = "74hAWLfZgfGaLBdNAnONmRAsT0LkyQTFGlhZZorc7tg";
 
 const format = (input: number) => {
   return parseFloat(input.toFixed(2));
@@ -28,7 +29,7 @@ export default async (req, res) => {
   const accounts: {
     address: string;
     formatted: string;
-    type?: "pool" | "treasury";
+    type?: "pool" | "treasury" | "faucet";
     balance: number;
     credit: number;
     stake: number;
@@ -44,7 +45,9 @@ export default async (req, res) => {
         .reduce((a, b) => a + b, 0);
     }
 
-    let type = address === TREASURY ? "treasury" : undefined;
+    let type: string;
+    if (address === TREASURY) type = "treasury";
+    if (address === FAUCET) type = "faucet";
     const index = contracts.findIndex((contract) => contract._id === address);
     if (index > -1) type = "pool";
 

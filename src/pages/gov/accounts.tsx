@@ -119,14 +119,16 @@ const Tokens = () => {
                     <p>{formatted}</p>
                     <>
                       {type === "pool" && <Tag type="lite">Pool</Tag>}{" "}
-                      {type === "treasury" && <Tag type="lite">Treasury</Tag>}
+                      {type === "treasury" && <Tag type="lite">Treasury</Tag>}{" "}
+                      {type === "faucet" && <Tag type="lite">Fauscet</Tag>}
                     </>
                   </>
                 ) : (
                   <>
                     <p>
                       {address} {type === "pool" && <Tag type="lite">Pool</Tag>}{" "}
-                      {type === "treasury" && <Tag type="lite">Treasury</Tag>}
+                      {type === "treasury" && <Tag type="lite">Treasury</Tag>}{" "}
+                      {type === "faucet" && <Tag type="lite">Faucet</Tag>}
                     </p>
                     <div
                       style={{
