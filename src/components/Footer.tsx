@@ -26,9 +26,9 @@ const Footer = () => (
       </div>
       <div className={styles.Column}>
         <h2>Explore</h2>
-        <Link href="/gov/tokens">Tokens</Link>
+        <Link href="/faucet">Faucet</Link>
+        <Link href="/gov/accounts">Accounts</Link>
         <Link href="/gov/pools">Pools</Link>
-        <Link href="/gov/vault">Vault</Link>
       </div>
       <div className={styles.Column}>
         <h2>Community</h2>

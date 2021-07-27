@@ -1,11 +1,20 @@
-import { MongoClient } from "mongodb";
+import { Collection, Db, MongoClient } from "mongodb";
 
-let cachedClient;
-let cachedDb;
+interface IFaucet {
+  _id: any;
+  address: string;
+  tweetID: string;
+  transaction?: string;
+  replyID?: string;
+}
+
+let cachedClient: MongoClient;
+let cachedDb: Db;
+let cachedFaucet: Collection<IFaucet>;
 
 export async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    return { client: cachedClient, db: cachedDb };
+  if (cachedClient && cachedDb && cachedFaucet) {
+    return { client: cachedClient, db: cachedDb, faucet: cachedFaucet };
   }
 
   const client = await MongoClient.connect(
@@ -16,9 +25,11 @@ export async function connectToDatabase() {
   );
 
   const db = client.db("cache");
+  const faucet = db.collection<IFaucet>("faucet");
 
   cachedClient = client;
   cachedDb = db;
+  cachedFaucet = faucet;
 
-  return { client, db };
+  return { client, db, faucet };
 }

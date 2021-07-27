@@ -2564,6 +2564,11 @@ tty-browserify@0.0.1:
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.1.tgz#3f05251ee17904dfd0677546670db9651682b811"
   integrity sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==
 
+twitter-url-parser@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/twitter-url-parser/-/twitter-url-parser-0.0.1.tgz#86d1954b01d4c5de13e70a8812bd64b72a7c61da"
+  integrity sha1-htGVSwHUxd4T5wqIEr1ktyp8Ydo=
+
 type-fest@^0.21.3:
   version "0.21.3"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"

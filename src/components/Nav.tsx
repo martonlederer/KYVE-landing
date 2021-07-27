@@ -92,6 +92,9 @@ const Nav = () => {
           setHoveredChain(undefined);
         }}
       >
+        <Link href="/faucet">
+          <a className={styles.Item}>Faucet</a>
+        </Link>
         <Link href="/gov/accounts">
           <a className={styles.Item}>Accounts</a>
         </Link>
@@ -103,12 +106,12 @@ const Nav = () => {
         <Button
           buttonSize="small"
           onClick={() => {
-            if (base === "gov") {
+            if (base === "gov" || base === "faucet") {
               login();
             } else router.push("https://docs.kyve.network");
           }}
         >
-          {base === "gov" ? (
+          {base === "gov" || base === "faucet" ? (
             <>
               {hasWallet
                 ? connected
@@ -141,6 +144,9 @@ const Nav = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.23, ease: "easeInOut" }}
               >
+                <Link href="/faucet">
+                  <a>Faucet</a>
+                </Link>
                 <Link href="/gov/accounts">
                   <a>Accounts</a>
                 </Link>
