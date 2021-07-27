@@ -1,29 +1,22 @@
 import {
   Page,
   Spacer,
-  Spinner,
   Tag,
   Tooltip,
   useMediaQuery,
-  useToasts,
 } from "@geist-ui/react";
 import useConnected from "../../hooks/useConnected";
-import useContract from "../../hooks/useContract";
-import { useEffect, useRef, useState } from "react";
-import { ArrowSwitchIcon, PlusIcon } from "@primer/octicons-react";
+import { useRef } from "react";
+import { ArrowSwitchIcon } from "@primer/octicons-react";
 import Footer from "../../components/Footer";
 import TransferTokenModal from "../../components/Governance/tokens/TransferTokensModal";
 import { AnimatePresence, motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import styles from "../../styles/views/tokens.module.sass";
-import { interactWrite } from "smartweave";
-import { arweave } from "../../extensions";
 import useSWR from "swr";
 
 const Tokens = () => {
   const isMobile = useMediaQuery("mobile");
-  const [toasts, setToast] = useToasts();
-  const [loading, setLoading] = useState(false);
   const connected = useConnected();
   const transferTokenModal = useRef();
 
