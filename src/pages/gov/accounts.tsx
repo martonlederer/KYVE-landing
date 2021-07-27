@@ -46,39 +46,6 @@ const Tokens = () => {
               exit={{ opacity: 0 }}
               className="ActionSheet"
             >
-              <Tooltip text="Dispense tokens">
-                <span
-                  className="Btn"
-                  onClick={async () => {
-                    setLoading(true);
-                    const id = await interactWrite(
-                      // @ts-ignore
-                      arweave,
-                      "use_wallet",
-                      "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
-                      {
-                        function: "dispense",
-                      }
-                    );
-                    setToast({
-                      text: `Successfully dispensed tokens. Please wait for tx: ${id} to mine.`,
-                    });
-                    setLoading(false);
-                  }}
-                >
-                  {loading ? (
-                    <Spinner
-                      style={{
-                        height: "1em",
-                        width: "1em",
-                      }}
-                    />
-                  ) : (
-                    <PlusIcon />
-                  )}
-                </span>
-              </Tooltip>
-              <Spacer y={1} />
               <Tooltip text="Transfer">
                 <span
                   className="Btn"
