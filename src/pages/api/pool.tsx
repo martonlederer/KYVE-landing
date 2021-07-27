@@ -33,7 +33,7 @@ export default async (req, res) => {
     pool = contracts[0];
   }
   if (type === "txs") {
-    const contracts = await db
+    const transactions = await db
       .collection("contracts")
       .aggregate([
         {
@@ -43,14 +43,33 @@ export default async (req, res) => {
         },
         {
           $project: {
-            "state.txs": 1,
+            _id: 0,
+            tx: {
+              $reverseArray: {
+                $objectToArray: "$state.txs",
+              },
+            },
+          },
+        },
+        {
+          $unwind: "$tx",
+        },
+        {
+          $project: {
+            id: "$tx.k",
+            status: "$tx.v.status",
+            yays: "$tx.v.yays",
+            nays: "$tx.v.nays",
+            voters: "$tx.v.voters",
+            closesAt: "$tx.v.closesAt",
+            confirmedAt: "$tx.v.confirmedAt",
           },
         },
       ])
-      .limit(1)
+      .limit(100)
       .toArray();
 
-    pool = contracts[0];
+    pool = transactions;
   }
   if (type === "unhandledTxs") {
     const transactions: { id: string }[] = await db
