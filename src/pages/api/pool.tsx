@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../../utils/mongodb";
 
-// "all", "meta", "txs"
+// "all", "meta", "txs", "unhandledTxs"
 export default async (req, res) => {
   let { id, type } = req.query;
   type = type || "all";
@@ -52,6 +52,41 @@ export default async (req, res) => {
 
     pool = contracts[0];
   }
+  if (type === "unhandledTxs") {
+    const transactions: { id: string }[] = await db
+      .collection("contracts")
+      .aggregate([
+        {
+          $match: {
+            _id: id,
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            tx: {
+              $objectToArray: "$state.txs",
+            },
+          },
+        },
+        {
+          $unwind: "$tx",
+        },
+        {
+          $match: {
+            "tx.v.status": "pending",
+          },
+        },
+        {
+          $project: {
+            id: "$tx.k",
+          },
+        },
+      ])
+      .toArray();
 
-  res.json(pool.state);
+    pool = transactions.map((tx) => tx.id);
+  }
+
+  res.json(pool.state || pool);
 };
