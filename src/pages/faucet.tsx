@@ -5,8 +5,8 @@ import {
   Divider,
   Input,
   Link,
+  Note,
   Page,
-  Radio,
   Row,
   Spacer,
   Text,
@@ -63,6 +63,9 @@ const Faucet = () => {
             <Spacer y={1} />
             {data.transaction && data.replyID ? (
               <>
+                <Note type="warning">
+                  The transaction might take ~20 minutes to mine.
+                </Note>
                 <Text>
                   Transaction:{" "}
                   <Link
