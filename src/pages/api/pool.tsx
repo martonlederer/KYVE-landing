@@ -72,7 +72,7 @@ export default async (req, res) => {
     pool = transactions;
   }
   if (type === "unhandledTxs") {
-    const transactions: { id: string }[] = await db
+    const transactions: { id: string, data: any }[] = await db
       .collection("contracts")
       .aggregate([
         {
@@ -99,12 +99,16 @@ export default async (req, res) => {
         {
           $project: {
             id: "$tx.k",
+            data: "$tx.v",
           },
         },
       ])
       .toArray();
 
-    pool = transactions.map((tx) => tx.id);
+    pool = {};
+    for (const { id, data } of transactions) {
+      pool[id] = data;
+    }
   }
 
   res.json(pool.state || pool);
