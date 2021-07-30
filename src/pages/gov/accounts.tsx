@@ -1,5 +1,4 @@
 import {
-  Note,
   Page,
   Spacer,
   Tag,
@@ -54,10 +53,6 @@ const Tokens = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        <Note type="warning">
-          We are facing some technical difficulties right now. This page will be available soon.
-        </Note>
-        {/*
         {accounts.map(
           ({ address, formatted, type, balance, credit, stake }, i) => (
             <>
@@ -122,7 +117,6 @@ const Tokens = () => {
             </>
           )
         )}
-        */}
       </Page>
       <TransferTokenModal ref={transferTokenModal} />
       <Footer />
