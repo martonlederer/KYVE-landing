@@ -80,7 +80,7 @@ const Pools = () => {
         >
           {filtered.map(({ id, settings, balance, validators }, index) => (
             <>
-              {settings.name && (
+              {settings && (
                 <Grid xs={isMobile ? undefined : 8}>
                   <motion.div
                     initial={{ scale: 0.75, opacity: 0 }}
