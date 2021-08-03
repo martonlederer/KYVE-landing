@@ -32,10 +32,10 @@ const handler = async (req, res) => {
   for (const { _id, state } of contracts) {
     if (_id === GOVERNANCE) continue;
 
-    const balance = Object.values(state.credit)
+    const balance = Object.values(state.credit || {})
       .map((entry: any) => entry.fund)
       .reduce((a, b) => a + b, 0);
-    const validators = Object.entries(state.credit)
+    const validators = Object.entries(state.credit || {})
       .filter((entry: any) => entry[1].stake > 0)
       .map(([address, credit]) => address)
       .filter((address) => address !== state.settings.uploader).length;

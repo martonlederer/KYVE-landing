@@ -57,7 +57,7 @@ const handler = async (req, res) => {
       if (contract._id === GOVERNANCE) continue;
 
       const state = contract.state;
-      if (address in state.credit) {
+      if (address in (state.credit || {})) {
         credit += state.credit[address].amount;
         stake += state.credit[address].stake;
       }
