@@ -1,10 +1,4 @@
-import {
-  Page,
-  Spacer,
-  Tag,
-  Tooltip,
-  useMediaQuery,
-} from "@geist-ui/react";
+import { Page, Spacer, Tag, Tooltip, useMediaQuery } from "@geist-ui/react";
 import useConnected from "../../hooks/useConnected";
 import { useRef } from "react";
 import { ArrowSwitchIcon } from "@primer/octicons-react";

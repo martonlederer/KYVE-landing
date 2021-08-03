@@ -13,6 +13,7 @@
     "@kyve/logic": "^0.0.0-alpha.15",
     "@kyve/query": "^0.0.0-alpha.11",
     "@primer/octicons-react": "^12.1.0",
+    "@sentry/nextjs": "^6.10.0",
     "arweave": "^1.10.15",
     "framer-motion": "^4.1.8",
     "mongodb": "^3.6.9",

@@ -1,7 +1,8 @@
+import { withSentry } from "@sentry/nextjs";
 import { connectToDatabase } from "../../utils/mongodb";
 
 // "all", "meta", "txs", "unhandledTxs"
-export default async (req, res) => {
+const handler = async (req, res) => {
   let { id, type } = req.query;
   type = type || "all";
   const { db } = await connectToDatabase();
@@ -72,7 +73,7 @@ export default async (req, res) => {
     pool = transactions;
   }
   if (type === "unhandledTxs") {
-    const transactions: { id: string, data: any }[] = await db
+    const transactions: { id: string; data: any }[] = await db
       .collection("contracts")
       .aggregate([
         {
@@ -113,3 +114,5 @@ export default async (req, res) => {
 
   res.json(pool.state || pool);
 };
+
+export default withSentry(handler);

@@ -1,7 +1,8 @@
+import { withSentry } from "@sentry/nextjs";
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../utils/mongodb";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { address, tweetID } = req.query as {
     address?: string;
     tweetID?: string;
@@ -39,3 +40,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
+
+export default withSentry(handler);

@@ -1,3 +1,4 @@
+import { withSentry } from "@sentry/nextjs";
 import { connectToDatabase } from "../../utils/mongodb";
 
 const GOVERNANCE = "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo";
@@ -6,7 +7,7 @@ const format = (input: number) => {
   return parseFloat(input.toFixed(2));
 };
 
-export default async (req, res) => {
+const handler = async (req, res) => {
   const { db } = await connectToDatabase();
 
   const contracts = await db
@@ -49,3 +50,5 @@ export default async (req, res) => {
 
   res.json(pools.sort((a, b) => b.balance - a.balance));
 };
+
+export default withSentry(handler);
