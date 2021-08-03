@@ -2,6 +2,7 @@ import { withSentry } from "@sentry/nextjs";
 import { connectToDatabase } from "../../utils/mongodb";
 
 const GOVERNANCE = "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo";
+const TREASURY = "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA";
 
 const format = (input: number) => {
   return parseFloat(input.toFixed(2));
@@ -31,6 +32,7 @@ const handler = async (req, res) => {
 
   for (const { _id, state } of contracts) {
     if (_id === GOVERNANCE) continue;
+    if (_id === TREASURY) continue;
 
     const balance = Object.values(state.credit || {})
       .map((entry: any) => entry.fund)
