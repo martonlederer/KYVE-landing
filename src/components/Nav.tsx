@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "@geist-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
-import useContract from "../hooks/useContract";
 import Link from "next/link";
 import Button from "./Button";
 import styles from "../styles/components/Nav.module.sass";
@@ -23,8 +22,6 @@ const Nav = () => {
   const popup = useRef<HTMLDivElement>(null);
   const [popupPos, setPopupPos] = useState(0);
   const [hoveredChain, setHoveredChain] = useState<string>();
-
-  const { loading, state, height } = useContract();
 
   const isMobile = useMediaQuery("mobile");
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
@@ -136,7 +133,7 @@ const Nav = () => {
           <span className={styles.MenuButtonLine} />
           <span className={styles.MenuButtonLine} />
           <AnimatePresence>
-            {state && mobileMenuOpened && (
+            {mobileMenuOpened && (
               <motion.div
                 className={styles.MobileMenu}
                 initial={{ opacity: 0 }}
