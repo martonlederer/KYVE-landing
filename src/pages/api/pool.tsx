@@ -10,6 +10,14 @@ const handler = async (req, res) => {
   let pool;
   if (type === "all") {
     pool = await db.collection("contracts").findOne({ _id: id });
+
+    pool.state.txs = await db.collection("txs").findOne({ contract: id });
+    pool.state.invocations = await db
+      .collection("invocations")
+      .findOne({ contract: id });
+    pool.state.foreignCalls = await db
+      .collection("foreignCalls")
+      .findOne({ contract: id });
   }
   if (type === "meta") {
     const contracts = await db
@@ -35,11 +43,11 @@ const handler = async (req, res) => {
   }
   if (type === "txs") {
     const transactions = await db
-      .collection("contracts")
+      .collection("txs")
       .aggregate([
         {
           $match: {
-            _id: id,
+            contract: id,
           },
         },
         {
@@ -47,7 +55,7 @@ const handler = async (req, res) => {
             _id: 0,
             tx: {
               $reverseArray: {
-                $objectToArray: "$state.txs",
+                $objectToArray: "$txs",
               },
             },
           },
@@ -74,18 +82,18 @@ const handler = async (req, res) => {
   }
   if (type === "unhandledTxs") {
     const transactions: { id: string; data: any }[] = await db
-      .collection("contracts")
+      .collection("txs")
       .aggregate([
         {
           $match: {
-            _id: id,
+            contract: id,
           },
         },
         {
           $project: {
             _id: 0,
             tx: {
-              $objectToArray: "$state.txs",
+              $objectToArray: "$txs",
             },
           },
         },
