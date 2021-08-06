@@ -36,26 +36,9 @@ const handler = async (req, res) => {
     pool.state.foreignCalls = foreignCalls;
   }
   if (type === "meta") {
-    const contracts = await db
-      .collection("contracts")
-      .aggregate([
-        {
-          $match: {
-            _id: id,
-          },
-        },
-        {
-          $project: {
-            "state.credit": 1,
-            "state.config": 1,
-            "state.settings": 1,
-          },
-        },
-      ])
-      .limit(1)
-      .toArray();
+    const contract = await db.collection("contracts").findOne({ _id: id });
 
-    pool = contracts[0];
+    pool = contract;
   }
   if (type === "txs") {
     const transactions = await db
