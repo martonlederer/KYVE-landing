@@ -11,13 +11,29 @@ const handler = async (req, res) => {
   if (type === "all") {
     pool = await db.collection("contracts").findOne({ _id: id });
 
-    pool.state.txs = await db.collection("txs").findOne({ contract: id });
-    pool.state.invocations = await db
-      .collection("invocations")
-      .findOne({ contract: id });
-    pool.state.foreignCalls = await db
-      .collection("foreignCalls")
-      .findOne({ contract: id });
+    const txsRes = await db
+      .collection("txs")
+      .find({ contract: id }, { sort: { index: 1 } })
+      .toArray();
+    let txs: { [txID: string]: any } = {};
+    txsRes.map(({ txID, data }) => (txs[txID] = data));
+    pool.state.txs = txs;
+
+    const invocations = (
+      await db
+        .collection("invocations")
+        .find({ contract: id }, { sort: { index: 1 } })
+        .toArray()
+    ).map(({ data }) => data);
+    pool.state.invocations = invocations;
+
+    const foreignCalls = (
+      await db
+        .collection("foreignCalls")
+        .find({ contract: id }, { sort: { index: 1 } })
+        .toArray()
+    ).map(({ data }) => data);
+    pool.state.foreignCalls = foreignCalls;
   }
   if (type === "meta") {
     const contracts = await db
@@ -44,80 +60,20 @@ const handler = async (req, res) => {
   if (type === "txs") {
     const transactions = await db
       .collection("txs")
-      .aggregate([
-        {
-          $match: {
-            contract: id,
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            tx: {
-              $reverseArray: {
-                $objectToArray: "$txs",
-              },
-            },
-          },
-        },
-        {
-          $unwind: "$tx",
-        },
-        {
-          $project: {
-            id: "$tx.k",
-            status: "$tx.v.status",
-            yays: "$tx.v.yays",
-            nays: "$tx.v.nays",
-            voters: "$tx.v.voters",
-            closesAt: "$tx.v.closesAt",
-            confirmedAt: "$tx.v.confirmedAt",
-          },
-        },
-      ])
+      .find({ contract: id }, { sort: { index: -1 } })
       .limit(100)
       .toArray();
 
-    pool = transactions;
+    pool = transactions.map(({ txID, data }) => ({ id: txID, ...data }));
   }
   if (type === "unhandledTxs") {
-    const transactions: { id: string; data: any }[] = await db
+    const transactions = await db
       .collection("txs")
-      .aggregate([
-        {
-          $match: {
-            contract: id,
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            tx: {
-              $objectToArray: "$txs",
-            },
-          },
-        },
-        {
-          $unwind: "$tx",
-        },
-        {
-          $match: {
-            "tx.v.status": "pending",
-          },
-        },
-        {
-          $project: {
-            id: "$tx.k",
-            data: "$tx.v",
-          },
-        },
-      ])
+      .find({ contract: id, "data.status": "pending" }, { sort: { index: 1 } })
       .toArray();
 
     pool = {};
-    for (const { id, data } of transactions) {
-      pool[id] = data;
-    }
+    transactions.map(({ txID, data }) => (pool[txID] = data));
   }
 
   res.json(pool.state || pool);
