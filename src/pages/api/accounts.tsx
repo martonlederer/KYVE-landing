@@ -47,10 +47,10 @@ const handler = async (req, res) => {
     }
 
     let type: string;
-    if (address === TREASURY) type = "treasury";
-    if (address === FAUCET) type = "faucet";
     const index = contracts.findIndex((contract) => contract._id === address);
     if (index > -1) type = "pool";
+    if (address === TREASURY) type = "treasury";
+    if (address === FAUCET) type = "faucet";
 
     let credit = 0;
     for (const contract of contracts) {
