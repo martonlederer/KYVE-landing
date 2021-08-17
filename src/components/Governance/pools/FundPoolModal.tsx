@@ -16,7 +16,7 @@ const FundPoolModal = forwardRef((props: { pool: string }, ref) => {
     },
   }));
 
-  const pool = new Pool(arweave, "use_wallet", props.pool);
+  const pool = new Pool(arweave, "use_wallet", props.pool, false);
 
   return (
     <>
