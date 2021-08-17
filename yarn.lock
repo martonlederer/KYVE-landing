@@ -94,20 +94,20 @@
     arweave "^1.10.13"
     smartweave "^0.4.29"
 
-"@kyve/contract-lib@^0.1.0-alpha.14":
-  version "0.1.0-alpha.14"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.14.tgz#9fa73317b18b668f8ac20e611adcdd789d75fc34"
-  integrity sha512-M4dYIZvR6tHGemeCA7FNjl+GYL4zs1BHpDxeu4E8mI7brnw1H35HiHcv8s1NZ9JbOu9quNgUGyfja6sBwLZ/Xg==
+"@kyve/contract-lib@^0.1.0-alpha.18":
+  version "0.1.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.18.tgz#8ce9066fc4b78e2b28f6d5b7bb60dd9fc223a7e6"
+  integrity sha512-WkY4t/MJVodcDtjVRqbgd1SAKQhOiJvyj+sYTnma6TN6PjYJrJ9UzZvUco/dx/xOup0JlvULJ2QiXRTw31Uusg==
   dependencies:
-    "@kyve/contract-pool" "^1.0.0-alpha.1"
+    "@kyve/contract-pool" "1.0.0-alpha.3"
     arweave "^1.10.15"
     cross-fetch "^3.1.4"
     smartweave johnletey/SmartWeave#release
 
-"@kyve/contract-pool@^1.0.0-alpha.1":
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-pool/-/contract-pool-1.0.0-alpha.1.tgz#420e33d0eca15acacc78cd1fd3dc511a62f53cb7"
-  integrity sha512-dfpO39QG6kWAuwaQHJc4LvjiMpclFlT8PUzOnMIsQA5rsSEE/d04CzOUmZf+mm+eI1hhb0TLw7t2kARR8AmYyg==
+"@kyve/contract-pool@1.0.0-alpha.3":
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-pool/-/contract-pool-1.0.0-alpha.3.tgz#5f1e1ba6b22f8bf47b1e5fc549bec558dc92fc51"
+  integrity sha512-gXDzjl4HQaUSpDX6IxXtFRK7KS9esFcXr5fn8RUDdL0aZEwMR9pIYw+II2B95B1WrkM6RUvIEx/aGxqIp3KHJQ==
   dependencies:
     arweave-bundles "^1.0.3"
     prando "^6.0.1"
@@ -2557,7 +2557,7 @@ smartweave@^0.4.27, smartweave@^0.4.29:
     sentencer "^0.2.1"
     yargs "^16.2.0"
 
-smartweave@johnletey/SmartWeave#release:
+"smartweave@github:johnletey/SmartWeave#release", smartweave@johnletey/SmartWeave#release:
   version "0.4.38"
   resolved "https://codeload.github.com/johnletey/SmartWeave/tar.gz/adbfc2a8da22b3fcd71907a591c9faaf814e03be"
   dependencies:

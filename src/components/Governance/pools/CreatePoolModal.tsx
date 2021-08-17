@@ -88,9 +88,9 @@ const CreatePoolModal = forwardRef((props, ref) => {
                 runtime,
                 version: "0.0.1",
                 logo,
-                foriegnContracts: {
-                  governance: "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo",
-                  treasury: "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA",
+                foreignContracts: {
+                  governance: "ZFByCyATdrG13HvS3Nyvj9Ete_Pfu5EFgiGqux5-b78",
+                  treasury: "3zRVvjsTc9CU1GIeVFXmQ88O3nhOqr15O_FaZL5enM8",
                 },
                 paused: false,
                 admins: JSON.parse(admins),
@@ -103,8 +103,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
               config: JSON.parse(config),
               credit: {},
               txs: {},
-              invocations: [],
-              foreignCalls: [],
+              outbox: [],
             });
             setLoading(false);
             setVisible(false);

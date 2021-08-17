@@ -9,7 +9,7 @@ const handler = async (req, res) => {
 
   let pool;
   if (type === "all") {
-    pool = await db.collection("contracts").findOne({ _id: id });
+    pool = await db.collection("contractsDev").findOne({ _id: id });
 
     const txsRes = await db
       .collection("txs")
@@ -36,7 +36,7 @@ const handler = async (req, res) => {
     pool.state.foreignCalls = foreignCalls;
   }
   if (type === "meta") {
-    const contract = await db.collection("contracts").findOne({ _id: id });
+    const contract = await db.collection("contractsDev").findOne({ _id: id });
 
     pool = contract;
   }

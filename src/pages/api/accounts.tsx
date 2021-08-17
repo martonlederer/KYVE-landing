@@ -1,8 +1,8 @@
 import { withSentry } from "@sentry/nextjs";
 import { connectToDatabase } from "../../utils/mongodb";
 
-const GOVERNANCE = "C_1uo08qRuQAeDi9Y1I8fkaWYUC9IWkOrKDNe9EphJo";
-const TREASURY = "RCH2pVk8m-IAuwg36mwxUt8Em_CnpWjSLpiAcCvZJMA";
+const GOVERNANCE = "ZFByCyATdrG13HvS3Nyvj9Ete_Pfu5EFgiGqux5-b78";
+const TREASURY = "3zRVvjsTc9CU1GIeVFXmQ88O3nhOqr15O_FaZL5enM8";
 const FAUCET = "74hAWLfZgfGaLBdNAnONmRAsT0LkyQTFGlhZZorc7tg";
 
 const format = (input: number) => {
@@ -13,7 +13,7 @@ const handler = async (req, res) => {
   const { db } = await connectToDatabase();
 
   const contracts = await db
-    .collection("contracts")
+    .collection("contractsDev")
     .aggregate([
       {
         $project: {
