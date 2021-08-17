@@ -37,7 +37,7 @@ const Faucet = () => {
   }, [connected]);
 
   const { data } = useSWR(
-    `/api/faucet?address=${address}`,
+    `https://api.kyve.network/faucet?address=${address}`,
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();
@@ -151,7 +151,7 @@ const Faucet = () => {
               onClick={async () => {
                 setLoading(true);
                 await fetch(
-                  `/api/faucet?address=${address}&tweetID=${
+                  `https://api.kyve.network/faucet?address=${address}&tweetID=${
                     parse(tweet.state).id
                   }`,
                   {

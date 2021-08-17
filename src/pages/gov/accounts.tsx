@@ -14,10 +14,13 @@ const Tokens = () => {
   const connected = useConnected();
   const transferTokenModal = useRef();
 
-  const { data: accounts } = useSWR("/api/accounts", async (url: string) => {
-    const res = await fetch(url);
-    return await res.json();
-  });
+  const { data: accounts } = useSWR(
+    "https://api.kyve.network/accounts",
+    async (url: string) => {
+      const res = await fetch(url);
+      return await res.json();
+    }
+  );
 
   if (!accounts) return null;
 

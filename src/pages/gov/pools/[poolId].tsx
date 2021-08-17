@@ -36,7 +36,7 @@ import { Pool as KYVEPool } from "@kyve/contract-lib";
 const Pool = () => {
   const router = useRouter();
   const { data: pool } = useSWR(
-    `/api/pool?id=${router.query.poolId}&type=meta`,
+    `https://api.kyve.network/pool?id=${router.query.poolId}&type=meta`,
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();

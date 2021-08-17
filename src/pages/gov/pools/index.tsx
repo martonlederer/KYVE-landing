@@ -27,10 +27,13 @@ const Pools = () => {
   const isMobile = useMediaQuery("mobile");
   const fadeInDelay = 0.065;
 
-  const { data: pools } = useSWR("/api/pools", async (url: string) => {
-    const res = await fetch(url);
-    return await res.json();
-  });
+  const { data: pools } = useSWR(
+    "https://api.kyve.network/pools",
+    async (url: string) => {
+      const res = await fetch(url);
+      return await res.json();
+    }
+  );
 
   const [runtime, setRuntime] = useState("all");
   const [runtimes, setRuntimes] = useState([]);

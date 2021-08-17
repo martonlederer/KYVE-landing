@@ -5,7 +5,7 @@ import styles from "../../../styles/views/tokens.module.sass";
 
 const TransactionList = (props: { id: string }) => {
   const { data: txs } = useSWR(
-    `/api/pool?id=${props.id}&type=txs`,
+    `https://api.kyve.network/pool?id=${props.id}&type=txs`,
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();
