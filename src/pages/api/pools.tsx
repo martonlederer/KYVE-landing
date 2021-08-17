@@ -1,8 +1,8 @@
 import { withSentry } from "@sentry/nextjs";
 import { connectToDatabase } from "../../utils/mongodb";
 
-const GOVERNANCE = "ZFByCyATdrG13HvS3Nyvj9Ete_Pfu5EFgiGqux5-b78";
-const TREASURY = "3zRVvjsTc9CU1GIeVFXmQ88O3nhOqr15O_FaZL5enM8";
+const GOVERNANCE = "bf8TMruaXAAeymJbe9HIzf8edTe2kmLr5iPC_qNfkeQ";
+const TREASURY = "7-yOavDvzo86K4dZOki5ZV9CRL332x40ceZlNP3O-2Y";
 
 const format = (input: number) => {
   return parseFloat(input.toFixed(2));

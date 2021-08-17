@@ -94,10 +94,10 @@
     arweave "^1.10.13"
     smartweave "^0.4.29"
 
-"@kyve/contract-lib@^0.1.0-alpha.18":
-  version "0.1.0-alpha.18"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.18.tgz#8ce9066fc4b78e2b28f6d5b7bb60dd9fc223a7e6"
-  integrity sha512-WkY4t/MJVodcDtjVRqbgd1SAKQhOiJvyj+sYTnma6TN6PjYJrJ9UzZvUco/dx/xOup0JlvULJ2QiXRTw31Uusg==
+"@kyve/contract-lib@^0.1.0-alpha.19":
+  version "0.1.0-alpha.19"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.19.tgz#920ffcbc107f9851a3e40de7032181fe6d64ff78"
+  integrity sha512-aAynYEstQW2X/XTnE4FCmyJk91AjogxcpdupFd5drdPuy+HfYLkU2K+xnYI7P56Z9WqkEnMUTPVIUyuciSH1HA==
   dependencies:
     "@kyve/contract-pool" "1.0.0-alpha.3"
     arweave "^1.10.15"

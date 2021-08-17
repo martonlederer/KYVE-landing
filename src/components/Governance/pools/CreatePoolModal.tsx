@@ -89,8 +89,8 @@ const CreatePoolModal = forwardRef((props, ref) => {
                 version: "0.0.1",
                 logo,
                 foreignContracts: {
-                  governance: "ZFByCyATdrG13HvS3Nyvj9Ete_Pfu5EFgiGqux5-b78",
-                  treasury: "3zRVvjsTc9CU1GIeVFXmQ88O3nhOqr15O_FaZL5enM8",
+                  governance: "bf8TMruaXAAeymJbe9HIzf8edTe2kmLr5iPC_qNfkeQ",
+                  treasury: "7-yOavDvzo86K4dZOki5ZV9CRL332x40ceZlNP3O-2Y",
                 },
                 paused: false,
                 admins: JSON.parse(admins),
