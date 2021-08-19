@@ -16,7 +16,7 @@ const WithdrawModal = forwardRef((props: { pool: string }, ref) => {
     },
   }));
 
-  const pool = new Pool(arweave, "use_wallet", props.pool, false);
+  const pool = new Pool(arweave, "use_wallet", props.pool);
 
   return (
     <>
