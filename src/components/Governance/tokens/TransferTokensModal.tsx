@@ -26,7 +26,7 @@ const TransferTokenModal = forwardRef((props, ref) => {
       // @ts-ignore
       arweave,
       "use_wallet",
-      "ZFByCyATdrG13HvS3Nyvj9Ete_Pfu5EFgiGqux5-b78",
+      "bf8TMruaXAAeymJbe9HIzf8edTe2kmLr5iPC_qNfkeQ",
       {
         function: "transfer",
         target,
