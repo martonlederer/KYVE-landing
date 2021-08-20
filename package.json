@@ -9,7 +9,7 @@
   "dependencies": {
     "@geist-ui/react": "^2.1.3",
     "@icons-pack/react-simple-icons": "^4.4.0",
-    "@kyve/contract-lib": "^0.1.0-alpha.24",
+    "@kyve/contract-lib": "^0.1.0-alpha.19",
     "@kyve/logic": "^0.0.0-alpha.15",
     "@kyve/query": "^0.0.0-alpha.11",
     "@primer/octicons-react": "^12.1.0",
@@ -22,7 +22,7 @@
     "react-dom": "^17.0.1",
     "react-feather": "^2.0.9",
     "react-highlight": "^0.14.0",
-    "smartweave": "^0.4.41",
+    "smartweave": "johnletey/SmartWeave#release",
     "swr": "^0.5.6",
     "twitter-url-parser": "^0.0.1"
   },
