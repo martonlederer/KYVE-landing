@@ -94,20 +94,20 @@
     arweave "^1.10.13"
     smartweave "^0.4.29"
 
-"@kyve/contract-lib@^0.1.0-alpha.19":
-  version "0.1.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.19.tgz#920ffcbc107f9851a3e40de7032181fe6d64ff78"
-  integrity sha512-aAynYEstQW2X/XTnE4FCmyJk91AjogxcpdupFd5drdPuy+HfYLkU2K+xnYI7P56Z9WqkEnMUTPVIUyuciSH1HA==
+"@kyve/contract-lib@^0.1.0-alpha.24":
+  version "0.1.0-alpha.24"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-lib/-/contract-lib-0.1.0-alpha.24.tgz#0eaec81f5732f8ca4b4268c611701713fda57b33"
+  integrity sha512-8xB5N8Pi1OLU10YBDekhjiMoFNL4AQZUEm/P3J5jbzqwJ9sA0ngzEx2X8WbHMBu0EzZcpjdJRCQ40/C0412/UA==
   dependencies:
-    "@kyve/contract-pool" "1.0.0-alpha.3"
+    "@kyve/contract-pool" "1.0.0-alpha.4"
     arweave "^1.10.15"
     cross-fetch "^3.1.4"
-    smartweave johnletey/SmartWeave#release
+    smartweave "^0.4.41"
 
-"@kyve/contract-pool@1.0.0-alpha.3":
-  version "1.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@kyve/contract-pool/-/contract-pool-1.0.0-alpha.3.tgz#5f1e1ba6b22f8bf47b1e5fc549bec558dc92fc51"
-  integrity sha512-gXDzjl4HQaUSpDX6IxXtFRK7KS9esFcXr5fn8RUDdL0aZEwMR9pIYw+II2B95B1WrkM6RUvIEx/aGxqIp3KHJQ==
+"@kyve/contract-pool@1.0.0-alpha.4":
+  version "1.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@kyve/contract-pool/-/contract-pool-1.0.0-alpha.4.tgz#fca37922154219983e34212143673cb1d2141270"
+  integrity sha512-9fxdIeIlg2wwXGxl121LaBrKy1u3tsriLf31Xl8EugkzgMSLaCGHnZeLGftyI7pGDnJWydRtR228Gi4WrAVqzA==
   dependencies:
     arweave-bundles "^1.0.3"
     prando "^6.0.1"
@@ -2557,9 +2557,10 @@ smartweave@^0.4.27, smartweave@^0.4.29:
     sentencer "^0.2.1"
     yargs "^16.2.0"
 
-"smartweave@github:johnletey/SmartWeave#release", smartweave@johnletey/SmartWeave#release:
-  version "0.4.38"
-  resolved "https://codeload.github.com/johnletey/SmartWeave/tar.gz/adbfc2a8da22b3fcd71907a591c9faaf814e03be"
+smartweave@^0.4.41:
+  version "0.4.41"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.41.tgz#40a2cad2f443091b4fe5c8e6bf565d980fe91403"
+  integrity sha512-xixp9Nfuiy/2e2JmU0IICKI9iU0KMDbLKsS/SLOwpgj7LDUwIhfGzaOHWAcK5OJ2iij9dHYSmGPRjRk+wurKqA==
   dependencies:
     "@types/clui" "^0.3.0"
     "@types/inquirer" "^7.3.1"
