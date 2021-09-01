@@ -53,16 +53,9 @@ const Tokens = () => {
         {accounts.map(
           ({ address, formatted, type, balance, credit, stake }, i) => (
             <>
-              <motion.div
+              <div
                 className={"Card " + styles.Card}
                 key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.23,
-                  ease: "easeInOut",
-                  delay: i * 0.1,
-                }}
                 onClick={() => {
                   if (type === "pool") window.open(`/gov/pools/${address}`);
                   else
@@ -109,7 +102,7 @@ const Tokens = () => {
                     </div>
                   </>
                 )}
-              </motion.div>
+              </div>
               <Spacer y={1} />
             </>
           )
