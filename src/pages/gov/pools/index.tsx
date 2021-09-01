@@ -28,7 +28,7 @@ const Pools = () => {
   const fadeInDelay = 0.065;
 
   const { data: pools } = useSWR(
-    "https://api.kyve.network/pools",
+    "https://kyve-cache-staging.herokuapp.com/pools",
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();

@@ -43,6 +43,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
   }));
 
   const pool = new Pool(arweave, "use_wallet");
+  pool.cacheUrl = "https://kyve-cache-staging.herokuapp.com";
 
   return (
     <>
@@ -89,8 +90,8 @@ const CreatePoolModal = forwardRef((props, ref) => {
                 version: "0.0.1",
                 logo,
                 foreignContracts: {
-                  governance: "bf8TMruaXAAeymJbe9HIzf8edTe2kmLr5iPC_qNfkeQ",
-                  treasury: "7-yOavDvzo86K4dZOki5ZV9CRL332x40ceZlNP3O-2Y",
+                  governance: "LkfzZvdl_vfjRXZOPjnov18cGnnK3aDKj0qSQCgkCX8",
+                  treasury: "Gj5peOLt14Mi9ARipHg9Vml3JK5Kebz5TaMGXdRgNUo",
                 },
                 paused: false,
                 admins: JSON.parse(admins),
@@ -103,6 +104,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
               config: JSON.parse(config),
               credit: {},
               txs: {},
+              events: [],
               outbox: [],
             });
             setLoading(false);

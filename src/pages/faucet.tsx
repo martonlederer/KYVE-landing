@@ -37,7 +37,7 @@ const Faucet = () => {
   }, [connected]);
 
   const { data } = useSWR(
-    `https://api.kyve.network/faucet?address=${address}`,
+    `https://kyve-cache-staging.herokuapp.com/faucet?address=${address}`,
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();
@@ -151,7 +151,7 @@ const Faucet = () => {
               onClick={async () => {
                 setLoading(true);
                 await fetch(
-                  `https://api.kyve.network/faucet?address=${address}&tweetID=${
+                  `https://kyve-cache-staging.herokuapp.com/faucet?address=${address}&tweetID=${
                     parse(tweet.state).id
                   }`,
                   {

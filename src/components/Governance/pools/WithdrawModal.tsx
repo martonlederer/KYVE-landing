@@ -17,6 +17,7 @@ const WithdrawModal = forwardRef((props: { pool: string }, ref) => {
   }));
 
   const pool = new Pool(arweave, "use_wallet", props.pool);
+  pool.cacheUrl = "https://kyve-cache-staging.herokuapp.com";
 
   return (
     <>
