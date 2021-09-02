@@ -38,6 +38,11 @@ const TransactionList = (props: { id: string }) => {
                 {/* @ts-ignore */}
                 <h1>{tx.status}</h1>
               </div>
+              <div className={styles.Data}>
+                <p>Finalized At</p>
+                {/* @ts-ignore */}
+                <h1>{tx.finalizedAt}</h1>
+              </div>
             </div>
           </div>
           <Spacer y={1} />
