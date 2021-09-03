@@ -43,7 +43,7 @@ const CreatePoolModal = forwardRef((props, ref) => {
   }));
 
   const pool = new Pool(arweave, "use_wallet");
-  pool.cacheUrl = "https://kyve-cache-staging.herokuapp.com";
+  pool.cacheUrl = "https://api.kyve.network";
 
   return (
     <>

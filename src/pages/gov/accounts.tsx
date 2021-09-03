@@ -15,7 +15,7 @@ const Tokens = () => {
   const transferTokenModal = useRef();
 
   const { data: accounts } = useSWR(
-    "https://kyve-cache-staging.herokuapp.com/accounts",
+    "https://api.kyve.network/accounts",
     async (url: string) => {
       const res = await fetch(url);
       return await res.json();
