@@ -133,7 +133,7 @@ const Home = () => {
             left: "1vw",
             bottom: "-6vh",
             background:
-              "linear-gradient(220deg, rgba(255, 255, 255, 0.26) 0.63%, rgba(255, 255, 255, 0) 79.44%)",
+              "linear-gradient(220deg, rgba(var(--theme-color), 0.26) 0.63%, rgba(var(--theme-color), 0) 79.44%)",
           }}
         />
       </div>
@@ -148,7 +148,7 @@ const Home = () => {
               right: "-8vw",
               top: 0,
               background:
-                "linear-gradient(40deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 61.98%)",
+                "linear-gradient(40deg, rgba(var(--theme-color), .26) 0%, rgba(var(--theme-color), 0) 61.98%)",
             }}
           />
         )}
@@ -181,7 +181,7 @@ const Home = () => {
             right: "-20vh",
             top: 0,
             background:
-              "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+              "linear-gradient(130deg, rgba(var(--theme-color), 0.47) 0%, rgba(var(--theme-color), 0) 75.52%)",
             animationDelay: ".3s",
           }}
         />
@@ -195,7 +195,7 @@ const Home = () => {
               left: "-4vh",
               bottom: 0,
               background:
-                "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+                "linear-gradient(130deg, rgba(var(--theme-color), 0.47) 0%, rgba(var(--theme-color), 0) 75.52%)",
               animationDelay: ".3s",
             }}
           />
@@ -211,7 +211,7 @@ const Home = () => {
             left: "-6vh",
             top: "47%",
             background:
-              "linear-gradient(-130deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 61.98%)",
+              "linear-gradient(-130deg, rgba(var(--theme-color), 0.26) 0%, rgba(var(--theme-color), 0) 61.98%)",
             animationDelay: ".22s",
           }}
         />
@@ -237,7 +237,7 @@ const Home = () => {
               right: "-3vh",
               top: 0,
               background:
-                "linear-gradient(130deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+                "linear-gradient(130deg, rgba(var(--theme-color), 0.47) 0%, rgba(var(--theme-color), 0) 75.52%)",
               animationDelay: ".3s",
             }}
           />
@@ -266,7 +266,7 @@ const Home = () => {
             right: "4vw",
             top: "5%",
             background:
-              "linear-gradient(120deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+              "linear-gradient(120deg, rgba(var(--theme-color), 0.47) 0%, rgba(var(--theme-color), 0) 75.52%)",
             animationDelay: ".87s",
           }}
         />
@@ -279,7 +279,7 @@ const Home = () => {
             right: "18%",
             top: "30%",
             background:
-              "linear-gradient(40deg, rgba(255, 255, 255, 0.4) 17.23%, rgba(255, 255, 255, 0.1) 72.16%)",
+              "linear-gradient(40deg, rgba(var(--theme-color), 0.4) 17.23%, rgba(var(--theme-color), 0.1) 72.16%)",
           }}
         />
         <div
@@ -290,7 +290,7 @@ const Home = () => {
             right: "2vw",
             top: "70%",
             background:
-              "linear-gradient(40deg, rgba(255, 255, 255, 0.47) 0%, rgba(255, 255, 255, 0) 75.52%)",
+              "linear-gradient(40deg, rgba(var(--theme-color), 0.47) 0%, rgba(var(--theme-color), 0) 75.52%)",
             animationDelay: ".24s",
           }}
         />

@@ -1,7 +1,7 @@
 @use "./variables"
   
 ::selection
-  background: rgba(255, 255, 255, 0.99) !important
+  background: rgba(variables.$theme-color, 0.99) !important
   color: #000 !important
 
 #__next
@@ -9,6 +9,7 @@
 
 body
   scroll-behavior: smooth
+  --theme-color: 18, 59, 53
 
 .Card
   background-color: variables.$tooltip-bg  !important
